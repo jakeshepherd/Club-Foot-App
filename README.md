@@ -11,8 +11,8 @@ And then change any values in the .env to allow you to login with the details yo
 
 ## Artisan commands
 `php artisan migrate:fresh`
-T
-o perform a complete migration of the database
+
+To perform a complete migration of the database
 
 `php artisan serve`
 
