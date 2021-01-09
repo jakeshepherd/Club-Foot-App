@@ -2,14 +2,15 @@
 1. Clone Repository
 2. `npm install`
 3. Install MySQL
-In order to run it with the database you will need to download MySQL
-You can download it from this URL: https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html
+
+    In order to run it with the database you will need to download MySQL
+    You can download it from this URL: https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html
 
 4. You then need to copy the .env.example:
 
-`cp .env.example .env`
+    `cp .env.example .env`
 
-And then change any values in the .env to allow you to login with the details you have set up for your database.
+    And then change any values in the .env to allow you to login with the details you have set up for your database.
 
 ## Artisan commands
 `php artisan migrate:fresh`
