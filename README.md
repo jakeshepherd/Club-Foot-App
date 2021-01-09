@@ -12,6 +12,8 @@
 
     And then change any values in the .env to allow you to login with the details you have set up for your database.
 
+5. Generate php artisan key
+   `php artisan key:generate`
 ## Artisan commands
 `php artisan migrate:fresh`
 
