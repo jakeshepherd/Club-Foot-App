@@ -1,9 +1,11 @@
 ## Initial Setup
-This project runs with MySQL
+1. Clone Repository
+2. `npm install`
+3. Install MySQL
 In order to run it with the database you will need to download MySQL
 You can download it from this URL: https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html
 
-You then need to copy the .env.example:
+4. You then need to copy the .env.example:
 
 `cp .env.example .env`
 
