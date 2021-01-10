@@ -7,7 +7,7 @@ function Homepage() {
         <div className="container">
             <TrackingButton 
                 text="Start Tracking Boots and Bars Time"
-                buttonColour="bg-green-500"
+                buttonColour="bg-green-200"
             />
         </div>
     );
