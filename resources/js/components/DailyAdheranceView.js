@@ -8,13 +8,13 @@ function DailyAdheranceView(props) {
             {Object.entries(props.data).map(([key, value]) => {
                 if (value) {
                     return (
-                        <div key={key} className="daily-adherance border-green-200">
+                        <div key={key} className="daily-adherance border-green-400">
                             {key[0]}
                         </div>
                     )
                 } else {
                     return (
-                        <div key={key} className="daily-adherance border-red-200">
+                        <div key={key} className="daily-adherance border-red-400">
                             {key[0]}
                         </div>
                     )

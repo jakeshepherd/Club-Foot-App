@@ -21,7 +21,7 @@ function Homepage() {
         <div className="p-5 m-auto w-10/12 text-center">
             <h2 className="font-seoulNamsan text-xl font-bold">Your Adherance for the last 7 days</h2>
             <PieChart
-                className="m-auto w-1/5"
+                className="m-auto mt-4 mb-4 w-1/5"
                 data={[
                     { title: 'Time Completed', value: 85, color: '#a7f3d0' },
                     { title: 'Time left to go', value: 15, color: '#fda0a0' },
@@ -33,7 +33,7 @@ function Homepage() {
             />
             <h2 className="text-xl font-bold">14.5 hours a day on average</h2>
             <DailyAdheranceView data={adheranceData}/>
-            <TrackingButton 
+            <TrackingButton
                 text="Start"
             />
             <h2 className="mt-5 text-xl font-bold">What's Coming up...</h2>
