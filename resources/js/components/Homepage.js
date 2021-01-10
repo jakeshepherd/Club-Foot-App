@@ -9,8 +9,7 @@ function Homepage() {
             <p>Placeholder!</p>
             <h2>14.5 hours a day on average</h2>
             <TrackingButton 
-                text="Start Tracking Boots and Bars Time"
-                buttonColour="bg-green-200"
+                text="Start"
             />
         </div>
     );
