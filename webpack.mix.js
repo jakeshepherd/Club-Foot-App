@@ -15,4 +15,10 @@ mix.js('resources/js/app.js', 'public/js').sourceMaps()
     .react()
     .postCss('resources/css/app.css', 'public/css', [
         require("tailwindcss"),
-    ]);
+    ]).webpackConfig({
+        resolve: {
+            fallback: {
+            "path": require.resolve("path-browserify")
+            }
+        },
+    });

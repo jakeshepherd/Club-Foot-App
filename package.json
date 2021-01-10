@@ -27,6 +27,7 @@
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
     },
     "dependencies": {
+        "path-browserify": "^1.0.1",
         "react-minimal-pie-chart": "^8.1.0"
     }
 }
