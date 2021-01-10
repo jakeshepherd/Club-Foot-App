@@ -1,10 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TrackingButton from './TrackingButton';
+import DailyAdheranceView from './DailyAdheranceView';
 
 import { PieChart } from 'react-minimal-pie-chart';
 
 function Homepage() {
+    var adheranceData = {
+        Monday: true,
+        Tuesday: true,
+        Wednesday: false,
+        Thursday: true,
+        Friday: false,
+        Saturday: true,
+        Sunday: true,
+    }
+
     return (
         <div className="p-5 m-auto w-10/12 text-center">
             <h1>Your Adherance for the last 7 days</h1>
@@ -20,6 +31,7 @@ function Homepage() {
                 label={() => {return '85%'}}
             />
             <h2>14.5 hours a day on average</h2>
+            <DailyAdheranceView data={adheranceData}/>
             <TrackingButton 
                 text="Start"
             />
