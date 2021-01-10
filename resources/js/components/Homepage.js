@@ -33,9 +33,7 @@ function Homepage() {
             />
             <h2 className="text-xl font-bold">14.5 hours a day on average</h2>
             <DailyAdheranceView data={adheranceData}/>
-            <TrackingButton
-                text="Start"
-            />
+            <TrackingButton />
             <h2 className="mt-5 text-xl font-bold">What's Coming up...</h2>
             <NextCalendarEvent
                 eventDetails={{
