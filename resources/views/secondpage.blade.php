@@ -13,7 +13,6 @@
     </head>
     <body class="antialiased">
         @include('layouts.navigation')
-        <div id="homepage"></div>
-        <script src="{{ asset('js/app.js') }}"></script>
+        <h1>Hello from page 2!!!</h1>
     </body>
 </html>
