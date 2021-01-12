@@ -12,12 +12,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body class="antialiased">
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <x-button class="float-right m-5">
-            {{ __('Logout') }}
-        </x-button>
-    </form>
+        @include('layouts.navigation')
         <div id="homepage"></div>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
