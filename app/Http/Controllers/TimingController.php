@@ -16,6 +16,6 @@ class TimingController extends Controller
         $brand->start_time = Carbon::now();
         $brand->save();
 
-        return response(true, 201);
+        return response($brand->id, 201);
     }
 }
