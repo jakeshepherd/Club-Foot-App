@@ -39,7 +39,7 @@ class TimingController extends Controller
             ['tracking', true],
         ])->get();
 
-        if ($time[0]->count() == 0) {
+        if ($time->isEmpty()) {
             return response()->json([
                 'id' => 0,
                 'tracking' => false,

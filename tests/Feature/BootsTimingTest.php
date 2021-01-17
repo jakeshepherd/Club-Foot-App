@@ -110,7 +110,6 @@ class BootsTimingTest extends TestCase
     }
 
     public function test_it_can_find_timings_without_end_time() {
-        $this->withoutExceptionHandling();
         // we need to be logged in to save the time for the user
         $this->createUser();
 
@@ -146,6 +145,39 @@ class BootsTimingTest extends TestCase
         $expected = [
             'id' => 0,
             'tracking' => false,
+        ];
+
+        $this->assertSame(json_encode($expected), $actual);
+    }
+
+    public function test_it_can_handle_multiple_durations() {
+        $this->withoutExceptionHandling();
+        // we need to be logged in to save the time for the user
+        $this->createUser();
+
+        $startTime = Carbon::now()->format('Y-m-d H:m:s');
+        Carbon::setTestNow($startTime);
+
+        // then post to api to save the start time in the database
+        $response = $this->post('/start-tracking');
+        $response->assertCreated();
+        $startTimeId = $response->getContent();
+
+        // then post to api to save the start time in the database
+        $response = $this->json('POST', '/' . $startTimeId . '/stop-tracking');
+        $response->assertStatus(201);
+
+        $response = $this->post('/start-tracking');
+        $response->assertCreated();
+        $startTimeId = $response->getContent();
+
+        $response = $this->get('/get-tracking');
+        $response->assertOk();
+        $actual = $response->getContent();
+
+        $expected = [
+            'id' => (int) $startTimeId,
+            'tracking' => true
         ];
 
         $this->assertSame(json_encode($expected), $actual);
