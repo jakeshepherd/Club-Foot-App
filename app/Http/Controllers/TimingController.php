@@ -19,4 +19,14 @@ class TimingController extends Controller
 
         return response()->json($bootsAndBarsRow->id, 201);
     }
+
+    public function stopTracking(int $timeId): JsonResponse
+    {
+        $time = BootsAndBarsTime::findOrFail($timeId);
+        $time->end_time = Carbon::now();
+        $time->duration = (Carbon::parse($time->start_time))->diffInMinutes($time->end_time);
+        $time->save();
+
+        return response()->json($time->duration, 201);
+    }
 }
