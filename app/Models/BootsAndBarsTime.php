@@ -14,10 +14,4 @@ class BootsAndBarsTime extends Model
     protected $fillable = [
         'start_time',
     ];
-
-//    public function getStartTimeAttribute($value): string
-//    {
-//        $time = Carbon::createFromFormat('d/m/y H:i:s', $value);
-//        return $time->format('d/m/y H:i:s');
-//    }
 }
