@@ -43,34 +43,6 @@ class BootsTimingTest extends TestCase
         $this->assertEqualsWithDelta($expected, $actual, 60);
     }
 
-    public function test_it_adds_multiple_start_times()
-    {
-        // we need to be logged in to save the time for the user
-        $user = $this->createUser();
-
-        $firstStartTime = Carbon::now()->format('Y-m-d H:m:s');
-        Carbon::setTestNow($firstStartTime);
-
-        // then post to api to save the start time in the database
-        $response = $this->post('/start-tracking');
-        $response->assertStatus(201);
-
-        $secondStartTime = Carbon::now('-2 weeks');
-        Carbon::setTestNow($secondStartTime);
-
-        $expected = [
-            ['start_time' => $firstStartTime],
-            ['start_time' => $secondStartTime],
-        ];
-
-        $response = $this->post('/start-tracking');
-        $response->assertStatus(201);
-
-        // then get the data back and check it is what we expected (same start hour and minute)
-        $actual = BootsAndBarsTime::where('user_id', $user->id)->get('start_time')->toArray();
-        $this->assertEqualsWithDelta($expected, $actual, 60);
-    }
-
     public function test_it_stops_boots_and_bars_timer()
     {
         // we need to be logged in to save the time for the user
@@ -151,7 +123,6 @@ class BootsTimingTest extends TestCase
     }
 
     public function test_it_can_handle_multiple_durations() {
-        $this->withoutExceptionHandling();
         // we need to be logged in to save the time for the user
         $this->createUser();
 
@@ -181,5 +152,25 @@ class BootsTimingTest extends TestCase
         ];
 
         $this->assertSame(json_encode($expected), $actual);
+    }
+
+    public function test_you_cant_start_more_than_once_tracking() {
+        // we need to be logged in to save the time for the user
+        $this->createUser();
+
+        $startTime = Carbon::now()->format('Y-m-d H:m:s');
+        Carbon::setTestNow($startTime);
+
+        // then post to api to save the start time in the database
+        $response = $this->post('/start-tracking');
+        $response->assertCreated();
+
+        $response = $this->post('/start-tracking');
+        $responseContent = json_decode($response->getContent(), true);
+        $this->assertSame(['error' => 'User already tracking boots and bars time.'], $responseContent);
+        $response->assertStatus(409);
+
+
+        $this->assertDatabaseCount('boots_and_bars_times', 1);
     }
 }

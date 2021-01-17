@@ -12,6 +12,18 @@ class TimingController extends Controller
 {
     public function startTracking(): JsonResponse
     {
+        // find if the user has something that is being tracked right now, if it is then dont allow anymore tracking
+        $existingRecord = BootsAndBarsTime::where([
+            ['user_id', Auth::id()],
+            ['tracking', true],
+        ])->get();
+
+        if ($existingRecord->isNotEmpty()) {
+            return response()->json([
+                'error' => 'User already tracking boots and bars time.',
+            ], 409);
+        }
+
         $bootsAndBarsRow = new BootsAndBarsTime();
         $bootsAndBarsRow->user_id = Auth::id();
         $bootsAndBarsRow->start_time = Carbon::now();
