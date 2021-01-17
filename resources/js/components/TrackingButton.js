@@ -4,7 +4,9 @@ class TrackingButton extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tracking: false
+            tracking: false,
+            trackingId: 0,
+            trackingDuration: 0
         }
     }
 
@@ -12,10 +14,21 @@ class TrackingButton extends React.Component {
         if (!this.state.tracking) {
             axios.post('/start-tracking')
                 .then(r => {
-                    this.setState({tracking: !this.state.tracking})
+                    this.setState({
+                        tracking: !this.state.tracking,
+                        trackingId: r.data
+                    })
+                    console.log(this.state.trackingId)
                 })
         } else {
-            this.setState({tracking: !this.state.tracking})
+            axios.post(`/${this.state.trackingId}/stop-tracking`)
+                .then(r => {
+                    console.log(r.data)
+                    this.setState({
+                        tracking: !this.state.tracking,
+                        trackingDuration: r.data
+                    })
+                })
         }
     }
 

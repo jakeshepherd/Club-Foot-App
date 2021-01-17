@@ -18,7 +18,7 @@ class CreateBootsAndBarsTimesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->dateTime('start_time');
             $table->dateTime('end_time')->nullable();
-            $table->integer('duration')->nullable();
+            $table->integer('duration')->nullable()->comment('Duration the boots and bars have been worn for in minutes');
             $table->timestamps();
             $table->index('user_id');
             $table->foreign('user_id')->references('id')->on('users');
