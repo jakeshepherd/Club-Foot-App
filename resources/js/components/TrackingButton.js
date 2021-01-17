@@ -12,7 +12,6 @@ class TrackingButton extends React.Component {
         if (!this.state.tracking) {
             axios.post('/start-tracking')
                 .then(r => {
-                    console.log(r.data)
                     this.setState({tracking: !this.state.tracking})
                 })
         } else {
