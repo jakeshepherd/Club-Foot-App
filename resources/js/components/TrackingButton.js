@@ -31,7 +31,6 @@ class TrackingButton extends React.Component {
                         tracking: !this.state.tracking,
                         trackingId: r.data
                     })
-                    console.log(this.state.trackingId)
                 })
         } else {
             axios.post(`/${this.state.trackingId}/stop-tracking`)
