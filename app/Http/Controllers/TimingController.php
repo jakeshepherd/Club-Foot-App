@@ -15,6 +15,7 @@ class TimingController extends Controller
         $bootsAndBarsRow = new BootsAndBarsTime();
         $bootsAndBarsRow->user_id = Auth::id();
         $bootsAndBarsRow->start_time = Carbon::now();
+        $bootsAndBarsRow->tracking = true;
         $bootsAndBarsRow->save();
 
         return response()->json($bootsAndBarsRow->id, 201);
@@ -25,6 +26,7 @@ class TimingController extends Controller
         $time = BootsAndBarsTime::findOrFail($timeId);
         $time->end_time = Carbon::now();
         $time->duration = (Carbon::parse($time->start_time))->diffInMinutes($time->end_time);
+        $time->tracking = false;
         $time->save();
 
         return response()->json($time->duration, 201);
