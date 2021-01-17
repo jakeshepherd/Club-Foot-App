@@ -11,11 +11,11 @@ class TimingController extends Controller
 {
     public function startTracking()
     {
-        $brand = new BootsAndBarsTime();
-        $brand->user_id = Auth::id();
-        $brand->start_time = Carbon::now();
-        $brand->save();
+        $bootsAndBarsRow = new BootsAndBarsTime();
+        $bootsAndBarsRow->user_id = Auth::id();
+        $bootsAndBarsRow->start_time = Carbon::now();
+        $bootsAndBarsRow->save();
 
-        return response($brand->id, 201);
+        return response($bootsAndBarsRow->id, 201);
     }
 }
