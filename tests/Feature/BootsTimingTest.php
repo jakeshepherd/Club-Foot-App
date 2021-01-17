@@ -108,4 +108,24 @@ class BootsTimingTest extends TestCase
         $response->assertNotFound();
         $this->assertDatabaseCount('boots_and_bars_times', 0);
     }
+
+    public function test_it_can_find_timings_without_end_time() {
+        $this->withoutExceptionHandling();
+        // we need to be logged in to save the time for the user
+        $user = $this->createUser();
+
+        $startTime = Carbon::now()->format('Y-m-d H:m:s');
+        Carbon::setTestNow($startTime);
+
+        // then post to api to save the start time in the database
+        $response = $this->post('/start-tracking');
+        $response->assertCreated();
+        $startTimeId = $response->content();
+
+        $response = $this->get('/get-tracking');
+        $response->assertOk();
+        $actual = $response->content();
+
+        $this->assertSame($startTimeId, $actual);
+    }
 }

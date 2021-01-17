@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/{id}/stop-tracking', [TimingController::class, 'stopTracking'])
         ->name('stopTracking');
+
+    Route::get('/get-tracking', [TimingController::class, 'getTracking'])
+        ->name('getTracking');
 });
 
 require __DIR__.'/auth.php';

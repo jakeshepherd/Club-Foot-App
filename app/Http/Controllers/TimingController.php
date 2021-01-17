@@ -31,4 +31,16 @@ class TimingController extends Controller
 
         return response()->json($time->duration, 201);
     }
+
+    public function getTracking(): JsonResponse
+    {
+        $time = BootsAndBarsTime::where(
+            [
+                ['user_id', Auth::id()],
+                ['tracking', '1'],
+            ]
+        )->firstOrFail();
+
+        return response()->json($time->id, 200);
+    }
 }
