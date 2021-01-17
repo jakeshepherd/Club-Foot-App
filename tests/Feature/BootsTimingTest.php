@@ -12,14 +12,20 @@ class BootsTimingTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function test_start_boots_and_bars_timer()
-    {
-        // we need to be logged in to save the time for the user
+    private function createUser() {
         $user = User::factory()->create();
         $this->post('/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);
+
+        return $user;
+    }
+
+    public function test_start_boots_and_bars_timer()
+    {
+        // we need to be logged in to save the time for the user
+        $user = $this->createUser();
 
         $startTime = Carbon::now()->format('Y-m-d H:m:s');
         Carbon::setTestNow($startTime);
@@ -40,11 +46,7 @@ class BootsTimingTest extends TestCase
     public function test_it_adds_multiple_start_times()
     {
         // we need to be logged in to save the time for the user
-        $user = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+        $user = $this->createUser();
 
         $firstStartTime = Carbon::now()->format('Y-m-d H:m:s');
         Carbon::setTestNow($firstStartTime);
@@ -71,14 +73,8 @@ class BootsTimingTest extends TestCase
 
     public function test_it_stops_boots_and_bars_timer()
     {
-        $this->withoutExceptionHandling();
-
         // we need to be logged in to save the time for the user
-        $user = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+        $user = $this->createUser();
 
         $startTime = Carbon::now()->format('Y-m-d H:m:s');
         Carbon::setTestNow($startTime);
