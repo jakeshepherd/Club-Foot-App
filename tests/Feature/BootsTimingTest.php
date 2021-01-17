@@ -100,5 +100,12 @@ class BootsTimingTest extends TestCase
         $this->assertEqualsWithDelta($expected, $actual, 0);
     }
 
-    // then want a test about it calculating duration
+    public function test_it_doesnt_allow_stopping_with_no_start() {
+        $this->createUser();
+        $startTimeId = 1;
+
+        $response = $this->json('POST', '/' . $startTimeId . '/stop-tracking');
+        $response->assertNotFound();
+        $this->assertDatabaseCount('boots_and_bars_times', 0);
+    }
 }
