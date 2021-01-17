@@ -10,9 +10,17 @@ class TrackingButton extends React.Component {
         }
     }
 
+    componentDidMount() {
+        axios.get(`/get-tracking`)
+            .then(r => this.setState({
+                tracking: r.data.tracking,
+                trackingId: r.data.id,
+            }))
+    }
+
     startTracking() {
         if (!this.state.tracking) {
-            axios.post('/start-tracking')
+            axios.post(`/start-tracking`)
                 .then(r => {
                     this.setState({
                         tracking: !this.state.tracking,
