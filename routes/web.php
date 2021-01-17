@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TimingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,10 @@ Route::get('/', function () {
 Route::get('/page-2', function () {
     return view('secondpage');
 })->middleware(['auth'])->name('Page2');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/start-tracking', [TimingController::class, 'startTracking'])
+        ->name('startTracking');
+});
 
 require __DIR__.'/auth.php';
