@@ -39,6 +39,9 @@ class TimingController extends Controller
             ['tracking', '1'],
         ])->firstOrFail();
 
-        return response()->json($time->id, 200);
+        return response()->json([
+            'id' => $time->id,
+            'tracking' => $time->tracking,
+        ], 200);
     }
 }

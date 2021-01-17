@@ -124,8 +124,13 @@ class BootsTimingTest extends TestCase
 
         $response = $this->get('/get-tracking');
         $response->assertOk();
-        $actual = $response->content();
+        $actual = $response->getContent();
 
-        $this->assertSame($startTimeId, $actual);
+        $expected = [
+            'id' => (int) $startTimeId,
+            'tracking' => '1'
+        ];
+
+        $this->assertSame(json_encode($expected), $actual);
     }
 }
