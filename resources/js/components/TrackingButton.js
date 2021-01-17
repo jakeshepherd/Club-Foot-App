@@ -10,12 +10,17 @@ class TrackingButton extends React.Component {
         }
     }
 
+    // is there a way to do this better cos its kind of slow
     componentDidMount() {
         axios.get(`/get-tracking`)
-            .then(r => this.setState({
-                tracking: r.data.tracking,
-                trackingId: r.data.id,
-            }))
+            .then(r => {
+                if (r.data.id > 0) {
+                    this.setState({
+                        trackingId: r.data.id,
+                        tracking: true
+                    })
+                }
+            })
     }
 
     startTracking() {
@@ -31,7 +36,6 @@ class TrackingButton extends React.Component {
         } else {
             axios.post(`/${this.state.trackingId}/stop-tracking`)
                 .then(r => {
-                    console.log(r.data)
                     this.setState({
                         tracking: !this.state.tracking,
                         trackingDuration: r.data
