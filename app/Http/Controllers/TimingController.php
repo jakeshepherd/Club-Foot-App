@@ -36,12 +36,19 @@ class TimingController extends Controller
     {
         $time = BootsAndBarsTime::where([
             ['user_id', Auth::id()],
-            ['tracking', '1'],
-        ])->firstOrFail();
+            ['tracking', true],
+        ])->get();
 
-        return response()->json([
-            'id' => $time->id,
-            'tracking' => $time->tracking,
-        ], 200);
+        if ($time[0]->count() == 0) {
+            return response()->json([
+                'id' => 0,
+                'tracking' => false,
+            ], 200);
+        } else {
+            return response()->json([
+                'id' => $time[0]->id,
+                'tracking' => (bool) $time[0]->tracking,
+            ], 200);
+        }
     }
 }

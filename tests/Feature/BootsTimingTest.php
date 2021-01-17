@@ -110,6 +110,7 @@ class BootsTimingTest extends TestCase
     }
 
     public function test_it_can_find_timings_without_end_time() {
+        $this->withoutExceptionHandling();
         // we need to be logged in to save the time for the user
         $this->createUser();
 
@@ -127,7 +128,7 @@ class BootsTimingTest extends TestCase
 
         $expected = [
             'id' => (int) $startTimeId,
-            'tracking' => '1'
+            'tracking' => true
         ];
 
         $this->assertSame(json_encode($expected), $actual);
@@ -144,7 +145,7 @@ class BootsTimingTest extends TestCase
 
         $expected = [
             'id' => 0,
-            'tracking' => 0,
+            'tracking' => false,
         ];
 
         $this->assertSame(json_encode($expected), $actual);
