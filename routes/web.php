@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\TimingController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get-tracking', [TimingController::class, 'getTracking'])
         ->name('getTracking');
+
+    Route::get('/get-7-day-average', [AnalysisController::class, 'calculateSevenDayAverageInMinutes'])
+        ->name('get7DayAverage');
 });
 
 require __DIR__.'/auth.php';
