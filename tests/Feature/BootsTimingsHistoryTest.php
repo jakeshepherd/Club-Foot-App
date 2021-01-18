@@ -22,11 +22,6 @@ class BootsTimingsHistoryTest extends TestCase
         return $user;
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_get_weekly_average_minutes()
     {
         // setup
