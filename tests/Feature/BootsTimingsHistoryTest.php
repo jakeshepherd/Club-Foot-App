@@ -57,5 +57,7 @@ class BootsTimingsHistoryTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    // gonna need some more tests to test how well the last 7 days thing works
+    // TODO gonna need some more tests to test how well the last 7 days thing works
+
+    // TODO test it ignores anything less than like 10 mins cos not worth it
 }
