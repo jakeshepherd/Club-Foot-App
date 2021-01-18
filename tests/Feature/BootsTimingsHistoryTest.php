@@ -46,12 +46,12 @@ class BootsTimingsHistoryTest extends TestCase
         }
 
         // calculate average of the data in here
-        $expected = array_sum($minutesBootsWorn)/count($minutesBootsWorn);
+        $expected = (int) round(array_sum($minutesBootsWorn)/count($minutesBootsWorn), 0);
 
         // go to endpoint, get averaged data
         $response = $this->get('/get-7-day-average');
         $response->assertOk();
-        $actual = (float) $response->getContent();
+        $actual = (int) $response->getContent();
 
         // assert equal in minutes
         $this->assertSame($expected, $actual);

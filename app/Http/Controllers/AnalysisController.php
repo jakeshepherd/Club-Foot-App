@@ -14,9 +14,9 @@ class AnalysisController extends Controller
         $averages = [];
 
         foreach ($durations as $duration) {
-            $averages[] = (float) $duration['duration'];
+            $averages[] = $duration['duration'];
         }
 
-        return response()->json(array_sum($averages)/count($averages), 200);
+        return response()->json(round(array_sum($averages)/count($averages), 0), 200);
     }
 }
