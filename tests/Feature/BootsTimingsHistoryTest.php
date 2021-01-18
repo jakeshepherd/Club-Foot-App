@@ -29,13 +29,9 @@ class BootsTimingsHistoryTest extends TestCase
      */
     public function test_get_weekly_average_minutes()
     {
-        $this->withoutExceptionHandling();
-        //set up
+        // setup
         $hoursBootsWorn = [14,14,8,15,13,5,11];
-
-        // log in
         $user = $this->createUserAndLogin();
-
         $startTime = Carbon::now();
         Carbon::setTestNow($startTime);
 
@@ -54,18 +50,15 @@ class BootsTimingsHistoryTest extends TestCase
             Carbon::setTestNow($startTime);
         }
 
-
         // calculate average of the data in here
         $expected = array_sum($hoursBootsWorn)/count($hoursBootsWorn);
 
-        //act
         // go to endpoint, get averaged data
         $response = $this->get('/get-7-day-average');
         $response->assertOk();
         $actual = (float) $response->getContent();
 
-        //assert
-        // assert our average is equal to the actual average in minutes
+        // assert equal in minutes
         $this->assertSame($expected, $actual);
     }
 
