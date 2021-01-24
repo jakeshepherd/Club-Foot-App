@@ -20,6 +20,7 @@ class BootsAndBarsTime extends Model
     {
         return BootsAndBarsTime::where('user_id', Auth::id())
             ->whereBetween('end_time', [Carbon::parse('-7 days'), Carbon::now()])
+            ->where('duration', '>=', '10')
             ->get(['end_time', 'duration'])->toArray();
     }
 }
