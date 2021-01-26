@@ -18,8 +18,8 @@ class BootsAndBarsTime extends Model
             ->whereBetween('end_time', [Carbon::parse('-7 days'), Carbon::now()])
             ->where('duration', '>=', '10')
             ->get(['end_time', 'duration'])
-            ->groupBy(function ($val) {
-                return Carbon::parse($val->end_time)->format('d');
+            ->groupBy(function ($element) {
+                return Carbon::parse($element->end_time)->format('d');
             })
             ->toArray()
         );
