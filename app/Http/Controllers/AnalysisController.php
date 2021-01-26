@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 
 class AnalysisController extends Controller
 {
-    public function calculateSevenDayAverageInMinutes(): JsonResponse
+    public function getSevenDayAverageInMinutes(): JsonResponse
     {
-        $durations = (new BootsAndBarsTime)->getSevenDayAverage();
+        $average = $this->calculateAverage((new BootsAndBarsTime)->getSevenDayAverage());
+
+        return response()->json($average['average'], $average['status']);
+    }
+
+    private function calculateAverage(array $durations): array
+    {
         $averages = [];
 
         // go through and get durations
@@ -31,9 +37,15 @@ class AnalysisController extends Controller
 
         // need to check here in case of /0 error.
         if (count($averages) > 0) {
-            return response()->json(round(array_sum($averages)/count($averages), 0), 200);
+            return [
+                'average' => round(array_sum($averages)/count($averages), 0),
+                'status' => 200,
+            ];
         } else {
-            return response()->json(0, 204);
+            return [
+                'average' => 0,
+                'status' => 204,
+            ];
         }
     }
 }
