@@ -170,4 +170,22 @@ class BootsTimingsHistoryTest extends TestCase
         // assert equal in minutes
         $this->assertSame($expected, $actual);
     }
+
+    public function test_it_works_with_no_times() {
+        $this->withoutExceptionHandling();
+        // setup
+        $user = $this->createUserAndLogin();
+        $startTime = Carbon::now();
+        Carbon::setTestNow($startTime);
+
+        // calculate average of the data in here
+        $expected = 0;
+
+        $response = $this->get('/get-7-day-average');
+        $response->assertNoContent();
+        $actual = (int) $response->getContent();
+
+        // assert equal in minutes
+        $this->assertSame($expected, $actual);
+    }
 }

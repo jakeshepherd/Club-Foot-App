@@ -16,7 +16,10 @@ class AnalysisController extends Controller
         foreach ($durations as $duration) {
             $averages[] = $duration['duration'];
         }
-
-        return response()->json(round(array_sum($averages)/count($averages), 0), 200);
+        if (count($averages) > 0) {
+            return response()->json(round(array_sum($averages)/count($averages), 0), 200);
+        } else {
+            return response()->json(0, 204);
+        }
     }
 }
