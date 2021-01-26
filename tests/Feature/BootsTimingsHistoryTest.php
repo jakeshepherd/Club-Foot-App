@@ -64,7 +64,7 @@ class BootsTimingsHistoryTest extends TestCase
         Carbon::setTestNow($startTime);
 
         // Need to add a weeks worth of data
-        for ($i = 0; $i<4; $i++) {
+        for ($i = 0; $i<3; $i++) {
             $newRow = new BootsAndBarsTime;
             $newRow->start_time =$startTime;
             $newRow->end_time = $startTime->addMinutes($minutesBootsWorn[$i]);
@@ -87,7 +87,7 @@ class BootsTimingsHistoryTest extends TestCase
 
         // calculate average of the data in here
         $expected = 0;
-        for($i = 0; $i<4; $i++) {
+        for($i = 0; $i<3; $i++) {
             $expected += $minutesBootsWorn[$i];
         }
 
