@@ -25,23 +25,23 @@ class BootsTimingsHistoryTest extends TestCase
     public function test_get_weekly_average_hours()
     {
         // setup
-        $minutesBootsWorn = [840,840,480,900,780,300,660];
+        $minutesBootsWorn = [840,840,480];
         $user = $this->createUserAndLogin();
         $startTime = Carbon::now();
         Carbon::setTestNow($startTime);
 
         // Need to add a weeks worth of data
-        for ($i = 0; $i<7; $i++) {
+        for ($i = 0; $i<sizeof($minutesBootsWorn); $i++) {
             $newRow = new BootsAndBarsTime;
-            $newRow->start_time = Carbon::now();
-            $newRow->end_time = Carbon::now()->addMinutes($minutesBootsWorn[$i]);
+            $newRow->start_time = $startTime;
+            $newRow->end_time = $startTime->addMinutes($minutesBootsWorn[$i]);
             $newRow->duration = $minutesBootsWorn[$i];
             $newRow->user_id = $user->id;
             $newRow->tracking = false;
             $newRow->save();
 
-            Carbon::now()->subHours($minutesBootsWorn[$i]);
-            $startTime->addDay();
+            $startTime->subMinutes($minutesBootsWorn[$i]);
+            $startTime->addDays(2);
             Carbon::setTestNow($startTime);
         }
 
@@ -74,7 +74,7 @@ class BootsTimingsHistoryTest extends TestCase
             $newRow->tracking = false;
             $newRow->save();
 
-            Carbon::now()->subHours($minutesBootsWorn[$i]);
+            Carbon::now()->subMinutes($minutesBootsWorn[$i]);
             $startTime->addDay();
             Carbon::setTestNow($startTime);
         }
@@ -114,7 +114,7 @@ class BootsTimingsHistoryTest extends TestCase
             $newRow->tracking = false;
             $newRow->save();
 
-            Carbon::now()->subHours($minutesBootsWorn[$i]);
+            Carbon::now()->subMinutes($minutesBootsWorn[$i]);
             $startTime->addDay();
             Carbon::setTestNow($startTime);
         }
@@ -154,7 +154,7 @@ class BootsTimingsHistoryTest extends TestCase
             $newRow->tracking = false;
             $newRow->save();
 
-            Carbon::now()->subHours($minutesBootsWorn[$i]);
+            Carbon::now()->subMinutes($minutesBootsWorn[$i]);
             Carbon::setTestNow($startTime);
         }
 
