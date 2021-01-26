@@ -42,7 +42,6 @@ class BootsTimingsHistoryTest extends TestCase
 
             $startTime->subMinutes($minutesBootsWorn[$i]);
             $startTime->addDays(2);
-            Carbon::setTestNow($startTime);
         }
 
         // calculate average of the data in here
@@ -67,16 +66,15 @@ class BootsTimingsHistoryTest extends TestCase
         // Need to add a weeks worth of data
         for ($i = 0; $i<4; $i++) {
             $newRow = new BootsAndBarsTime;
-            $newRow->start_time = Carbon::now();
-            $newRow->end_time = Carbon::now()->addMinutes($minutesBootsWorn[$i]);
+            $newRow->start_time =$startTime;
+            $newRow->end_time = $startTime->addMinutes($minutesBootsWorn[$i]);
             $newRow->duration = $minutesBootsWorn[$i];
             $newRow->user_id = $user->id;
             $newRow->tracking = false;
             $newRow->save();
 
-            Carbon::now()->subMinutes($minutesBootsWorn[$i]);
+            $startTime->subMinutes($minutesBootsWorn[$i]);
             $startTime->addDay();
-            Carbon::setTestNow($startTime);
         }
 
         $newRow = new BootsAndBarsTime;
@@ -153,15 +151,14 @@ class BootsTimingsHistoryTest extends TestCase
         // Need to add a weeks worth of data
         for ($i = 0; $i<7; $i++) {
             $newRow = new BootsAndBarsTime;
-            $newRow->start_time = Carbon::now();
-            $newRow->end_time = Carbon::now()->addMinutes($minutesBootsWorn[$i]);
+            $newRow->start_time = $startTime;
+            $newRow->end_time = $startTime->addMinutes($minutesBootsWorn[$i]);
             $newRow->duration = $minutesBootsWorn[$i];
             $newRow->user_id = $user->id;
             $newRow->tracking = false;
             $newRow->save();
 
-            Carbon::now()->subMinutes($minutesBootsWorn[$i]);
-            Carbon::setTestNow($startTime);
+            $startTime->subMinutes($minutesBootsWorn[$i]);
         }
 
         // calculate average of the data in here
@@ -202,16 +199,16 @@ class BootsTimingsHistoryTest extends TestCase
         Carbon::setTestNow($startTime);
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time = Carbon::now();
-        $newRow->end_time = Carbon::now()->addMinutes(120);
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(120);
         $newRow->duration = 120;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time = Carbon::now();
-        $newRow->end_time = Carbon::now()->addMinutes(120);
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(120);
         $newRow->duration = 120;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
