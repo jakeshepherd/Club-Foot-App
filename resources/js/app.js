@@ -13,5 +13,5 @@ require('./bootstrap');
  - */
 
 require('./components/Homepage');
-require('./components/Settings')
+require('./components/Settings/Settings')
 require('alpinejs');

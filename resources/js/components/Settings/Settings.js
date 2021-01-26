@@ -1,10 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TrackingButton from './TrackingButton';
-import DailyAdheranceView from './DailyAdheranceView';
-import NextCalendarEvent from './NextCalendarEvent';
-
-import { PieChart } from 'react-minimal-pie-chart';
 
 class Settings extends React.Component {
     constructor(props) {
