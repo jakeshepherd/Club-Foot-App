@@ -104,36 +104,34 @@ class BootsTimingsHistoryTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    // TODO test it ignores anything less than like 10 mins cos not worth it
     public function test_ignores_less_than_10_mins() {
         // setup
-        $minutesBootsWorn = [5,840,480,900,780,300,660];
+        $minutesBootsWorn = [5,840,480];
         $user = $this->createUserAndLogin();
         $startTime = Carbon::now();
         Carbon::setTestNow($startTime);
 
         // Need to add a weeks worth of data
-        for ($i = 0; $i<7; $i++) {
+        for ($i = 0; $i<3; $i++) {
             $newRow = new BootsAndBarsTime;
-            $newRow->start_time = Carbon::now();
-            $newRow->end_time = Carbon::now()->addMinutes($minutesBootsWorn[$i]);
+            $newRow->start_time = $startTime;
+            $newRow->end_time = $startTime->addMinutes($minutesBootsWorn[$i]);
             $newRow->duration = $minutesBootsWorn[$i];
             $newRow->user_id = $user->id;
             $newRow->tracking = false;
             $newRow->save();
 
-            Carbon::now()->subMinutes($minutesBootsWorn[$i]);
-            $startTime->addDay();
-            Carbon::setTestNow($startTime);
+            $startTime->subMinutes($minutesBootsWorn[$i]);
+            $startTime->addDays(2);
         }
 
         // calculate average of the data in here
         $expected = 0;
-        for($i = 1; $i<7; $i++) {
+        for($i = 1; $i<3; $i++) {
             $expected += $minutesBootsWorn[$i];
         }
 
-        $expected = (int) round($expected/6, 0);
+        $expected = (int) round($expected/2, 0);
 
         // go to endpoint, get averaged data
         $response = $this->get('/get-7-day-average');
