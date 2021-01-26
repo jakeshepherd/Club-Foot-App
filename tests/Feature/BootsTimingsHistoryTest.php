@@ -140,40 +140,6 @@ class BootsTimingsHistoryTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function test_it_gets_multiple_times_on_same_day() {
-        $this->withoutExceptionHandling();
-        // setup
-        $minutesBootsWorn = [15,840,480,900,780,300,660];
-        $user = $this->createUserAndLogin();
-        $startTime = Carbon::now();
-        Carbon::setTestNow($startTime);
-
-        // Need to add a weeks worth of data
-        for ($i = 0; $i<7; $i++) {
-            $newRow = new BootsAndBarsTime;
-            $newRow->start_time = $startTime;
-            $newRow->end_time = $startTime->addMinutes($minutesBootsWorn[$i]);
-            $newRow->duration = $minutesBootsWorn[$i];
-            $newRow->user_id = $user->id;
-            $newRow->tracking = false;
-            $newRow->save();
-
-            $startTime->subMinutes($minutesBootsWorn[$i]);
-        }
-
-        // calculate average of the data in here
-        $expected = (int) round(array_sum($minutesBootsWorn)/count($minutesBootsWorn), 0);
-
-        // go to endpoint, get averaged data
-        $startTime->addDays(2);
-        $response = $this->get('/get-7-day-average');
-        $response->assertOk();
-        $actual = (int) $response->getContent();
-
-        // assert equal in minutes
-        $this->assertSame($expected, $actual);
-    }
-
     public function test_it_works_with_no_times() {
         // setup
         $user = $this->createUserAndLogin();
