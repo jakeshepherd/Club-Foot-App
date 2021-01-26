@@ -59,13 +59,13 @@ class BootsTimingsHistoryTest extends TestCase
 
     public function test_it_doesnt_include_8_days_before() {
         // setup
-        $minutesBootsWorn = [840,840,480,900,780,300,660,600];
+        $minutesBootsWorn = [840,840,480,900];
         $user = $this->createUserAndLogin();
         $startTime = Carbon::now();
         Carbon::setTestNow($startTime);
 
         // Need to add a weeks worth of data
-        for ($i = 0; $i<8; $i++) {
+        for ($i = 0; $i<4; $i++) {
             $newRow = new BootsAndBarsTime;
             $newRow->start_time = Carbon::now();
             $newRow->end_time = Carbon::now()->addMinutes($minutesBootsWorn[$i]);
@@ -79,13 +79,21 @@ class BootsTimingsHistoryTest extends TestCase
             Carbon::setTestNow($startTime);
         }
 
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = Carbon::parse('-8 days');
+        $newRow->end_time = Carbon::parse('-8 days')->addMinutes($minutesBootsWorn[3]);
+        $newRow->duration = $minutesBootsWorn[3];
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
         // calculate average of the data in here
         $expected = 0;
-        for($i = 1; $i<8; $i++) {
+        for($i = 0; $i<4; $i++) {
             $expected += $minutesBootsWorn[$i];
         }
 
-        $expected = (int) round($expected/7, 0);
+        $expected = (int) round($expected/3, 0);
 
         // go to endpoint, get averaged data
         $response = $this->get('/get-7-day-average');
