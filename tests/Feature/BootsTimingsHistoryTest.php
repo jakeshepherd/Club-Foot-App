@@ -172,7 +172,6 @@ class BootsTimingsHistoryTest extends TestCase
     }
 
     public function test_it_works_with_no_times() {
-        $this->withoutExceptionHandling();
         // setup
         $user = $this->createUserAndLogin();
         $startTime = Carbon::now();
@@ -183,6 +182,49 @@ class BootsTimingsHistoryTest extends TestCase
 
         $response = $this->get('/get-7-day-average');
         $response->assertNoContent();
+        $actual = (int) $response->getContent();
+
+        // assert equal in minutes
+        $this->assertSame($expected, $actual);
+    }
+
+    public function test_it_works_with_times_on_same_day_on_multiple_days() {
+        $this->withoutExceptionHandling();
+        // setup
+        $user = $this->createUserAndLogin();
+        $startTime = Carbon::now();
+        Carbon::setTestNow($startTime);
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = Carbon::now();
+        $newRow->end_time = Carbon::now()->addMinutes(120);
+        $newRow->duration = 120;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = Carbon::now();
+        $newRow->end_time = Carbon::now()->addMinutes(120);
+        $newRow->duration = 120;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = Carbon::parse('+1 day');
+        $newRow->end_time = Carbon::parse('+1 day')->addMinutes(180);
+        $newRow->duration = 180;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $expected = ((120+120) + 180)/2;
+
+        // go to endpoint, get averaged data
+        $startTime->addDays(2);
+        $response = $this->get('/get-7-day-average');
+        $response->assertOk();
         $actual = (int) $response->getContent();
 
         // assert equal in minutes

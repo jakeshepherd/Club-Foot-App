@@ -15,9 +15,13 @@ class BootsAndBarsTime extends Model
 
     public function getSevenDayAverage(): array
     {
-        return BootsAndBarsTime::where('user_id', Auth::id())
+        $times = BootsAndBarsTime::where('user_id', Auth::id())
             ->whereBetween('end_time', [Carbon::parse('-7 days'), Carbon::now()])
             ->where('duration', '>=', '10')
-            ->get(['end_time', 'duration'])->toArray();
+            ->get(['end_time', 'duration'])->groupBy(function ($val) {
+                return Carbon::parse($val->end_time)->format('d');
+            })
+            ->toArray();
+        return array_values($times);
     }
 }
