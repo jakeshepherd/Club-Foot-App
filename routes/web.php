@@ -24,6 +24,10 @@ Route::get('/page-2', function () {
     return view('secondpage');
 })->middleware(['auth'])->name('Page2');
 
+Route::get('/settings', function () {
+    return view('settings');
+})->middleware(['auth'])->name('Settings');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/set-boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
