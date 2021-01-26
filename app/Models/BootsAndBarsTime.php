@@ -11,8 +11,6 @@ class BootsAndBarsTime extends Model
 {
     use HasFactory;
 
-    protected $table = 'boots_and_bars_times';
-
     public function getSevenDayAverage(): array
     {
         return array_values(
