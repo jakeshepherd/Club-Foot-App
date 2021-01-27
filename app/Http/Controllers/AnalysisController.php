@@ -63,8 +63,6 @@ class AnalysisController extends Controller
     private function calculateAverage(array $durations): array
     {
         $averages = [];
-
-        // go through and get durations
         foreach ($durations as $duration) {
             // if there are multiple timings on one day, we handle it slightly differently
             if (count($duration) > 1) {
@@ -80,7 +78,7 @@ class AnalysisController extends Controller
             }
         }
 
-        // need to check here in case of /0 error.
+        // need to check here in case of divide by 0 error.
         if (count($averages) > 0) {
             return [
                 'average' => round(array_sum($averages)/count($averages)),
