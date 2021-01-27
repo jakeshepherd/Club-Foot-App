@@ -40,9 +40,7 @@ class Settings extends React.Component {
                         Hours
                     </label>
                     <br />
-                    <input type={'submit'} value={'Submit'}
-                           className="mt-3 m-auto p-2 rounded bg-green-200 inline-block shadow-md transition duration-500 hover:shadow-lg
-                                    hover:border-transparent hover:text-white hover:bg-green-500 cursor-pointer" />
+                    <input type={'submit'} value={'Submit'} className="button mt-3 p-2 bg-green-200 hover:bg-green-500" />
                 </form>
 
             </div>

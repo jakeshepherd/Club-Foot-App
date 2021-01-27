@@ -11,8 +11,8 @@ class TrackingButton extends React.Component {
     }
 
     // is there a way to do this better cos its kind of slow
-    componentDidMount() {
-        axios.get(`/get-tracking`)
+    async componentDidMount() {
+        await axios.get(`/get-tracking`)
             .then(r => {
                 if (r.data.id > 0) {
                     this.setState({
@@ -44,11 +44,13 @@ class TrackingButton extends React.Component {
     }
 
     render() {
-        var buttonColour = (this.state.tracking) ? buttonColour = 'bg-red' : buttonColour = 'bg-green'
-        var buttonContext = (this.state.tracking) ? buttonContext = "Stop" : buttonContext = "Start"
+        let buttonColour;
+        (this.state.tracking) ? buttonColour = 'bg-red' : buttonColour = 'bg-green';
+        let buttonContext;
+        (this.state.tracking) ? buttonContext = "Stop" : buttonContext = "Start";
         return (
             <button
-                className={buttonColour + '-200 rounded p-3 w-1/5 mt-5 shadow-md transition duration-500 hover:shadow-lg hover:border-transparent hover:text-white hover:' + buttonColour +'-500'}
+                className={'button ' + buttonColour + '-200 p-3 w-1/5 mt-5 hover:' + buttonColour +'-500'}
                 onClick={() => {this.startTracking()}}>
                 {buttonContext} Tracking Boots and Bars Time
             </button>
