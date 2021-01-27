@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\BootsAndBarsTime;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;

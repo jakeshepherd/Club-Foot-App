@@ -20,10 +20,17 @@ class AnalysisController extends Controller
 
     public function getSevenDayAdherence(): JsonResponse
     {
-        $dailyTimings = [];
-        $durations = (new BootsAndBarsTime)->getSevenDayTimes();
-        $timeGoal = (User::findOrFail(Auth::id())->time_goal);
+        $data = $this->formatWeeklyAdherenceData(
+            (new BootsAndBarsTime)->getSevenDayTimes(),
+            (User::findOrFail(Auth::id())->time_goal)
+        );
 
+        return response()->json($data['data'], $data['status']);
+    }
+
+    private function formatWeeklyAdherenceData(array $durations, int $timeGoal): array
+    {
+        $dailyTimings = [];
         // go through and get durations
         foreach ($durations as $duration) {
             // if there are multiple timings on one day, we handle it slightly differently
@@ -46,9 +53,15 @@ class AnalysisController extends Controller
         }
 
         if (empty($weeklyAdherence)) {
-            return response()->json(0, 204);
+            return [
+                'data' => 0,
+                'status' => 204,
+            ];
         }
-        return response()->json($weeklyAdherence, 200);
+        return [
+            'data' => $weeklyAdherence,
+            'status' => 200,
+        ];
     }
 
     private function calculateAverage(array $durations): array
@@ -77,11 +90,10 @@ class AnalysisController extends Controller
                 'average' => round(array_sum($averages)/count($averages), 0),
                 'status' => 200,
             ];
-        } else {
-            return [
-                'average' => 0,
-                'status' => 204,
-            ];
         }
+        return [
+            'average' => 0,
+            'status' => 204,
+        ];
     }
 }
