@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
-class SetBootsTimeGoalTest extends TestCase
+class BootsTimeGoalTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -18,7 +18,7 @@ class SetBootsTimeGoalTest extends TestCase
         $this->createUserAndLogin();
 
         $expected = 15;
-        $response = $this->post('/set-boots-time-goal', [
+        $response = $this->post('/boots-time-goal', [
             'time_goal' => $expected
         ]);
         $response->assertCreated();
@@ -32,7 +32,22 @@ class SetBootsTimeGoalTest extends TestCase
     {
         $this->createUserAndLogin();
 
-        $response = $this->post('/set-boots-time-goal', []);
+        $response = $this->post('/boots-time-goal', []);
         $response->assertStatus(400);
+    }
+
+    public function test_it_gets_time_goal()
+    {
+        $this->createUserAndLogin();
+
+        $expected = 12;
+        $this->post('/boots-time-goal', [
+            'time_goal' => $expected
+        ]);
+
+        $actual = $this->get('/boots-time-goal');
+        $actual->assertOk();
+
+        $this->assertSame($expected*60, (int) $actual->getContent());
     }
 }

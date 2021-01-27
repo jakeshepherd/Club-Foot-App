@@ -29,8 +29,11 @@ Route::get('/settings', function () {
 })->middleware(['auth'])->name('Settings');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('/set-boots-time-goal', [UserController::class, 'setTimeGoal'])
+    Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
+
+    Route::get('/boots-time-goal', [UserController::class, 'getTimeGoal'])
+        ->name('getTimeGoal');
 
     Route::post('/start-tracking', [TimingController::class, 'startTracking'])
         ->name('startTracking');

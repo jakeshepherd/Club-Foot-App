@@ -11,12 +11,16 @@ class Settings extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+
+    }
+
     handleChange(event) {
         this.setState({value: event.target.value})
     }
 
     handleSubmit(event) {
-        axios.post(`/set-boots-time-goal`, {
+        axios.post(`/boots-time-goal`, {
             'time_goal': this.state.value
         }).then(r => alert('Updated your goal time!'))
         event.preventDefault()

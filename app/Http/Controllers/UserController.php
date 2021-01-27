@@ -28,4 +28,10 @@ class UserController extends Controller
 
         return response()->json($user->time_goal, 201);
     }
+
+    public function getTimeGoal(): JsonResponse
+    {
+        $timeGoal = User::findOrFail(Auth::id())->time_goal;
+        return response()->json($timeGoal);
+    }
 }

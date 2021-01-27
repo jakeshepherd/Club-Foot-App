@@ -16,7 +16,7 @@ class AdherencePercentAnalysisTest extends TestCase
         $expected = [];
 
         $user = $this->createUserAndLogin();
-        $this->post('/set-boots-time-goal', [
+        $this->post('/boots-time-goal', [
             'time_goal' => '15'
         ]);
 
@@ -88,7 +88,7 @@ class AdherencePercentAnalysisTest extends TestCase
         $expected = [];
 
         $user = $this->createUserAndLogin();
-        $this->post('/set-boots-time-goal', [
+        $this->post('/boots-time-goal', [
             'time_goal' => '15'
         ]);
 
@@ -188,7 +188,7 @@ class AdherencePercentAnalysisTest extends TestCase
         $startTime = Carbon::now();
         Carbon::setTestNow($startTime);
 
-        $this->post('/set-boots-time-goal', [
+        $this->post('/boots-time-goal', [
             'time_goal' => '15'
         ]);
 
@@ -203,7 +203,7 @@ class AdherencePercentAnalysisTest extends TestCase
         $expected = [];
 
         $user = $this->createUserAndLogin();
-        $this->post('/set-boots-time-goal', [
+        $this->post('/boots-time-goal', [
             'time_goal' => '15'
         ]);
 
