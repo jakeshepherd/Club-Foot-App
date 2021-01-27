@@ -12,7 +12,9 @@ class AnalysisController extends Controller
 {
     public function getSevenDayAverageInMinutes(): JsonResponse
     {
-        $average = $this->calculateAverage((new BootsAndBarsTime)->getSevenDayTimes());
+        $average = $this->calculateAverage(
+            (new BootsAndBarsTime)->getSevenDayTimes()
+        );
 
         return response()->json($average['average'], $average['status']);
     }
@@ -21,7 +23,7 @@ class AnalysisController extends Controller
     {
         $data = $this->formatWeeklyAdherenceData(
             (new BootsAndBarsTime)->getSevenDayTimes(),
-            (User::findOrFail(Auth::id())->time_goal)
+            User::findOrFail(Auth::id())->time_goal
         );
 
         return response()->json($data['data'], $data['status']);
@@ -35,7 +37,11 @@ class AnalysisController extends Controller
         foreach ($durations as $duration) {
             // if there are multiple timings on one day, we handle it slightly differently
             if (count($duration) > 1) {
-                $dailyTimings[$duration[0]['end_time']] = array_sum($duration['duration']);
+                $dailyTotal = 0;
+                foreach ($duration as $subTime) {
+                    $dailyTotal += $subTime['duration'];
+                }
+                $dailyTimings[$duration[0]['end_time']] = $dailyTotal;
             }
             // if there's just one timing for the day then we can just get the duration nicely
             else {
@@ -44,8 +50,7 @@ class AnalysisController extends Controller
         }
 
         foreach ($dailyTimings as $date => $duration) {
-            $date = Carbon::parse($date)->format('l');
-            $weeklyAdherence[$date] = $duration >= $timeGoal;
+            $weeklyAdherence[Carbon::parse($date)->format('l')] = $duration >= $timeGoal;
         }
 
         if (empty($weeklyAdherence)) {

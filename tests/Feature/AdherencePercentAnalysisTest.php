@@ -198,4 +198,52 @@ class AdherencePercentAnalysisTest extends TestCase
 
         $this->assertSame(0, $actual);
     }
+    public function test_it_works_with_multiple_times_on_same_day() {
+        $this->withoutExceptionHandling();
+        $expected = [];
+
+        $user = $this->createUserAndLogin();
+        $this->post('/set-boots-time-goal', [
+            'time_goal' => '15'
+        ]);
+
+        $startTime = Carbon::parse('2021-01-28 02:28:10');
+        Carbon::setTestNow($startTime);
+
+        // Need to add a weeks worth of data
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time =$startTime;
+        $newRow->end_time = $startTime->addMinutes(10*60);
+        $newRow->duration = 10*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+        $expected[$startTime->format('l')] = false;
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time =$startTime;
+        $newRow->end_time = $startTime->addMinutes(6*60);
+        $newRow->duration = 6*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+        $expected[$startTime->format('l')] = true;
+
+        $startTime->addDay();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time =$startTime;
+        $newRow->end_time = $startTime->addMinutes(10*60);
+        $newRow->duration = 10*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+        $expected[$startTime->format('l')] = false;
+
+        $response = $this->get('/weekly-adherence');
+        $response->assertOk();
+        $actual = json_decode($response->content(), true);
+
+        $this->assertSame($expected, $actual);
+    }
 }
