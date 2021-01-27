@@ -11,8 +11,11 @@ class Settings extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-
+    async componentDidMount() {
+        await axios.get(`boots-time-goal`)
+            .then(r => this.setState({
+                value: r.data/60
+            }))
     }
 
     handleChange(event) {
