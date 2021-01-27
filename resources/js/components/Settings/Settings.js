@@ -7,8 +7,6 @@ class Settings extends React.Component {
         this.state = {
             value: ''
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount() {
@@ -33,12 +31,12 @@ class Settings extends React.Component {
         return (
             <div className="p-5 m-auto w-10/12 text-center">
                 <h1 className="text-2xl">Settings</h1>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={(event) => this.handleSubmit(event)}>
                     <label className="">
                         Boots and Bars Time Goal
                         <br />
                         <input className="rounded w-1/12 m-2 text-center bg-gray-200 border-gray-200 transition duration-500 hover:shadow-md"
-                               type={"text"} value={this.state.value} onChange={this.handleChange} />
+                               type={"text"} value={this.state.value} onChange={(event) => this.handleChange(event)} />
                         Hours
                     </label>
                     <br />
