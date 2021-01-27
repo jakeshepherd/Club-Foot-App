@@ -42,11 +42,7 @@ class AnalysisController extends Controller
         $weeklyAdherence = [];
         foreach ($dailyTimings as $date => $duration) {
             $date = Carbon::parse($date)->format('l');
-            if ($duration >= $timeGoal) {
-                 $weeklyAdherence[$date] = true;
-            } else {
-                $weeklyAdherence[$date] = false;
-            }
+            $weeklyAdherence[$date] = $duration >= $timeGoal;
         }
 
         return response()->json($weeklyAdherence, 200);
