@@ -17,7 +17,7 @@ class SetBootsTimeGoalTest extends TestCase
     {
         $this->createUserAndLogin();
 
-        $expected = '15';
+        $expected = 15;
         $response = $this->post('/set-boots-time-goal', [
             'time_goal' => $expected
         ]);
@@ -25,7 +25,7 @@ class SetBootsTimeGoalTest extends TestCase
 
         $actual = User::where('id', Auth::id())->get('time_goal')->toArray();
 
-        $this->assertSame($expected, $actual[0]['time_goal']);
+        $this->assertSame($expected*60, (int) $actual[0]['time_goal']);
     }
 
     public function test_it_fails_with_no_post_value()
