@@ -31,6 +31,7 @@
     },
     "dependencies": {
         "path-browserify": "^1.0.1",
-        "react-minimal-pie-chart": "^8.1.0"
+        "react-minimal-pie-chart": "^8.1.0",
+        "react-tooltip": "^4.2.13"
     }
 }
