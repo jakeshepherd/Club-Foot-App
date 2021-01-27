@@ -13,16 +13,6 @@ class SetBootsTimeGoalTest extends TestCase
 {
     use DatabaseMigrations;
 
-    private function createUserAndLogin() {
-        $user = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
-
-        return $user;
-    }
-
     public function test_it_sets_boots_and_bars_time_goal()
     {
         $this->createUserAndLogin();

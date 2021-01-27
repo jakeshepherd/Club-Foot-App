@@ -12,16 +12,6 @@ class BootsTimingsHistoryTest extends TestCase
 {
     use DatabaseMigrations;
 
-    private function createUserAndLogin() {
-        $user = User::factory()->create();
-        $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
-
-        return $user;
-    }
-
     public function test_get_weekly_average_hours()
     {
         // setup
