@@ -28,6 +28,21 @@ class BootsTimeGoalTest extends TestCase
         $this->assertSame($expected*60, $actual[0]['time_goal']);
     }
 
+    public function test_it_sets_goal_with_float()
+    {
+        $this->createUserAndLogin();
+
+        $expected = 15.5;
+        $response = $this->post('/boots-time-goal', [
+            'time_goal' => $expected
+        ]);
+        $response->assertCreated();
+
+        $actual = User::findOrFail(Auth::id())->time_goal;
+
+        $this->assertSame((int) ($expected*60), $actual);
+    }
+
     public function test_it_fails_with_no_post_value()
     {
         $this->createUserAndLogin();

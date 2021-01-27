@@ -14,7 +14,7 @@ class Settings extends React.Component {
     async componentDidMount() {
         await axios.get(`/boots-time-goal`)
             .then(r => this.setState({
-                value: r.data/60
+                value: (r.data/60).toFixed(1)
             }))
     }
 
@@ -37,7 +37,7 @@ class Settings extends React.Component {
                     <label className="">
                         Boots and Bars Time Goal
                         <br />
-                        <input className="rounded w-12 m-2 text-center bg-gray-200 border-gray-200 transition duration-500 hover:shadow-md"
+                        <input className="rounded w-1/12 m-2 text-center bg-gray-200 border-gray-200 transition duration-500 hover:shadow-md"
                                type={"text"} value={this.state.value} onChange={this.handleChange} />
                         Hours
                     </label>
