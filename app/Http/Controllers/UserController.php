@@ -22,7 +22,7 @@ class UserController extends Controller
         }
 
         $user = User::findOrFail(Auth::id());
-        $user->time_goal = (request('time_goal'))*60;
+        $user->time_goal = request('time_goal')*60;
         $user->save();
 
         return response()->json($user->time_goal, 201);
@@ -30,7 +30,6 @@ class UserController extends Controller
 
     public function getTimeGoal(): JsonResponse
     {
-        $timeGoal = User::findOrFail(Auth::id())->time_goal;
-        return response()->json($timeGoal);
+        return response()->json(User::findOrFail(Auth::id())->time_goal);
     }
 }
