@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\TimingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,17 @@ Route::get('/page-2', function () {
     return view('secondpage');
 })->middleware(['auth'])->name('Page2');
 
+Route::get('/settings', function () {
+    return view('settings');
+})->middleware(['auth'])->name('Settings');
+
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
+        ->name('setTimeGoal');
+
+    Route::get('/boots-time-goal', [UserController::class, 'getTimeGoal'])
+        ->name('getTimeGoal');
+
     Route::post('/start-tracking', [TimingController::class, 'startTracking'])
         ->name('startTracking');
 
@@ -35,6 +46,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get-7-day-average', [AnalysisController::class, 'getSevenDayAverageInMinutes'])
         ->name('get7DayAverage');
+
+    Route::get('/weekly-adherence', [AnalysisController::class, 'getSevenDayAdherence'])
+        ->name('getSevenDayAdherence');
 });
 
 require __DIR__.'/auth.php';

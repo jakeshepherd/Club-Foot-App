@@ -47,6 +47,13 @@
                                 {{ __('Logout') }}
                             </x-dropdown-link>
                         </form>
+                        <form method="GET" action="{{ route('Settings') }}">
+                            <x-dropdown-link :href="route('Settings')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Settings') }}
+                            </x-dropdown-link>
+                        </form>
                     </x-slot>
                 </x-dropdown>
             </div>

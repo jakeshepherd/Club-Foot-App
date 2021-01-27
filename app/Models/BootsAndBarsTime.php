@@ -11,7 +11,16 @@ class BootsAndBarsTime extends Model
 {
     use HasFactory;
 
-    public function getSevenDayAverage(): array
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'duration' => 'integer',
+    ];
+
+    public function getSevenDayTimes(): array
     {
         return array_values(
             BootsAndBarsTime::where('user_id', Auth::id())

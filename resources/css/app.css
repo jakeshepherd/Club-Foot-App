@@ -4,5 +4,9 @@
     .daily-adherance {
         @apply rounded-full h-10 w-10 inline-block border-4 items-center p-1 m-2 transition duration-500 cursor-pointer;
     }
+    .button {
+        @apply m-auto rounded inline-block shadow-md transition duration-500 hover:shadow-lg
+            hover:border-transparent hover:text-white cursor-pointer
+    }
 }
 @tailwind utilities;
