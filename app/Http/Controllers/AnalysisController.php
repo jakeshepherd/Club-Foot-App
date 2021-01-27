@@ -31,22 +31,19 @@ class AnalysisController extends Controller
     private function formatWeeklyAdherenceData(array $durations, int $timeGoal): array
     {
         $dailyTimings = [];
+        $weeklyAdherence = [];
         // go through and get durations
         foreach ($durations as $duration) {
             // if there are multiple timings on one day, we handle it slightly differently
             if (count($duration) > 1) {
-                $dailyTotal = 0;
-                foreach ($duration as $subTime) {
-                    $dailyTotal += $subTime['duration'];
-                }
-                $dailyTimings[$duration[0]['end_time']] = $dailyTotal;
+                $dailyTimings[$duration[0]['end_time']] = array_sum($duration['duration']);
             }
             // if there's just one timing for the day then we can just get the duration nicely
             else {
                 $dailyTimings[$duration[0]['end_time']] = $duration[0]['duration'];
             }
         }
-        $weeklyAdherence = [];
+
         foreach ($dailyTimings as $date => $duration) {
             $date = Carbon::parse($date)->format('l');
             $weeklyAdherence[$date] = $duration >= $timeGoal;
