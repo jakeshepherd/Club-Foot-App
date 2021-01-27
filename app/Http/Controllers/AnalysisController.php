@@ -45,6 +45,9 @@ class AnalysisController extends Controller
             $weeklyAdherence[$date] = $duration >= $timeGoal;
         }
 
+        if (empty($weeklyAdherence)) {
+            return response()->json(0, 204);
+        }
         return response()->json($weeklyAdherence, 200);
     }
 

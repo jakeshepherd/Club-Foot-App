@@ -185,4 +185,19 @@ class AdherencePercentAnalysisTest extends TestCase
 
         $this->assertSame($expected, $actual);
     }
+    public function test_it_works_with_no_data() {
+        $this->createUserAndLogin();
+        $startTime = Carbon::now();
+        Carbon::setTestNow($startTime);
+
+        $this->post('/set-boots-time-goal', [
+            'time_goal' => '15'
+        ]);
+
+        $response = $this->get('/weekly-adherence');
+        $response->assertStatus(204);
+        $actual = (int) $response->content();
+
+        $this->assertSame(0, $actual);
+    }
 }
