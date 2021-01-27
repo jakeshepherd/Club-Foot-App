@@ -34,7 +34,7 @@ class BootsTimingsHistoryTest extends TestCase
         }
 
         // calculate average of the data in here
-        $expected = (int) round(array_sum($minutesBootsWorn)/count($minutesBootsWorn), 0);
+        $expected = (int) round(array_sum($minutesBootsWorn)/count($minutesBootsWorn));
 
         // go to endpoint, get averaged data
         $response = $this->get('/get-7-day-average');
@@ -105,7 +105,7 @@ class BootsTimingsHistoryTest extends TestCase
             $expected += $minutesBootsWorn[$i];
         }
 
-        $expected = (int) round($expected/2, 0);
+        $expected = (int) round($expected/2);
 
         // go to endpoint, get averaged data
         $response = $this->get('/get-7-day-average');

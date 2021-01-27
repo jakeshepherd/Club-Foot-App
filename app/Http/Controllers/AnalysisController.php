@@ -84,7 +84,7 @@ class AnalysisController extends Controller
         // need to check here in case of /0 error.
         if (count($averages) > 0) {
             return [
-                'average' => round(array_sum($averages)/count($averages), 0),
+                'average' => round(array_sum($averages)/count($averages)),
                 'status' => 200,
             ];
         }
