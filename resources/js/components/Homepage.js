@@ -23,11 +23,9 @@ class Homepage extends React.Component {
                 averageDurationMinutes: r.data % 60
             }))
         await axios.get(`/weekly-adherence`)
-            .then(r => {
-                this.setState({
-                    weeklyAdherence: r.data,
-                })
-            })
+            .then(r => this.setState({
+                    weeklyAdherence: r.data
+            }))
 
         const totalSize = Object.keys(this.state.weeklyAdherence).length;
         const numOfTrues = Object.values(this.state.weeklyAdherence).filter(Boolean).length;
