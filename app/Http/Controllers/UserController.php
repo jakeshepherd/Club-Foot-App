@@ -19,6 +19,7 @@ class UserController extends Controller
             ]);
         } catch (ValidationException $e) {
             Log::error('time_goal not specified in POST. Please try again.');
+            return response()->json('time_goal not specified in POST. Please try again.', 400);
         }
 
         $user = User::findOrFail(Auth::id());

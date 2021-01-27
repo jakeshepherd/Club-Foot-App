@@ -25,7 +25,6 @@ class SetBootsTimeGoalTest extends TestCase
 
     public function test_it_sets_boots_and_bars_time_goal()
     {
-        $this->withoutExceptionHandling();
         $this->createUserAndLogin();
 
         $expected = '15';
@@ -37,5 +36,13 @@ class SetBootsTimeGoalTest extends TestCase
         $actual = User::where('id', Auth::id())->get('time_goal')->toArray();
 
         $this->assertSame($expected, $actual[0]['time_goal']);
+    }
+
+    public function test_it_fails_with_no_post_value()
+    {
+        $this->createUserAndLogin();
+
+        $response = $this->post('/set-boots-time-goal', []);
+        $response->assertStatus(400);
     }
 }
