@@ -25,9 +25,16 @@ class Settings extends React.Component {
     render() {
         return (
             <div className="p-5 m-auto w-10/12 text-center">
-                <h1>Settings</h1>
+                <h1 className="text-2xl">Settings</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <input type={"text"} value={this.state.value} onChange={this.handleChange} />
+                    <label className="">
+                        Boots and Bars Time Goal
+                        <br />
+                        <input className="rounded w-12 m-2 text-center bg-gray-200 border-gray-200 transition duration-500 hover:shadow-md"
+                               type={"text"} value={this.state.value} onChange={this.handleChange} />
+                        Hours
+                    </label>
+                    <br />
                     <input type={'submit'} value={'Submit'}
                            className="mt-3 m-auto p-2 rounded bg-green-200 inline-block shadow-md transition duration-500 hover:shadow-lg
                                     hover:border-transparent hover:text-white hover:bg-green-500 cursor-pointer" />
