@@ -78,7 +78,7 @@ class BootsTimingsHistoryTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function test_ignores_less_than_10_mins() {
+    public function test_ignores_less_than_10_minutes() {
         // setup
         $minutesBootsWorn = [5,840,480];
         $user = $this->createUserAndLogin();
@@ -118,7 +118,7 @@ class BootsTimingsHistoryTest extends TestCase
 
     public function test_it_works_with_no_times() {
         // setup
-        $user = $this->createUserAndLogin();
+        $this->createUserAndLogin();
         $startTime = Carbon::now();
         Carbon::setTestNow($startTime);
 

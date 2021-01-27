@@ -6,7 +6,6 @@ use App\Models\BootsAndBarsTime;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AnalysisController extends Controller

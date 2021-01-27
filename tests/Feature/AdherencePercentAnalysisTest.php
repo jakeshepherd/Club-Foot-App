@@ -5,8 +5,6 @@ namespace Tests\Feature;
 use App\Models\BootsAndBarsTime;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AdherencePercentAnalysisTest extends TestCase
@@ -178,7 +176,7 @@ class AdherencePercentAnalysisTest extends TestCase
         $startTime->subMinutes(18*60);
         $expected[$startTime->format('l')] = true;
 
-        $startTime->addDays(1);
+        $startTime->addDay();
         $response = $this->get('/weekly-adherence');
         $response->assertOk();
         $actual = json_decode($response->content(), true);
