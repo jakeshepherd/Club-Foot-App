@@ -1,8 +1,6 @@
-import { data } from 'autoprefixer';
 import React from 'react';
 
-
-function DailyAdheranceView(props) {
+function DailyAdherenceView(props) {
     return (
         <div>
             {Object.entries(props.data).map(([key, value]) => {
@@ -18,4 +16,4 @@ function DailyAdheranceView(props) {
     )
 }
 
-export default DailyAdheranceView
+export default DailyAdherenceView
