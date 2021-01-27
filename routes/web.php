@@ -43,6 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get-7-day-average', [AnalysisController::class, 'getSevenDayAverageInMinutes'])
         ->name('get7DayAverage');
+
+    Route::get('/weekly-adherence', [AnalysisController::class, 'getSevenDayAdherence'])
+        ->name('getSevenDayAdherence');
 });
 
 require __DIR__.'/auth.php';

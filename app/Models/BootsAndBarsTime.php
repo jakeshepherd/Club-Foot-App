@@ -11,7 +11,7 @@ class BootsAndBarsTime extends Model
 {
     use HasFactory;
 
-    public function getSevenDayAverage(): array
+    public function getSevenDayTimes(): array
     {
         return array_values(
             BootsAndBarsTime::where('user_id', Auth::id())
