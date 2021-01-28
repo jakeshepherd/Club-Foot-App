@@ -32,7 +32,7 @@ class TrackingButton extends React.Component {
                         tracking: !this.state.tracking,
                         trackingId: r.data
                     })
-                    toast.info('✅ Started tracking')
+                    toast.success('✅ Started tracking')
                 })
         } else {
             axios.post(`/${this.state.trackingId}/stop-tracking`)
@@ -41,7 +41,7 @@ class TrackingButton extends React.Component {
                         tracking: !this.state.tracking,
                         trackingDuration: r.data
                     })
-                    toast.info('🛑 Stopped tracking')
+                    toast.error('🛑 Stopped tracking')
                 })
         }
     }
