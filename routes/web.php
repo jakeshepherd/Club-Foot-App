@@ -20,9 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware(['auth'])->name('welcome');
 
-Route::get('/page-2', function () {
-    return view('secondpage');
-})->middleware(['auth'])->name('Page2');
+Route::get('/FAQ', function () {
+    return view('FAQ');
+})->middleware(['auth'])->name('FAQ');
 
 Route::get('/settings', function () {
     return view('settings');

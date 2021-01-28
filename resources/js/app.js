@@ -13,5 +13,6 @@ require('./bootstrap');
  - */
 
 require('./components/Homepage');
-require('./components/Settings/Settings')
+require('./components/Settings/Settings');
+require('./components/FAQ/FAQSplash');
 require('alpinejs');
