@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class Settings extends React.Component {
     constructor(props) {
         super(props);
@@ -21,9 +24,13 @@ class Settings extends React.Component {
     }
 
     handleSubmit(event) {
-        axios.post(`/boots-time-goal`, {
-            'time_goal': this.state.value
-        }).then(r => alert('Updated your goal time!'))
+        if (this.state.value === '') {
+            toast.error('Please add a goal time')
+        } else {
+            axios.post(`/boots-time-goal`, {
+                'time_goal': this.state.value
+            }).then(r => toast.success('🕒 Updated your goal time!'))
+        }
         event.preventDefault()
     }
 
@@ -42,7 +49,7 @@ class Settings extends React.Component {
                     <br />
                     <input type={'submit'} value={'Submit'} className="button mt-3 p-2 bg-green-200 hover:bg-green-500" />
                 </form>
-
+                <ToastContainer pauseOnFocusLoss draggable/>
             </div>
         );
     }

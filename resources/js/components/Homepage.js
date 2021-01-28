@@ -5,6 +5,7 @@ import DailyAdherenceView from './DailyAdherenceView';
 import NextCalendarEvent from './NextCalendarEvent';
 
 import { PieChart } from 'react-minimal-pie-chart';
+import {toast, ToastContainer} from 'react-toastify';
 
 class Homepage extends React.Component {
     constructor(props) {
@@ -60,6 +61,7 @@ class Homepage extends React.Component {
                         eventTime: '4pm',
                     }}
                 />
+                <ToastContainer pauseOnFocusLoss draggable/>
             </div>
         );
     }
