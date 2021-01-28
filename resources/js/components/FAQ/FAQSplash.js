@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class FAQSplash extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
+import Question from "./Question";
 
+class FAQSplash extends React.Component {
     render() {
         return (
             <div>
-                This is FAQ
+                <Question />
+                <Question />
             </div>
         );
     }

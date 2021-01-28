@@ -11,7 +11,7 @@
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
-    <body class="antialiased">
+    <body class="bg-blue-100">
         @include('layouts.navigation')
         <div id="faq"></div>
         <script src="{{ asset('js/app.js') }}"></script>
