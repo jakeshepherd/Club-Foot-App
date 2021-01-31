@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Question from "./Question";
+import skin from '../../../images/icons8-skin-80.png';
 
 class FAQSplash extends React.Component {
     render() {
         return (
             <div>
-                <Question />
+                <Question name={"Skin Issues"} image={skin}/>
             </div>
         );
     }
