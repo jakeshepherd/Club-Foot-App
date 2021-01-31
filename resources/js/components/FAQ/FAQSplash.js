@@ -8,7 +8,6 @@ class FAQSplash extends React.Component {
         return (
             <div>
                 <Question />
-                <Question />
             </div>
         );
     }
