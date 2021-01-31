@@ -21,5 +21,5 @@ class FAQSplash extends React.Component {
 export default FAQSplash;
 
 if (document.getElementById('faq')) {
-    ReactDOM.render(<FAQSplash />, document.getElementById('faq'));
+    ReactDOM.render(<FAQSplash/>, document.getElementById('faq'));
 }
