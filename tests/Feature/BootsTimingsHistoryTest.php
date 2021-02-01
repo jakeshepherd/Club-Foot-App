@@ -137,7 +137,7 @@ class BootsTimingsHistoryTest extends TestCase
         $this->withoutExceptionHandling();
         // setup
         $user = $this->createUserAndLogin();
-        $startTime = Carbon::now();
+        $startTime = Carbon::parse('01/01/21 12:00:00');
         Carbon::setTestNow($startTime);
 
         $newRow = new BootsAndBarsTime;
