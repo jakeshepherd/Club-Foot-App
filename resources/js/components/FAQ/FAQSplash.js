@@ -5,11 +5,43 @@ import Question from "./Question";
 import skin from '../../../images/icons8-skin-80.png';
 import clothing from '../../../images/icons8-jumper-128.png';
 import boot from '../../../images/icons8-work-boot-64.png';
+import foot from '../../../images/icons8-foot-64.png';
 
 class FAQSplash extends React.Component {
     render() {
         return (
             <div>
+                <Question name={"Brace Advice"} image={boot}
+                          FAQs={[
+                              {
+                                  question: 'How do I put on the boots and bars?',
+                                  answer: 'Take a look at this video!'
+                              },
+                              {
+                                  question: 'How long should my child wear the boots and bars for?',
+                                  answer: 'For the first 3 months your child should wear the boots for 23 hours a day. ' +
+                                      'After this, your child only needs to wear them between 12 and 14 hours a day'
+                              }
+                          ]}/>
+                <Question name={"Clothing"} image={clothing}
+                          FAQs={[
+                              {
+                                  question: 'Are there any good clothes to wear with the boots?',
+                                  answer: 'Try this website: www.example.com'
+                              },
+                          ]}
+                />
+                <Question name={"Signs of Regression"} image={foot}
+                          FAQs={[
+                              {
+                                  question: '',
+                                  answer: 'You may notice the arch of the foot is beginning to look more pronounced'
+                              },
+                              {
+                                  question: '',
+                                  answer: 'Your child may be putting more weight on the outside of the sole of their foot'
+                              }
+                          ]}/>
                 <Question name={"Skin Issues"} image={skin}
                           FAQs={[
                               {
@@ -24,25 +56,6 @@ class FAQSplash extends React.Component {
                               }
                           ]}
                 />
-                <Question name={"Clothing"} image={clothing}
-                          FAQs={[
-                              {
-                                  question: 'Are there any good clothes to wear with the boots?',
-                                  answer: 'Try this website: www.example.com'
-                              },
-                          ]}/>
-                <Question name={"Brace Advice"} image={boot}
-                          FAQs={[
-                              {
-                                  question: 'How do I put on the boots and bars?',
-                                  answer: 'Take a look at this video!'
-                              },
-                              {
-                                  question: 'How long should my child wear the boots and bars for?',
-                                  answer: 'For the first 3 months your child should wear the boots for 23 hours a day. ' +
-                                      'After this, your child only needs to wear them between 12 and 14 hours a day'
-                              }
-                          ]}/>
             </div>
         );
     }
