@@ -13,7 +13,7 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 class Question extends React.Component {
     render() {
         return (
-            <Accordion allowZeroExpanded className="p-2 w-1/2 m-2 ml-auto mr-auto rounded bg-white shadow-md">
+            <Accordion allowZeroExpanded className="w-1/2 m-2 ml-auto mr-auto rounded bg-white shadow-md">
                 <AccordionItem>
                     <AccordionItemHeading>
                         <AccordionItemButton>
