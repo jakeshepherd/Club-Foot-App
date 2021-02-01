@@ -40,7 +40,7 @@ class Homepage extends React.Component {
             <div className="p-5 m-auto w-10/12 text-center">
                 <h2 className="font-seoulNamsan text-xl font-bold">Your Adherance for the last 7 days</h2>
                 <PieChart
-                    className="m-auto mt-4 mb-4 w-1/2 md:w-1/4"
+                    className="m-auto mt-4 mb-4 w-1/2 md:w-56"
                     data={[
                         { title: 'Days you\'ve hit your goal', value: this.state.weeklyAdherencePercent, color: '#a7f3d0' },
                         { title: 'Days you have not hit your goal', value: (100-this.state.weeklyAdherencePercent), color: '#fda0a0' },
