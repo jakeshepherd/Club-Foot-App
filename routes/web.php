@@ -28,6 +28,10 @@ Route::get('/settings', function () {
     return view('settings');
 })->middleware(['auth'])->name('Settings');
 
+Route::get('/contact', function () {
+    return view('contact-details');
+})->middleware(['auth'])->name('ContactDetails');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
