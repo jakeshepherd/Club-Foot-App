@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
              'name' => 'Jake',
              'email' => 'jakeshepherd98@gmail.com',
              'password' => '$2y$10$mJYZB0nTFwGfBT6Z61YQiO2YiP3YZpZaU6wpMUKBor1UK0KfwMLrm',
+             'time_goal' => 15*60
          ]);
         BootsAndBarsTime::create([
             'user_id' => $user->id,
