@@ -15,12 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $user = \App\Models\User::factory()->create([
-            'name' => 'jake',
-            'email' => 'jakeshepherd98@gmail.com',
-            'password' => '$2y$10$mJYZB0nTFwGfBT6Z61YQiO2YiP3YZpZaU6wpMUKBor1UK0KfwMLrm',
-            'time_goal' => 14 * 60
-        ]);
+         \App\Models\User::factory()->create([
+             'name' => 'Jake',
+             'email' => 'jakeshepherd98@gmail.com',
+             'password' => '$2y$10$mJYZB0nTFwGfBT6Z61YQiO2YiP3YZpZaU6wpMUKBor1UK0KfwMLrm',
+         ]);
         BootsAndBarsTime::create([
             'user_id' => $user->id,
             'start_time' => Carbon::parse('-3 days -11 hours'),

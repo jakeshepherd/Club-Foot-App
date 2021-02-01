@@ -15,8 +15,8 @@
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('Homepage') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('Page2')" :active="request()->routeIs('Page2')">
-                        {{ __('Page2') }}
+                    <x-nav-link :href="route('FAQ')" :active="request()->routeIs('FAQ')">
+                        {{ __('FAQ') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -74,10 +74,10 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
-                {{ __('welcome') }}
+                {{ __('Homepage') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('Page2')" :active="request()->routeIs('Page2')">
-                {{ __('Page2') }}
+            <x-responsive-nav-link :href="route('FAQ')" :active="request()->routeIs('FAQ')">
+                {{ __('FAQ') }}
             </x-responsive-nav-link>
         </div>
 
@@ -108,11 +108,11 @@
                     </x-responsive-nav-link>
                 </form>
                 <form method="GET" action="{{ route('Settings') }}">
-                    <x-dropdown-link :href="route('Settings')"
+                    <x-responsive-nav-link :href="route('Settings')"
                                      onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                         {{ __('Settings') }}
-                    </x-dropdown-link>
+                    </x-responsive-nav-link>
                 </form>
             </div>
         </div>
