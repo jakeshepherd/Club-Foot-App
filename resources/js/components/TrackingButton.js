@@ -53,7 +53,7 @@ class TrackingButton extends React.Component {
         (this.state.tracking) ? buttonContext = "Stop" : buttonContext = "Start";
         return (
             <button
-                className={'button ' + buttonColour + '-200 p-3 w-1/5 mt-5 hover:' + buttonColour +'-500'}
+                className={'button ' + buttonColour + '-200 p-3 w-3/4 text-2xl md:text-base md:w-1/5 mt-5 hover:' + buttonColour +'-500'}
                 onClick={() => {this.startTracking()}}>
                 {buttonContext} Tracking Boots and Bars Time
             </button>
