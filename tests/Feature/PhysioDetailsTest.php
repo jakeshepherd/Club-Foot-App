@@ -11,11 +11,7 @@ use Tests\TestCase;
 class PhysioDetailsTest extends TestCase
 {
     use DatabaseMigrations;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
     public function test_gets_physio_details()
     {
         $this->withoutExceptionHandling();
@@ -36,6 +32,6 @@ class PhysioDetailsTest extends TestCase
         $response = $this->get('/contact-details');
         $response->assertStatus(200);
 
-        $this->assertContains($expected, json_decode($response->getContent(), true));
+        $this->assertSame($expected, json_decode($response->getContent(), true));
     }
 }

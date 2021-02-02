@@ -39,6 +39,6 @@ class UserController extends Controller
         $results = PhysioContactDetails::findOrFail(Auth::id())->get(['name', 'email', 'phone_number'])
             ->toArray();
 
-        return response()->json($results);
+        return response()->json($results[0]);
     }
 }
