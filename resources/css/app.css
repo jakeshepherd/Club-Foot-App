@@ -8,5 +8,8 @@
         @apply m-auto rounded inline-block shadow-md transition duration-500 hover:shadow-lg
             hover:border-transparent hover:text-white cursor-pointer
     }
+    .card-text {
+        @apply ml-4 inline-block align-middle
+    }
 }
 @tailwind utilities;
