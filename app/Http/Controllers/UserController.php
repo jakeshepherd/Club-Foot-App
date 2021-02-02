@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhysioContactDetails;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -31,5 +32,13 @@ class UserController extends Controller
     public function getTimeGoal(): JsonResponse
     {
         return response()->json(User::findOrFail(Auth::id())->time_goal);
+    }
+
+    public function getPhysioDetailsForUser()
+    {
+        $results = PhysioContactDetails::findOrFail(Auth::id())->get(['name', 'email', 'phone_number'])
+            ->toArray();
+
+        return response()->json($results);
     }
 }

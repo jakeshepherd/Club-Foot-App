@@ -53,6 +53,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/weekly-adherence', [AnalysisController::class, 'getSevenDayAdherence'])
         ->name('getSevenDayAdherence');
+
+    Route::get('/contact-details', [UserController::class, 'getPhysioDetailsForUser'])
+        ->name('getContactDetails');
 });
 
 require __DIR__.'/auth.php';
