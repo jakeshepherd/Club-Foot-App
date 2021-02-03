@@ -49,7 +49,6 @@ function ContactSplash() {
                 </div>
             </div>
             <button onClick={() => setOverlay(true)} className={"button p-3 mt-6 bg-yellow-400 hover:bg-yellow-500"}>Edit details</button>
-            {/*{isOpen && <EditDetailsForm />}*/}
             <Overlay configs={configs} isOpen={isOpen} closeOverlay={closeOverlay}>
                 <EditDetailsForm />
             </Overlay>
