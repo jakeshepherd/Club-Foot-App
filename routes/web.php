@@ -56,6 +56,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/contact-details', [UserController::class, 'getPhysioDetailsForUser'])
         ->name('getContactDetails');
+
+    Route::post('/contact-details', [UserController::class, 'setPhysioDetailsForUser'])
+        ->name('setContactDetails');
 });
 
 require __DIR__.'/auth.php';
