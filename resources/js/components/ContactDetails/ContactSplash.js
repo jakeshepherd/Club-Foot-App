@@ -4,9 +4,11 @@ import ReactDOM from 'react-dom';
 import accountImage from '../../../images/icons8-account-64.png';
 import emailIcon from '../../../images/icons8-email-64.png';
 import phoneIcon from '../../../images/icons8-phone-64.png';
+import EditDetailsForm from "./EditDetailsForm";
 
 function ContactSplash() {
     const [contactDetails, setContactDetails] = useState({});
+    const [showEdit, setShowEdit] = useState(false);
 
     useEffect(() => {
         axios.get(`contact-details`)
@@ -20,7 +22,7 @@ function ContactSplash() {
     }, [])
 
     return (
-        <React.Fragment>
+        <div className={"text-center"}>
             <div className={"w-max m-2 mt-14 m-auto rounded p-4 shadow-md text-justify"}>
                 <p className={"text-xl text-center"}>Your Local Physiotherapist Contact Details...</p>
                 <div className={"m-7"}>
@@ -36,8 +38,9 @@ function ContactSplash() {
                     <p className="card-text">{contactDetails.phoneNumber}</p>
                 </div>
             </div>
-            <button className={"button p-3 m-auto bg-yellow-500 hover:bg-yellow-400"}>Edit details</button>
-        </React.Fragment>
+            <button onClick={() => setShowEdit(!showEdit)} className={"button p-3 mt-6 bg-yellow-400 hover:bg-yellow-500"}>Edit details</button>
+            {showEdit && <EditDetailsForm />}
+        </div>
     );
 }
 
