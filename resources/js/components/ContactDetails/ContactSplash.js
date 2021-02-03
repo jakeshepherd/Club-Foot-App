@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
+import Overlay from "react-overlay-component";
 
 import accountImage from '../../../images/icons8-account-64.png';
 import emailIcon from '../../../images/icons8-email-64.png';
@@ -8,7 +9,16 @@ import EditDetailsForm from "./EditDetailsForm";
 
 function ContactSplash() {
     const [contactDetails, setContactDetails] = useState({});
-    const [showEdit, setShowEdit] = useState(false);
+    const [isOpen, setOverlay] = useState(false);
+
+    const closeOverlay = () => setOverlay(false);
+
+    const configs = {
+        animate: true,
+        clickDismiss: true,
+        escapeDismiss: false,
+        focusOutline: false,
+    };
 
     useEffect(() => {
         axios.get(`contact-details`)
@@ -38,8 +48,11 @@ function ContactSplash() {
                     <p className="card-text">{contactDetails.phoneNumber}</p>
                 </div>
             </div>
-            <button onClick={() => setShowEdit(!showEdit)} className={"button p-3 mt-6 bg-yellow-400 hover:bg-yellow-500"}>Edit details</button>
-            {showEdit && <EditDetailsForm />}
+            <button onClick={() => setOverlay(true)} className={"button p-3 mt-6 bg-yellow-400 hover:bg-yellow-500"}>Edit details</button>
+            {/*{isOpen && <EditDetailsForm />}*/}
+            <Overlay configs={configs} isOpen={isOpen} closeOverlay={closeOverlay}>
+                <EditDetailsForm />
+            </Overlay>
         </div>
     );
 }
