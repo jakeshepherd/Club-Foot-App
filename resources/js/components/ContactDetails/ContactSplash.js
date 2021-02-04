@@ -49,7 +49,6 @@ function ContactSplash() {
                     <img className="w-14 inline-block" src={phoneIcon} alt={'Phone icon'}/>
                     <p className="card-text">{contactDetails.phoneNumber}</p>
                 </div>
-
             </div>
             <button onClick={() => setOverlay(true)} className={"m-auto mt-5"}>
                 <img className="w-14 inline-block" src={edit} alt={"Edit Icon"}/>
