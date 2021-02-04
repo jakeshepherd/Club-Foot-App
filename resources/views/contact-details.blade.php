@@ -11,7 +11,7 @@
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
-    <body>
+    <body class="bg-blue-100">
         @include('layouts.navigation')
         <div id="contact-details"></div>
         <script src="{{ asset('js/app.js') }}"></script>
