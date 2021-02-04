@@ -8,5 +8,32 @@
         @apply m-auto rounded inline-block shadow-md transition duration-500 hover:shadow-lg
             hover:border-transparent hover:text-white cursor-pointer
     }
+    .card-text {
+        @apply ml-4 inline-block align-middle
+    }
+    .field {
+        @apply shadow-md py-2 px-3 text-gray-500 rounded-xl border-opacity-100;
+    }
+
+    .field-label {
+        @apply uppercase font-bold text-lg text-gray-500 mb-2;
+    }
+
+    .field-group {
+        @apply flex flex-col;
+    }
+
+    .btn {
+        @apply block text-white text-lg pl-4 pr-4 pt-2 pb-2 rounded;
+    }
+
+    .btn-teal {
+        @apply bg-blue-300;
+    }
+
+    .btn-teal:hover {
+        @apply bg-blue-900 transition duration-500;
+    }
 }
+
 @tailwind utilities;

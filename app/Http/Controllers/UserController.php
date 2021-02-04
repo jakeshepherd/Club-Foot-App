@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhysioContactDetails;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -31,5 +32,46 @@ class UserController extends Controller
     public function getTimeGoal(): JsonResponse
     {
         return response()->json(User::findOrFail(Auth::id())->time_goal);
+    }
+
+    public function getPhysioDetailsForUser(): JsonResponse
+    {
+        $results = PhysioContactDetails::findOrFail(Auth::id())->get(['name', 'email', 'phone_number'])
+            ->toArray();
+
+        return response()->json($results[0]);
+    }
+
+    public function setPhysioDetailsForUser(): JsonResponse
+    {
+        try {
+            $this->validate(request(), [
+                'name' => 'required',
+                'email' => 'required',
+                'phone_number' => 'required',
+            ]);
+        } catch (ValidationException $e) {
+            Log::error('name, email or phone_number not specified in POST. Please try again.');
+            return response()->json('name, email or phone_number not specified in POST. Please try again.', 400);
+        }
+
+        $record = PhysioContactDetails::find(Auth::id());
+        if ($record) {
+            $record->name = request('name');
+            $record->email = request('email');
+            $record->phone_number = request('phone_number');
+            $record->save();
+
+            return response()->json(true, 200);
+        } else {
+            PhysioContactDetails::create([
+                'user_id' => Auth::id(),
+                'name' => request('name'),
+                'email' => request('email'),
+                'phone_number' => request('phone_number'),
+            ]);
+
+            return response()->json(true, 201);
+        }
     }
 }

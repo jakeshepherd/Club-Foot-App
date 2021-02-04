@@ -28,6 +28,10 @@ Route::get('/settings', function () {
     return view('settings');
 })->middleware(['auth'])->name('Settings');
 
+Route::get('/contact', function () {
+    return view('contact-details');
+})->middleware(['auth'])->name('ContactDetails');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
@@ -49,6 +53,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/weekly-adherence', [AnalysisController::class, 'getSevenDayAdherence'])
         ->name('getSevenDayAdherence');
+
+    Route::get('/contact-details', [UserController::class, 'getPhysioDetailsForUser'])
+        ->name('getContactDetails');
+
+    Route::post('/contact-details', [UserController::class, 'setPhysioDetailsForUser'])
+        ->name('setContactDetails');
 });
 
 require __DIR__.'/auth.php';

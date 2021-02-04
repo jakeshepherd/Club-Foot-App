@@ -16,8 +16,8 @@ class Question extends React.Component {
                 <AccordionItem>
                     <AccordionItemHeading>
                         <AccordionItemButton>
-                            <img className="w-9 inline-block" src={this.props.image} alt={'Skin icon'}/>
-                            <p className="ml-4 inline-block text-xl align-middle">{this.props.name}</p>
+                            <img className="w-9 inline-block" src={this.props.image} alt={this.props.name + ' icon'}/>
+                            <p className="card-text text-xl">{this.props.name}</p>
                         </AccordionItemButton>
                     </AccordionItemHeading>
                     {this.props.FAQs.map((subQuestion, value) => (

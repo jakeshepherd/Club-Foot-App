@@ -4,16 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Settings</title>
+        <title>Contact Details</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
-    <body>
+    <body class="bg-blue-100">
         @include('layouts.navigation')
-        <div id="settings"></div>
+        <div id="contact-details"></div>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

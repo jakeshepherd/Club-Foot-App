@@ -15,4 +15,5 @@ require('./bootstrap');
 require('./components/Homepage');
 require('./components/Settings/Settings');
 require('./components/FAQ/FAQSplash');
+require('./components/ContactDetails/ContactSplash');
 require('alpinejs');
