@@ -8,6 +8,7 @@ class EditDetailsForm extends React.Component {
             name: '',
             email: '',
             phoneNumber: '',
+            error: false
         }
     }
 
@@ -25,7 +26,9 @@ class EditDetailsForm extends React.Component {
 
     handleSubmit(event) {
         if (this.state.name === '' || this.state.email === '' || this.state.phoneNumber === '') {
-            toast.error('Please fill in all the details')
+            this.setState({
+                error: true
+            })
         } else {
             axios.post(`/contact-details`, {
                 'name': this.state.name,
@@ -60,8 +63,9 @@ class EditDetailsForm extends React.Component {
                                value={this.state.phoneNumber} onChange={(event) => this.handlePhoneChange(event)}/>
                     </div>
                     <button className="btn btn-teal mx-auto" type="submit">Submit</button>
+                    {this.state.error && <p className={"text-red-600"}>Please Fill in all the Details</p>}
                 </form>
-                <ToastContainer pauseOnFocusLoss draggable/>
+                <ToastContainer draggable/>
             </div>
         )
     }
