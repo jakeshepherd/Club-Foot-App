@@ -42,7 +42,7 @@ class Settings extends React.Component {
                     <label className="">
                         Boots and Bars Time Goal
                         <br />
-                        <input className="rounded w-1/12 m-2 text-center bg-gray-200 border-gray-200 transition duration-500 hover:shadow-md"
+                        <input className="rounded w-max m-2 text-center bg-gray-200 border-gray-200 transition duration-500 hover:shadow-md"
                                type={"text"} value={this.state.value} onChange={(event) => this.handleChange(event)} />
                         Hours
                     </label>
