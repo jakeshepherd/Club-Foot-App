@@ -5,6 +5,8 @@ import Overlay from "react-overlay-component";
 import accountImage from '../../../images/icons8-account-64.png';
 import emailIcon from '../../../images/icons8-email-64.png';
 import phoneIcon from '../../../images/icons8-phone-64.png';
+import edit from '../../../images/icons8-edit-64.png';
+
 import EditDetailsForm from "./EditDetailsForm";
 
 function ContactSplash() {
@@ -33,7 +35,7 @@ function ContactSplash() {
 
     return (
         <div className={"text-center"}>
-            <div className={"w-max m-2 mt-14 m-auto rounded p-4 shadow-md text-justify"}>
+            <div className={"w-11/12 lg:w-max m-2 mt-14 m-auto rounded p-4 shadow-md text-justify"}>
                 <p className={"text-xl text-center"}>Your Local Physiotherapist Contact Details...</p>
                 <div className={"m-7"}>
                     <img className="w-14 inline-block" src={accountImage} alt={'Account icon'}/>
@@ -47,8 +49,12 @@ function ContactSplash() {
                     <img className="w-14 inline-block" src={phoneIcon} alt={'Phone icon'}/>
                     <p className="card-text">{contactDetails.phoneNumber}</p>
                 </div>
+
             </div>
-            <button onClick={() => setOverlay(true)} className={"button p-3 mt-6 bg-yellow-400 hover:bg-yellow-500"}>Edit details</button>
+            <button onClick={() => setOverlay(true)} className={"m-auto mt-5"}>
+                <img className="w-14 inline-block" src={edit} alt={"Edit Icon"}/>
+                <p className="card-text">Edit these details</p>
+            </button>
             <Overlay configs={configs} isOpen={isOpen} closeOverlay={closeOverlay}>
                 <EditDetailsForm />
             </Overlay>
