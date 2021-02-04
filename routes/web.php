@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware(['auth'])->name('welcome');
 
+Route::get('/history', function () {
+    return view('history');
+})->middleware(['auth'])->name('History');
+
 Route::get('/FAQ', function () {
     return view('FAQ');
 })->middleware(['auth'])->name('FAQ');
