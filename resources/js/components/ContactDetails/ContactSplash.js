@@ -35,7 +35,7 @@ function ContactSplash() {
 
     return (
         <div className={"text-center"}>
-            <div className={"w-11/12 lg:w-max m-2 mt-14 m-auto rounded p-4 shadow-md text-justify bg-white"}>
+            <div className={"w-11/12 lg:w-max m-2 mt-14 m-auto rounded p-6 shadow-md text-justify bg-white"}>
                 <p className={"text-xl text-center"}>Your Local Physiotherapist Contact Details...</p>
                 <div className={"m-7"}>
                     <img className="w-14 inline-block" src={accountImage} alt={'Account icon'}/>
