@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('Homepage') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('History')" :active="request()->routeIs('History')">
+                        {{ __('Your Progress so far') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('FAQ')" :active="request()->routeIs('FAQ')">
                         {{ __('FAQ') }}
                     </x-nav-link>
@@ -78,6 +81,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                 {{ __('Homepage') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('History')" :active="request()->routeIs('History')">
+                {{ __('Your Progress so far') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('FAQ')" :active="request()->routeIs('FAQ')">
                 {{ __('FAQ') }}
