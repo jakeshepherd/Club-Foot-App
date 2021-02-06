@@ -36,6 +36,7 @@
         "react-minimal-pie-chart": "^8.1.0",
         "react-overlay-component": "^1.0.2",
         "react-toastify": "^7.0.1",
-        "react-tooltip": "^4.2.13"
+        "react-tooltip": "^4.2.13",
+        "react-vis": "^1.11.7"
     }
 }
