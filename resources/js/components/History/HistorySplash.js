@@ -42,8 +42,8 @@ class HistorySplash extends React.Component {
                 },
                 fill: {
                     opacity: 1,
-                    colors: [function({ value }) {
-                        if(value < 12) {
+                    colors: [function ({value}) {
+                        if (value < 12) {
                             return '#FF0000'
                         } else if (value >= 12 && value < 14) {
                             return '#FFA500'
@@ -68,6 +68,7 @@ class HistorySplash extends React.Component {
             <div id="chart" className={"text-center"}>
                 <p>Your Progress so far</p>
                 <Chart
+                    className={"inline-block"}
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
