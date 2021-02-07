@@ -72,7 +72,8 @@ class HistorySplash extends React.Component {
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
-                    width="500"
+                    width="600"
+                    height="300"
                 />
             </div>
         )
