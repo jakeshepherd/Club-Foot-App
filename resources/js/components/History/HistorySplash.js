@@ -14,7 +14,8 @@ class HistorySplash extends React.Component {
             options: {
                 chart: {
                     type: 'bar',
-                    height: 350
+                    height: 350,
+                    background: '#fff'
                 },
                 plotOptions: {
                     bar: {
@@ -40,7 +41,16 @@ class HistorySplash extends React.Component {
                     }
                 },
                 fill: {
-                    opacity: 1
+                    opacity: 1,
+                    colors: [function({ value }) {
+                        if(value < 12) {
+                            return '#FF0000'
+                        } else if (value >= 12 && value < 14) {
+                            return '#FFA500'
+                        } else {
+                            return '#008000'
+                        }
+                    }]
                 },
                 tooltip: {
                     y: {
@@ -55,7 +65,8 @@ class HistorySplash extends React.Component {
 
     render() {
         return (
-            <div id="chart">
+            <div id="chart" className={"text-center"}>
+                <p>Your Progress so far</p>
                 <Chart
                     options={this.state.options}
                     series={this.state.series}
