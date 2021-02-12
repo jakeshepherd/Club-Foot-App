@@ -5,8 +5,6 @@ namespace Tests\Feature;
 use App\Models\BootsAndBarsTime;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class HistoryForProgressTest extends TestCase
@@ -15,7 +13,6 @@ class HistoryForProgressTest extends TestCase
 
     public function test_it_gets_last_7_days_in_format()
     {
-        $this->withoutExceptionHandling();
         $user = $this->createUserAndLogin();
 
         $expected = [];
@@ -89,7 +86,6 @@ class HistoryForProgressTest extends TestCase
 
     public function test_it_fails_with_no_data()
     {
-        $this->withoutExceptionHandling();
         $this->createUserAndLogin();
 
         $startTime = Carbon::parse('2021-01-28 02:28:10');
@@ -102,7 +98,6 @@ class HistoryForProgressTest extends TestCase
     }
 
     public function test_it_gets_history_with_multiple_times_on_same_day() {
-        $this->withoutExceptionHandling();
         $expected = [];
 
         $user = $this->createUserAndLogin();
