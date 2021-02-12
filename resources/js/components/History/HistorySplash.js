@@ -14,7 +14,8 @@ class HistorySplash extends React.Component {
             options: {
                 chart: {
                     type: 'bar',
-                    height: 350,
+                    weight: "100%",
+                    height: "100%",
                     background: '#fff'
                 },
                 plotOptions: {
@@ -63,6 +64,16 @@ class HistorySplash extends React.Component {
                     }
                 }
             },
+            responsive: [
+                {
+                    breakpoint: 1000,
+                    options: {
+                        legend: {
+                            position: "bottom"
+                        }
+                    }
+                }
+            ]
         };
     }
 
@@ -88,12 +99,10 @@ class HistorySplash extends React.Component {
             <div id="chart" className={"text-center mt-4"}>
                 <p>Your Progress so far</p>
                 <Chart
-                    className={"inline-block"}
+                    className={"inline-block md:w-1/3"}
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
-                    width="600"
-                    height="300"
                 />
             </div>
         )
