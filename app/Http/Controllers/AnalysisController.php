@@ -29,6 +29,29 @@ class AnalysisController extends Controller
         return response()->json($data['data'], $data['status']);
     }
 
+    public function getProgressSoFar(): JsonResponse
+    {
+        $data = $this->formatBootsTime(
+            (new BootsAndBarsTime)->getSevenDayTimes(),
+        );
+
+        if (empty($data)) {
+            return response()->json($data, 204);
+        }
+        return response()->json($data);
+    }
+
+    private function formatBootsTime(array $durations): array
+    {
+        $weeklyAdherence = [];
+        foreach ($durations as $duration) {
+            $subDuration = $duration[0];
+            $weeklyAdherence[Carbon::parse($subDuration['end_time'])->format('l')] = $subDuration['duration']/60;
+        }
+
+        return $weeklyAdherence;
+    }
+
     private function formatWeeklyAdherenceData(array $durations, int $timeGoal): array
     {
         $dailyTimings = [];

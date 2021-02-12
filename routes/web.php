@@ -63,6 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/contact-details', [UserController::class, 'setPhysioDetailsForUser'])
         ->name('setContactDetails');
+
+    Route::get('/progress-so-far', [AnalysisController::class, 'getProgressSoFar'])
+        ->name('getProgressSoFar');
 });
 
 require __DIR__.'/auth.php';
