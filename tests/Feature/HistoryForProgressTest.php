@@ -30,7 +30,8 @@ class HistoryForProgressTest extends TestCase
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
-        $expected[$startTime->format('l')] = 15;
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 15;
 
         $startTime->addDay();
 
@@ -41,7 +42,8 @@ class HistoryForProgressTest extends TestCase
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
-        $expected[$startTime->format('l')] = 12;
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 12;
 
         $startTime->addDay();
 
@@ -52,7 +54,8 @@ class HistoryForProgressTest extends TestCase
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
-        $expected[$startTime->format('l')] = 10;
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 10;
 
         $startTime->addDay();
 
@@ -63,7 +66,8 @@ class HistoryForProgressTest extends TestCase
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
-        $expected[$startTime->format('l')] = 16;
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 16;
 
         $startTime->addDay();
 
@@ -74,7 +78,8 @@ class HistoryForProgressTest extends TestCase
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
-        $expected[$startTime->format('l')] = 18;
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 18;
 
         $response = $this->get('/progress-so-far');
         $response->assertStatus(200);

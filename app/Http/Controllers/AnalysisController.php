@@ -46,7 +46,8 @@ class AnalysisController extends Controller
         $weeklyAdherence = [];
         foreach ($durations as $duration) {
             $subDuration = $duration[0];
-            $weeklyAdherence[Carbon::parse($subDuration['end_time'])->format('l')] = $subDuration['duration']/60;
+            $weeklyAdherence['days'][] = Carbon::parse($subDuration['end_time'])->format('l');
+            $weeklyAdherence['hours'][] = $subDuration['duration']/60;
         }
 
         return $weeklyAdherence;
