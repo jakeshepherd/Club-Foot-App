@@ -29,6 +29,42 @@ class AnalysisController extends Controller
         return response()->json($data['data'], $data['status']);
     }
 
+    public function getSevenDayAdherenceForGraph(): JsonResponse
+    {
+        $data = $this->formatForGraph(
+            (new BootsAndBarsTime)->getSevenDayTimes(),
+        );
+
+        if (empty($data)) {
+            return response()->json($data, 204);
+        }
+        return response()->json($data);
+    }
+
+    private function formatForGraph(array $durations): array
+    {
+        $weeklyAdherence = [];
+        foreach ($durations as $duration) {
+            // if there are multiple timings on one day, we handle it slightly differently
+            if (count($duration) > 1) {
+                $dailyTotal = 0;
+                foreach ($duration as $subTime) {
+                    $dailyTotal += $subTime['duration'];
+                }
+                $weeklyAdherence['days'][] = Carbon::parse($duration[0]['end_time'])->format('l');
+                $weeklyAdherence['hours'][] = $dailyTotal/60;
+            }
+            // if there's just one timing for the day then we can just get the duration nicely
+            else {
+                $subDuration = $duration[0];
+                $weeklyAdherence['days'][] = Carbon::parse($subDuration['end_time'])->format('l');
+                $weeklyAdherence['hours'][] = $subDuration['duration']/60;
+            }
+        }
+
+        return $weeklyAdherence;
+    }
+
     private function formatWeeklyAdherenceData(array $durations, int $timeGoal): array
     {
         $dailyTimings = [];
