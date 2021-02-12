@@ -85,7 +85,7 @@ class HistorySplash extends React.Component {
 
     render() {
         return (
-            <div id="chart" className={"text-center"}>
+            <div id="chart" className={"text-center mt-4"}>
                 <p>Your Progress so far</p>
                 <Chart
                     className={"inline-block"}
