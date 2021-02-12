@@ -33,6 +33,9 @@ class HistorySplash extends React.Component {
                     colors: ['transparent']
                 },
                 xaxis: {
+                    title: {
+                        text: 'Days'
+                    },
                     categories: [],
                 },
                 yaxis: {
