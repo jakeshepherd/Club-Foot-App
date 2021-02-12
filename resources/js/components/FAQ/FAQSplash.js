@@ -7,22 +7,20 @@ import clothing from '../../../images/icons8-jumper-128.png';
 import boot from '../../../images/icons8-work-boot-64.png';
 import foot from '../../../images/icons8-foot-64.png';
 
+import QuestionWithVideo from "./QuestionWithVideo";
+
 class FAQSplash extends React.Component {
     render() {
         return (
             <div>
-                <Question name={"Brace Advice"} image={boot}
-                          FAQs={[
-                              {
-                                  question: 'How do I put on the boots and bars?',
-                                  answer: 'Take a look at this video!'
-                              },
-                              {
-                                  question: 'How long should my child wear the boots and bars for?',
-                                  answer: 'For the first 3 months your child should wear the boots for 23 hours a day. ' +
-                                      'After this, your child only needs to wear them between 12 and 14 hours a day'
-                              }
-                          ]}/>
+                <QuestionWithVideo name={"Brace Advice"} image={boot}
+                                   FAQs={[
+                                       {
+                                           question: 'How long should my child wear the boots and bars for?',
+                                           answer: 'For the first 3 months your child should wear the boots for 23 hours a day. ' +
+                                               'After this, your child only needs to wear them between 12 and 14 hours a day'
+                                       }
+                                   ]}/>
                 <Question name={"Clothing"} image={clothing}
                           FAQs={[
                               {

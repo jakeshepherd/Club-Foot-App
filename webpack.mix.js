@@ -23,4 +23,16 @@ mix.js('resources/js/app.js', 'public/js').sourceMaps()
             "path": require.resolve("path-browserify")
         }
     },
+    module: {
+        rules: [{
+            test: /\.html$/,
+            use: 'html-loader?attrs[]=video:src'
+        }, {
+            test: /\.mp4$/,
+            use: 'url-loader?limit=10000&mimetype=video/mp4'
+        }, {
+            test: /\.mov$/,
+            use: 'url-loader?limit=10000&mimetype=video/mp4'
+        }]
+    }
 });
