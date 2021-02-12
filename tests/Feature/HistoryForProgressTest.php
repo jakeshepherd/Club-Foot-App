@@ -90,7 +90,7 @@ class HistoryForProgressTest extends TestCase
     public function test_it_fails_with_no_data()
     {
         $this->withoutExceptionHandling();
-        $user = $this->createUserAndLogin();
+        $this->createUserAndLogin();
 
         $startTime = Carbon::parse('2021-01-28 02:28:10');
         Carbon::setTestNow($startTime);
@@ -99,5 +99,53 @@ class HistoryForProgressTest extends TestCase
         $response->assertStatus(204);
 
         $this->assertSame('', $response->getContent());
+    }
+
+    public function test_it_gets_history_with_multiple_times_on_same_day() {
+        $this->withoutExceptionHandling();
+        $expected = [];
+
+        $user = $this->createUserAndLogin();
+
+        $startTime = Carbon::parse('2021-01-28 02:28:10');
+        Carbon::setTestNow($startTime);
+
+        // Need to add a weeks worth of data
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time =$startTime;
+        $newRow->end_time = $startTime->addMinutes(10*60);
+        $newRow->duration = 10*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time =$startTime;
+        $newRow->end_time = $startTime->addMinutes(6*60);
+        $newRow->duration = 6*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 16;
+
+        $startTime->addDay();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time =$startTime;
+        $newRow->end_time = $startTime->addMinutes(10*60);
+        $newRow->duration = 10*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 10;
+
+        $response = $this->get('/progress-so-far');
+        $response->assertStatus(200);
+
+
+        $this->assertSame($expected, json_decode($response->content(), true));
     }
 }
