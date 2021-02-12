@@ -29,9 +29,9 @@ class AnalysisController extends Controller
         return response()->json($data['data'], $data['status']);
     }
 
-    public function getProgressSoFar(): JsonResponse
+    public function getSevenDayAdherenceForGraph(): JsonResponse
     {
-        $data = $this->formatBootsTime(
+        $data = $this->formatForGraph(
             (new BootsAndBarsTime)->getSevenDayTimes(),
         );
 
@@ -41,7 +41,7 @@ class AnalysisController extends Controller
         return response()->json($data);
     }
 
-    private function formatBootsTime(array $durations): array
+    private function formatForGraph(array $durations): array
     {
         $weeklyAdherence = [];
         foreach ($durations as $duration) {

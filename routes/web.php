@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/contact-details', [UserController::class, 'setPhysioDetailsForUser'])
         ->name('setContactDetails');
 
-    Route::get('/progress-so-far', [AnalysisController::class, 'getProgressSoFar'])
+    Route::get('/progress-so-far', [AnalysisController::class, 'getSevenDayAdherenceForGraph'])
         ->name('getProgressSoFar');
 });
 
