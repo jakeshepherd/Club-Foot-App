@@ -86,7 +86,7 @@ class HistorySplash extends React.Component {
                         data: r.data.hours
                     }],
                     options: {
-                        xaxis:  {
+                        xaxis: {
                             categories: r.data.days
                         }
                     }
