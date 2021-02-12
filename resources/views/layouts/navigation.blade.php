@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('welcome') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                        <img src="../../images/AppIcon.png" class="block h-14 w-auto fill-current text-gray-600" alt="Club Foot Icon"/>
                     </a>
                 </div>
 
