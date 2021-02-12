@@ -7,8 +7,7 @@ import {
     AccordionItemPanel,
 } from 'react-accessible-accordion';
 
-import video from "./FittingMitchellBootsandBarVideo.mp4";
-import video2 from "./FittingMitchellBootsandBarVideo.mov";
+import video from "../../../images/FittingMitchellBootsandBarVideo.mp4";
 
 import 'react-accessible-accordion/dist/fancy-example.css';
 
@@ -25,12 +24,9 @@ class QuestionWithVideo extends React.Component {
                     </AccordionItemHeading>
                         <AccordionItemPanel>
                             <h1 className={"text-2xl"}>How do I put on the boots and bars?</h1>
-
                             <video width="100%" height="100%" controls playsInline preload="metadata">
                                 <source src={video} type="video/mp4" />
-                                <source src={video2} type="video/mp4" />
                             </video>
-
                         </AccordionItemPanel>
                     {this.props.FAQs.map((subQuestion, value) => (
                         <AccordionItemPanel key={value}>
