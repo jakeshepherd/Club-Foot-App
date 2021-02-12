@@ -8,8 +8,8 @@ class HistorySplash extends React.Component {
         super(props);
         this.state = {
             series: [{
-                name: 'Hours boots worn',
-                data: [12, 15, 17, 16, 11, 8, 13, 10, 16]
+                name: '',
+                data: []
             }],
             options: {
                 chart: {
@@ -33,7 +33,7 @@ class HistorySplash extends React.Component {
                     colors: ['transparent']
                 },
                 xaxis: {
-                    categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    categories: [],
                 },
                 yaxis: {
                     title: {
@@ -61,6 +61,23 @@ class HistorySplash extends React.Component {
                 }
             },
         };
+    }
+
+    async componentDidMount() {
+        await axios.get(`progress-so-far`)
+            .then(r => {
+                this.setState({
+                    series: [{
+                        name: 'Hours Boots Worn',
+                        data: r.data.hours
+                    }],
+                    options: {
+                        xaxis:  {
+                            categories: r.data.days
+                        }
+                    }
+                })
+            })
     }
 
     render() {
