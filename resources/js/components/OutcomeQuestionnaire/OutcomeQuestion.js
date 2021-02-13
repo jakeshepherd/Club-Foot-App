@@ -7,7 +7,8 @@ class OutcomeQuestion extends React.Component {
             one: false,
             two: false,
             three: false,
-            four: false
+            four: false,
+            selectedAnswer: 0,
         }
     }
 
@@ -18,8 +19,10 @@ class OutcomeQuestion extends React.Component {
             two: false,
             three: false,
             four: false,
-            [answerId]: !this.state.[answerId]
+            [answerId]: !this.state.[answerId],
+            selectedAnswer: [answerId],
         })
+        this.props.handleQuestionSubmit(this.props.questionNumber, this.state.selectedAnswer)
     }
 
     render() {
@@ -29,19 +32,18 @@ class OutcomeQuestion extends React.Component {
         const fourColour = this.state.four ? 'green-500' : 'white';
 
         return (
-            <div className={"w-11/12 lg:w-max m-2 mt-14 m-auto rounded p-4 shadow-md text-center bg-blue-100"}>
-                <h1>How satisfied are you with the status of your child's foot?</h1>
+            <div className={"w-11/12 lg:w-1/2 m-2 mt-14 m-auto rounded p-4 shadow-md text-center bg-blue-100"}>
+                <h1>{this.props.question}</h1>
                 <div className={"grid grid-cols-2"}>
                     <p className={"shadow-md rounded p-2 m-2 w-24 justify-self-center cursor-pointer transition duration-500 bg-" + oneColour}
-                       onClick={() => this.selectAnswer('one')}>Very Satisfied</p>
+                       onClick={() => this.selectAnswer('one')}>{this.props.answers.one}</p>
                     <p className={"shadow-md rounded p-2 m-2 w-24 justify-self-center cursor-pointer transition duration-500 bg-" + twoColour}
-                       onClick={() => this.selectAnswer('two')}>Somewhat Satisfied</p>
+                       onClick={() => this.selectAnswer('two')}>{this.props.answers.two}</p>
                     <p className={"shadow-md rounded p-2 m-2 w-24 justify-self-center cursor-pointer transition duration-500 bg-" + threeColour}
-                       onClick={() => this.selectAnswer('three')}>Somewhat Dissatisfied</p>
+                       onClick={() => this.selectAnswer('three')}>{this.props.answers.three}</p>
                     <p className={"shadow-md rounded p-2 m-2 w-24 justify-self-center cursor-pointer transition duration-500 bg-" + fourColour}
-                       onClick={() => this.selectAnswer('four')}>Very Dissatisfied</p>
+                       onClick={() => this.selectAnswer('four')}>{this.props.answers.four}</p>
                 </div>
-                <button className={"button rounded-full p-2 w-24 bg-blue-400 hover:bg-blue-500"}>Next</button>
             </div>
         )
     }
