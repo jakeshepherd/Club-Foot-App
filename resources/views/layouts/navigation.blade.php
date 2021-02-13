@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('FAQ')" :active="request()->routeIs('FAQ')">
                         {{ __('FAQ') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('OutcomeQuestionnaire')" :active="request()->routeIs('OutcomeQuestionnaire')">
+                        {{ __('Roye Score') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('ContactDetails')" :active="request()->routeIs('ContactDetails')">
                         {{ __('Contact Details') }}
                     </x-nav-link>
@@ -87,6 +90,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('FAQ')" :active="request()->routeIs('FAQ')">
                 {{ __('FAQ') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('OutcomeQuestionnaire')" :active="request()->routeIs('OutcomeQuestionnaire')">
+                {{ __('Roye Score') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('ContactDetails')" :active="request()->routeIs('ContactDetails')">
                 {{ __('Contact Details') }}

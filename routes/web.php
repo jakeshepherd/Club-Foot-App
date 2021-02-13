@@ -36,6 +36,10 @@ Route::get('/contact', function () {
     return view('contact-details');
 })->middleware(['auth'])->name('ContactDetails');
 
+Route::get('/outcome-questionnaire', function () {
+    return view('outcome-questionnaire');
+})->middleware(['auth'])->name('OutcomeQuestionnaire');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
