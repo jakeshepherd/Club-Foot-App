@@ -85,6 +85,82 @@ class HistoryForProgressTest extends TestCase
         $this->assertSame($expected['hours'], json_decode($response->getContent(), true)['hours']);
     }
 
+    public function test_it_gets_all_history()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->createUserAndLogin();
+
+        $expected = [];
+        $startTime = Carbon::parse("15-02-2021 12:00:00");
+        Carbon::setTestNow();
+
+        // Need to add a weeks worth of data
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime->subWeek();
+        $newRow->end_time = $startTime->addMinutes(15*60);
+        $newRow->duration = 15*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 15;
+
+        $startTime->subHours(15);
+        $startTime->subDay();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time =$startTime;
+        $newRow->end_time = $startTime->addMinutes(12*60);
+        $newRow->duration = 12*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 12;
+
+        $startTime->subHours(12);
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time =$startTime->subDays(2);
+        $newRow->end_time = $startTime->addMinutes(10*60);
+        $newRow->duration = 10*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $startTime->subHours(10);
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(6*60);
+        $newRow->duration = 6*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+        $expected['days'][] = $startTime->format('l');
+        $expected['hours'][] = 16;
+
+        $expected['start_date'] = Carbon::parse('-2 weeks');
+        $expected['end_date'] = Carbon::parse('-1 weeks');
+
+        $response = $this->get('/timing-history');
+
+        $response->assertStatus(200);
+
+        $this->assertSame($expected['days'], json_decode($response->getContent(), true)['days']);
+        $this->assertSame($expected['hours'], json_decode($response->getContent(), true)['hours']);
+        $this->assertEqualsWithDelta(
+            $expected['start_date'],
+            Carbon::parse(json_decode($response->getContent(), true)['start_date']),
+            5
+        );
+        $this->assertEqualsWithDelta(
+            $expected['end_date'],
+            Carbon::parse(json_decode($response->getContent(), true)['end_date']),
+            5
+        );
+    }
+
     public function test_it_fails_with_no_data()
     {
         $this->createUserAndLogin();

@@ -5,15 +5,43 @@ namespace App\Http\Controllers;
 use App\Models\BootsAndBarsTime;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AnalysisController extends Controller
 {
+    private $bootsAndBarsTime;
+
+    public function __construct()
+    {
+        $this->bootsAndBarsTime = new BootsAndBarsTime();
+    }
+
+    public function getHistoryForTimeframe(): JsonResponse
+    {
+        $startDate = Carbon::parse('-2 weeks');
+        $endDate = Carbon::parse('-1 week');
+
+        $allTimes = $this->bootsAndBarsTime->getTimeWithinTimeframe(
+            $startDate,
+            $endDate
+        );
+
+        $data = $this->formatForGraph($allTimes);
+        $data['start_date'] = $startDate;
+        $data['end_date'] = $endDate;
+
+        if (empty($data)) {
+            return response()->json($data, 204);
+        }
+        return response()->json($data);
+    }
+
     public function getSevenDayAverageInMinutes(): JsonResponse
     {
         $average = $this->calculateAverage(
-            (new BootsAndBarsTime)->getSevenDayTimes()
+            $this->bootsAndBarsTime->getSevenDayTimes()
         );
 
         return response()->json($average['average'], $average['status']);
@@ -22,7 +50,7 @@ class AnalysisController extends Controller
     public function getSevenDayAdherence(): JsonResponse
     {
         $data = $this->formatWeeklyAdherenceData(
-            (new BootsAndBarsTime)->getSevenDayTimes(),
+            $this->bootsAndBarsTime->getSevenDayTimes(),
             User::findOrFail(Auth::id())->time_goal
         );
 
@@ -32,7 +60,7 @@ class AnalysisController extends Controller
     public function getProgressSoFar(): JsonResponse
     {
         $data = $this->formatForGraph(
-            (new BootsAndBarsTime)->getSevenDayTimes(),
+            $this->bootsAndBarsTime->getSevenDayTimes(),
         );
 
         if (empty($data)) {

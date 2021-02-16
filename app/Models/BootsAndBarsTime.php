@@ -20,6 +20,20 @@ class BootsAndBarsTime extends Model
         'duration' => 'integer',
     ];
 
+    public function getTimeWithinTimeframe(Carbon $startDate, Carbon $endDate): array
+    {
+        return array_values(
+            BootsAndBarsTime::where('user_id', Auth::id())
+                ->whereBetween('end_time', [$startDate, $endDate])
+                ->where('duration', '>=', '10')
+                ->get(['end_time', 'duration'])
+                ->groupBy(function ($element) {
+                    return Carbon::parse($element->end_time)->format('d');
+                })
+                ->toArray()
+        );
+    }
+
     public function getSevenDayTimes(): array
     {
         return array_values(
