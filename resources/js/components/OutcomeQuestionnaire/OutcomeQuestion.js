@@ -1,5 +1,6 @@
 import React from "react";
 
+//TODO -- it doesnt select the right number, always have to click the button twice.
 class OutcomeQuestion extends React.Component {
     constructor(props) {
         super(props);
@@ -26,10 +27,10 @@ class OutcomeQuestion extends React.Component {
     }
 
     render() {
-        const oneColour = this.state.one ? 'green-500' : 'white';
-        const twoColour = this.state.two ? 'green-500' : 'white';
-        const threeColour = this.state.three ? 'green-500' : 'white';
-        const fourColour = this.state.four ? 'green-500' : 'white';
+        const oneColour = this.state.[1] ? 'green-500' : 'white';
+        const twoColour = this.state.[2] ? 'green-500' : 'white';
+        const threeColour = this.state.[3] ? 'green-500' : 'white';
+        const fourColour = this.state.[4] ? 'green-500' : 'white';
 
         return (
             <div className={"w-11/12 lg:w-1/2 m-2 mt-14 m-auto rounded p-4 shadow-md text-center bg-blue-100"}>

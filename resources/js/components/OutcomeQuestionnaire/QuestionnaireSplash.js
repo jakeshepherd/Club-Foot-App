@@ -23,6 +23,10 @@ class QuestionnaireSplash extends React.Component {
         })
     }
 
+    questionnaireSubmit() {
+        console.log("submitting!")
+    }
+
     render() {
         const questionnaireData = {
             q1: {
@@ -131,7 +135,7 @@ class QuestionnaireSplash extends React.Component {
                     <ToastContainer pauseOnFocusLoss draggable/>
                 </div>
                 <div className={"flex justify-center"}>
-                    <button className={"button rounded-full p-2 w-24 bg-blue-400 hover:bg-blue-500 fixed bottom-16"}>Submit</button>
+                    <button className={"button rounded-full p-2 w-24 bg-blue-400 hover:bg-blue-500 fixed bottom-16"} onClick={this.questionnaireSubmit}>Submit</button>
                 </div>
             </React.Fragment>
         );
