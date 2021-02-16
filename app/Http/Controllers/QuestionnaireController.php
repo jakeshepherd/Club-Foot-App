@@ -33,7 +33,7 @@ class QuestionnaireController extends Controller
             ]);
         } catch (ValidationException $e) {
             Log::error('questionnaire_data not specified in POST. Please try again.');
-            return response()->json('questionnaire_data not specified in POST. Please try again.', 400);
+            return response()->json('Please answer every question.', 400);
         }
 
         OutcomeQuestionnaireResult::create([

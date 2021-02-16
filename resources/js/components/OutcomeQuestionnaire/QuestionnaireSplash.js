@@ -8,23 +8,27 @@ class QuestionnaireSplash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            results: {}
+            questionnaire_data: {}
         }
         this.handleQuestionSubmit = this.handleQuestionSubmit.bind(this);
+        this.questionnaireSubmit = this.questionnaireSubmit.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.state.results)
+        console.log(this.state.questionnaire_data)
     }
 
     handleQuestionSubmit(question, answer) {
         this.setState({
-            results: {...this.state.results, [question]: answer}
+            questionnaire_data: {...this.state.questionnaire_data, [question]: answer}
         })
     }
 
     questionnaireSubmit() {
-        console.log("submitting!")
+        axios.post(`/roye-outcome-questionnaire`, this.state)
+            .then(() =>
+                toast.success("✅ Questionnaire Submitted")
+            ).catch(error => toast.error(error.response.data))
     }
 
     render() {
@@ -135,7 +139,9 @@ class QuestionnaireSplash extends React.Component {
                     <ToastContainer pauseOnFocusLoss draggable/>
                 </div>
                 <div className={"flex justify-center"}>
-                    <button className={"button rounded-full p-2 w-24 bg-blue-400 hover:bg-blue-500 fixed bottom-16"} onClick={this.questionnaireSubmit}>Submit</button>
+                    <button className={"button rounded-full p-2 w-24 bg-blue-400 hover:bg-blue-500 fixed bottom-16"}
+                            onClick={this.questionnaireSubmit}>Submit
+                    </button>
                 </div>
             </React.Fragment>
         );
