@@ -43,7 +43,8 @@ class AnalysisController extends Controller
         $oldestRecord = BootsAndBarsTime::where('user_id', Auth::id())
             ->oldest()->pluck('end_time')->first();
 
-        $data['boots_worn_for'] = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
+        $diffInWeeks = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
+        $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
 
         $allRecords = BootsAndBarsTime::where('user_id', Auth::id())
             ->pluck('duration')->toArray();
