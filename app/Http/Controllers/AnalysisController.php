@@ -45,6 +45,11 @@ class AnalysisController extends Controller
 
         $data['boots_worn_for'] = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
 
+        $allRecords = BootsAndBarsTime::where('user_id', Auth::id())
+            ->pluck('duration')->toArray();
+
+        $data['total_average'] = array_sum($allRecords)/count($allRecords);
+
         return response()->json($data);
     }
 
