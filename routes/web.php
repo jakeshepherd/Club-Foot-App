@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\TimingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/progress-so-far', [AnalysisController::class, 'getSevenDayAdherenceForGraph'])
         ->name('getProgressSoFar');
+
+    Route::post('/roye-outcome-questionnaire', [QuestionnaireController::class, 'setRoyeScoreQuestionnaire'])
+        ->name('setRoyeScoreQuestionnaire');
 });
 
 require __DIR__.'/auth.php';
