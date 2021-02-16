@@ -7,9 +7,7 @@ class HistorySplash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: {
-                bootsWornFor: '',
-            },
+            data: {},
             series: [{
                 name: '',
                 data: []
@@ -85,7 +83,9 @@ class HistorySplash extends React.Component {
             .then(r => {
                 this.setState({
                     data: {
-                        bootsWornFor: r.data.boots_worn_for
+                        bootsWornFor: r.data.boots_worn_for,
+                        totalAverageHours: Math.floor(r.data.total_average / 60),
+                        totalAverageMinutes: Math.round(r.data.total_average % 60),
                     },
                     series: [{
                         name: 'Hours Boots Worn',
@@ -106,9 +106,10 @@ class HistorySplash extends React.Component {
                 <h1 className={"text-xl font-bold"}>Your Progress so far</h1>
                 <p>You've been using the Boots and Bars for </p>
                 <p className={"text-purple-400"}>{this.state.data.bootsWornFor} Weeks</p>
-
                 <p>And you're daily average is </p>
-                <p className={"text-green-400"}>15.6 hours</p>
+                <p className={"text-green-400"}>
+                    {this.state.data.totalAverageHours}.{this.state.data.totalAverageMinutes} hours
+                </p>
                 <p>So you're doing well!</p>
                 <Chart
                     className={"inline-block md:w-1/3"}
