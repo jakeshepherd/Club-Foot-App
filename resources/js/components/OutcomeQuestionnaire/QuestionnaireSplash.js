@@ -24,11 +24,16 @@ class QuestionnaireSplash extends React.Component {
         })
     }
 
+    // todo -- check that every question has been answered
     questionnaireSubmit() {
-        axios.post(`/roye-outcome-questionnaire`, this.state)
-            .then(() =>
-                toast.success("✅ Questionnaire Submitted")
-            ).catch(error => toast.error(error.response.data))
+        if (Object.keys(this.state.questionnaire_data).length === 10) {
+            axios.post(`/roye-outcome-questionnaire`, this.state)
+                .then(() =>
+                    toast.success("✅ Questionnaire Submitted")
+                ).catch(error => toast.error(error.response.data))
+        } else {
+            toast.error("Please fill in the whole questionnaire")
+        }
     }
 
     render() {
@@ -126,7 +131,8 @@ class QuestionnaireSplash extends React.Component {
         return (
             <React.Fragment>
                 <div className="p-5 m-auto w-10/12 text-center mb-28">
-                    <h1>Outcome Questionnaire</h1>
+                    <h1 className={"text-2xl font-bold"}>Outcome Questionnaire</h1>
+                    <p>Please answer all the questions</p>
                     {Object.values(questionnaireData).map(function (key, value) {
                         return <OutcomeQuestion
                             key={value}
