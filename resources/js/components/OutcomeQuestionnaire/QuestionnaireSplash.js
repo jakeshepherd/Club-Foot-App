@@ -32,7 +32,7 @@ class QuestionnaireSplash extends React.Component {
                     toast.success("✅ Questionnaire Submitted")
                 ).catch(error => toast.error(error.response.data))
         } else {
-            toast.error("Please fill in the whole questionnaire")
+            toast.error("✏️ Please fill in all the questions")
         }
     }
 
