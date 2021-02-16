@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/contact-details', [UserController::class, 'setPhysioDetailsForUser'])
         ->name('setContactDetails');
 
-    Route::get('/progress-so-far', [AnalysisController::class, 'getSevenDayAdherenceForGraph'])
+    Route::get('/progress-so-far', [AnalysisController::class, 'getProgressSoFar'])
         ->name('getProgressSoFar');
 
     Route::post('/roye-outcome-questionnaire', [QuestionnaireController::class, 'setRoyeScoreQuestionnaire'])

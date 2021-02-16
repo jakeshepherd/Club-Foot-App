@@ -29,7 +29,7 @@ class AnalysisController extends Controller
         return response()->json($data['data'], $data['status']);
     }
 
-    public function getSevenDayAdherenceForGraph(): JsonResponse
+    public function getProgressSoFar(): JsonResponse
     {
         $data = $this->formatForGraph(
             (new BootsAndBarsTime)->getSevenDayTimes(),
@@ -38,6 +38,13 @@ class AnalysisController extends Controller
         if (empty($data)) {
             return response()->json($data, 204);
         }
+
+        // get how long FAB worn for
+        $oldestRecord = BootsAndBarsTime::where('user_id', Auth::id())
+            ->oldest()->pluck('end_time')->first();
+
+        $data['boots_worn_for'] = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
+
         return response()->json($data);
     }
 
