@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\TimingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,10 @@ Route::get('/contact', function () {
     return view('contact-details');
 })->middleware(['auth'])->name('ContactDetails');
 
+Route::get('/outcome-questionnaire', function () {
+    return view('outcome-questionnaire');
+})->middleware(['auth'])->name('OutcomeQuestionnaire');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
@@ -66,6 +71,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/progress-so-far', [AnalysisController::class, 'getSevenDayAdherenceForGraph'])
         ->name('getProgressSoFar');
+
+    Route::post('/roye-outcome-questionnaire', [QuestionnaireController::class, 'setRoyeScoreQuestionnaire'])
+        ->name('setRoyeScoreQuestionnaire');
 });
 
 require __DIR__.'/auth.php';
