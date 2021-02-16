@@ -83,4 +83,21 @@ class StoreRoyeScoreTest extends TestCase
     }
 
     //test for weird data
+    public function test_it_fails_without_all_answers() {
+        $this->createUserAndLogin();
+        $response = $this->post('/roye-outcome-questionnaire', [
+            'questionnaire_data' => [
+                0 => 1,
+                1 => 2,
+                3 => 1,
+                4 => 4,
+                5 => 1,
+                6 => 1,
+                7 => 1,
+                8 => 1,
+            ]
+        ]);
+        $response->assertStatus(400);
+        $this->assertSame('"Please answer every question."', $response->getContent());
+    }
 }

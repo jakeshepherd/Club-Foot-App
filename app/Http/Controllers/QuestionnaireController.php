@@ -37,6 +37,11 @@ class QuestionnaireController extends Controller
             return response()->json('Please answer every question.', 400);
         }
 
+        if (sizeof(request('questionnaire_data')) != 10) {
+            Log::error('questionnaire_data too small, not all questions answered. Please try again.');
+            return response()->json('Please answer every question.', 400);
+        }
+
         OutcomeQuestionnaireResult::create([
             'user_id' => Auth::id(),
             'questionnaire_id' => 0,
