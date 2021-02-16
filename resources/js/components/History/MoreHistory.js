@@ -1,15 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 import Chart from "react-apexcharts";
-import MoreHistory from "./MoreHistory";
 
-class HistorySplash extends React.Component {
+class MoreHistory extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showMoreHistory: false,
-            data: {},
             series: [{
                 name: '',
                 data: []
@@ -79,61 +75,18 @@ class HistorySplash extends React.Component {
             ]
         };
     }
-
-    async componentDidMount() {
-        await axios.get(`/progress-so-far`)
-            .then(r => {
-                this.setState({
-                    data: {
-                        bootsWornFor: r.data.boots_worn_for,
-                        totalAverageHours: Math.floor(r.data.total_average / 60),
-                        totalAverageMinutes: Math.round(r.data.total_average % 60),
-                    },
-                    series: [{
-                        name: 'Hours Boots Worn',
-                        data: r.data.hours
-                    }],
-                    options: {
-                        xaxis: {
-                            categories: r.data.days
-                        }
-                    }
-                })
-            })
-
-        axios.get(`/get-all-history`)
-            .then(r => {
-                console.log(r)
-            })
-    }
-
     render() {
         return (
-            <div id="chart" className={"text-center mt-4"}>
-                <h1 className={"text-xl font-bold"}>Your Progress so far</h1>
-                <p>You've been using the Boots and Bars for </p>
-                <p className={"text-purple-400"}>{this.state.data.bootsWornFor} Weeks</p>
-                <p>And you're daily average is </p>
-                <p className={"text-green-400"}>
-                    {this.state.data.totalAverageHours}.{this.state.data.totalAverageMinutes} hours
-                </p>
-                <p>So you're doing well!</p>
+            <div>
                 <Chart
                     className={"inline-block md:w-1/3"}
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
                 />
-                <p className={"text-sm cursor-pointer"} onClick={() => this.setState({showMoreHistory: !this.state.showMoreHistory})}>
-                    Tap to see more from previous weeks</p>
-                {this.state.showMoreHistory && <MoreHistory />}
             </div>
-        )
+        );
     }
 }
 
-export default HistorySplash;
-
-if (document.getElementById('history')) {
-    ReactDOM.render(<HistorySplash/>, document.getElementById('history'));
-}
+export default MoreHistory;
