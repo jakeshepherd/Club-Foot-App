@@ -81,7 +81,8 @@ class HistoryForProgressTest extends TestCase
         $response = $this->get('/progress-so-far');
         $response->assertStatus(200);
 
-        $this->assertSame($expected, json_decode($response->getContent(), true));
+        $this->assertSame($expected['days'], json_decode($response->getContent(), true)['days']);
+        $this->assertSame($expected['hours'], json_decode($response->getContent(), true)['hours']);
     }
 
     public function test_it_fails_with_no_data()
@@ -141,7 +142,8 @@ class HistoryForProgressTest extends TestCase
         $response->assertStatus(200);
 
 
-        $this->assertSame($expected, json_decode($response->content(), true));
+        $this->assertSame($expected['days'], json_decode($response->getContent(), true)['days']);
+        $this->assertSame($expected['hours'], json_decode($response->getContent(), true)['hours']);
     }
 
     public function test_it_gets_how_long_worn_for()
