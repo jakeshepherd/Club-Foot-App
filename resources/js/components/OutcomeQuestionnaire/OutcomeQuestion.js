@@ -1,6 +1,5 @@
 import React from "react";
 
-//TODO -- it doesnt select the right number, always have to click the button twice.
 class OutcomeQuestion extends React.Component {
     constructor(props) {
         super(props);
@@ -9,7 +8,6 @@ class OutcomeQuestion extends React.Component {
             2: false,
             3: false,
             4: false,
-            selectedAnswer: 0,
         }
     }
 
@@ -21,9 +19,8 @@ class OutcomeQuestion extends React.Component {
             3: false,
             4: false,
             [answerId]: !this.state.[answerId],
-            selectedAnswer: answerId,
         })
-        this.props.handleQuestionSubmit(this.props.questionNumber, this.state.selectedAnswer)
+        this.props.handleQuestionSubmit(this.props.questionNumber, answerId)
     }
 
     render() {
