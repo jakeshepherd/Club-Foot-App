@@ -29,8 +29,8 @@ class AnalysisController extends Controller
         );
 
         $data = $this->formatForGraph($allTimes);
-        $data['start_date'] = $startDate;
-        $data['end_date'] = $endDate;
+        $data['start_date'] = $startDate->format('d-m-Y');
+        $data['end_date'] = $endDate->format('d-m-Y');
 
         if (empty($data)) {
             return response()->json($data, 204);

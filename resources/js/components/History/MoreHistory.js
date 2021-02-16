@@ -5,12 +5,16 @@ import Chart from "react-apexcharts";
 class MoreHistory extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             series: [{
-                name: '',
-                data: []
+                name: 'Hours Boots Worn',
+                data: this.props.data.hours,
             }],
             options: {
+                title: {
+                    text: this.props.data.start_date + ' to ' + this.props.data.end_date
+                },
                 chart: {
                     type: 'bar',
                     weight: "100%",
@@ -36,7 +40,7 @@ class MoreHistory extends React.Component {
                     title: {
                         text: 'Days'
                     },
-                    categories: [],
+                    categories: this.props.data.days
                 },
                 yaxis: {
                     title: {
@@ -74,6 +78,7 @@ class MoreHistory extends React.Component {
                 }
             ]
         };
+
     }
     render() {
         return (

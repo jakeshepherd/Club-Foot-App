@@ -76,7 +76,8 @@ class HistorySplash extends React.Component {
                         }
                     }
                 }
-            ]
+            ],
+            moreHistory: {}
         };
     }
 
@@ -101,9 +102,11 @@ class HistorySplash extends React.Component {
                 })
             })
 
-        axios.get(`/get-all-history`)
+        axios.get(`/timing-history`)
             .then(r => {
-                console.log(r)
+                this.setState({
+                    moreHistory: r.data
+                })
             })
     }
 
@@ -126,7 +129,7 @@ class HistorySplash extends React.Component {
                 />
                 <p className={"text-sm cursor-pointer"} onClick={() => this.setState({showMoreHistory: !this.state.showMoreHistory})}>
                     Tap to see more from previous weeks</p>
-                {this.state.showMoreHistory && <MoreHistory />}
+                {this.state.showMoreHistory && <MoreHistory data={this.state.moreHistory}/>}
             </div>
         )
     }
