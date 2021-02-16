@@ -8,26 +8,26 @@ class QuestionnaireSplash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            questionnaire_data: {}
+            roye_score: {
+                questionnaire_data: {}
+            }
         }
         this.handleQuestionSubmit = this.handleQuestionSubmit.bind(this);
         this.questionnaireSubmit = this.questionnaireSubmit.bind(this);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.state.questionnaire_data)
-    }
-
     handleQuestionSubmit(question, answer) {
         this.setState({
-            questionnaire_data: {...this.state.questionnaire_data, [question]: answer}
+            roye_score: {
+                questionnaire_data: {...this.state.roye_score.questionnaire_data, [question]: answer}
+            }
         })
     }
 
-    // todo -- check that every question has been answered
     questionnaireSubmit() {
-        if (Object.keys(this.state.questionnaire_data).length === 10) {
-            axios.post(`/roye-outcome-questionnaire`, this.state)
+        // check if every question has been answered by counting result state
+        if (Object.keys(this.state.roye_score.questionnaire_data).length === 10) {
+            axios.post(`/roye-outcome-questionnaire`, this.state.roye_score)
                 .then(() =>
                     toast.success("✅ Questionnaire Submitted")
                 ).catch(error => toast.error(error.response.data))
@@ -133,6 +133,7 @@ class QuestionnaireSplash extends React.Component {
                 <div className="p-5 m-auto w-10/12 text-center mb-28">
                     <h1 className={"text-2xl font-bold"}>Outcome Questionnaire</h1>
                     <p>Please answer all the questions</p>
+                    <p>Note: Please do not submit an outcome questionnaire more than once per day</p>
                     {Object.values(questionnaireData).map(function (key, value) {
                         return <OutcomeQuestion
                             key={value}
