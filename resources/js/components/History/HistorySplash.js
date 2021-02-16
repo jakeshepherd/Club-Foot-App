@@ -7,6 +7,9 @@ class HistorySplash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: {
+                bootsWornFor: '',
+            },
             series: [{
                 name: '',
                 data: []
@@ -78,9 +81,12 @@ class HistorySplash extends React.Component {
     }
 
     async componentDidMount() {
-        await axios.get(`progress-so-far`)
+        await axios.get(`/progress-so-far`)
             .then(r => {
                 this.setState({
+                    data: {
+                        bootsWornFor: r.data.boots_worn_for
+                    },
                     series: [{
                         name: 'Hours Boots Worn',
                         data: r.data.hours
@@ -97,13 +103,20 @@ class HistorySplash extends React.Component {
     render() {
         return (
             <div id="chart" className={"text-center mt-4"}>
-                <p>Your Progress so far</p>
+                <h1 className={"text-xl font-bold"}>Your Progress so far</h1>
+                <p>You've been using the Boots and Bars for </p>
+                <p className={"text-purple-400"}>{this.state.data.bootsWornFor} Weeks</p>
+
+                <p>And you're daily average is </p>
+                <p className={"text-green-400"}>15.6 hours</p>
+                <p>So you're doing well!</p>
                 <Chart
                     className={"inline-block md:w-1/3"}
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
                 />
+                <p className={"text-sm"}>Tap to see more from previous weeks</p>
             </div>
         )
     }
