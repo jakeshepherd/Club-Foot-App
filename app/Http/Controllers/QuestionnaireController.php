@@ -22,7 +22,7 @@ class QuestionnaireController extends Controller
         if (!$thereIsARecordForCurrentDay->isEmpty()) {
             Log::warning('Roye Score questionnaire already submitted today. Please try again tomorrow.');
             return response()->json(
-                'Roye Score questionnaire already submitted today. Please try again tomorrow.',
+                '⌛️ Roye Score questionnaire already submitted today. Please try again tomorrow.',
                 409
             );
         }
