@@ -58,7 +58,7 @@ class QuestionnaireController extends Controller
         OutcomeQuestionnaireResult::create([
             'user_id' => Auth::id(),
             'questionnaire_id' => 0,
-            'questionnaire_data' => json_encode(request('questionnaire_data'), true),
+            'questionnaire_data' => json_encode(request('questionnaire_data')),
         ]);
 
         return response()->json(true, 201);
