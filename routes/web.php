@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
-        \Illuminate\Support\Facades\Mail::to('jakeshepherd98@gmail.com')->send(new \App\Mail\ForgottenPassword);
         return view('welcome');
     })->name('welcome');
 
