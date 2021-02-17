@@ -80,6 +80,7 @@ class MoreHistory extends React.Component {
         };
 
     }
+    // note: this only shows two to one week ago currently
     render() {
         return (
             <div>
