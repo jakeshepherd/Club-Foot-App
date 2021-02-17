@@ -9,6 +9,7 @@ class HistorySplash extends React.Component {
         super(props);
         this.state = {
             showMoreHistory: false,
+            moreHistoryData: {},
             data: {},
             series: [{
                 name: '',
@@ -76,8 +77,7 @@ class HistorySplash extends React.Component {
                         }
                     }
                 }
-            ],
-            moreHistory: {}
+            ]
         };
     }
 
@@ -105,7 +105,7 @@ class HistorySplash extends React.Component {
         axios.get(`/timing-history`)
             .then(r => {
                 this.setState({
-                    moreHistory: r.data
+                    moreHistoryData: r.data
                 })
             })
     }
@@ -116,7 +116,7 @@ class HistorySplash extends React.Component {
                 <h1 className={"text-xl font-bold"}>Your Progress so far</h1>
                 <p>You've been using the Boots and Bars for </p>
                 <p className={"text-purple-400"}>{this.state.data.bootsWornFor} Weeks</p>
-                <p>And you're daily average is </p>
+                <p>And your total daily average is </p>
                 <p className={"text-green-400"}>
                     {this.state.data.totalAverageHours}.{this.state.data.totalAverageMinutes} hours
                 </p>
@@ -129,7 +129,7 @@ class HistorySplash extends React.Component {
                 />
                 <p className={"text-sm cursor-pointer"} onClick={() => this.setState({showMoreHistory: !this.state.showMoreHistory})}>
                     Tap to see more from previous weeks</p>
-                {this.state.showMoreHistory && <MoreHistory data={this.state.moreHistory}/>}
+                {this.state.showMoreHistory && <MoreHistory data={this.state.moreHistoryData}/>}
             </div>
         )
     }
