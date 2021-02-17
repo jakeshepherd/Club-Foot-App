@@ -49,6 +49,10 @@ Route::get('/outcome-history', function () {
     return view('outcome-history');
 })->middleware(['auth'])->name('QuestionnaireHistory');
 
+Route::get('/dashboard-credit', function () {
+    return view('icon-credit');
+})->middleware(['auth'])->name('IconCredit');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
