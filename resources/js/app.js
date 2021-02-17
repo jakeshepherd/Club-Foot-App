@@ -19,4 +19,5 @@ require('./components/ContactDetails/ContactSplash');
 require('./components/History/HistorySplash');
 require('./components/History/MoreHistory');
 require('./components/OutcomeQuestionnaire/QuestionnaireSplash');
+require('./components/OutcomeQuestionnaire/OutcomeHistory');
 require('alpinejs');

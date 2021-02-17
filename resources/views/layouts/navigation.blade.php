@@ -63,6 +63,13 @@
                                 {{ __('Settings') }}
                             </x-dropdown-link>
                         </form>
+                        <form method="GET" action="{{ route('QuestionnaireHistory') }}">
+                        <x-dropdown-link :href="route('QuestionnaireHistory')"
+                                         onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            {{ __('Roye Score History') }}
+                        </x-dropdown-link>
+                        </form>
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -131,6 +138,13 @@
                                                 this.closest('form').submit();">
                         {{ __('Settings') }}
                     </x-responsive-nav-link>
+                </form>
+                <form method="GET" action="{{ route('QuestionnaireHistory') }}">
+                    <x-dropdown-link :href="route('QuestionnaireHistory')"
+                                     onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                        {{ __('Roye Score History') }}
+                    </x-dropdown-link>
                 </form>
             </div>
         </div>

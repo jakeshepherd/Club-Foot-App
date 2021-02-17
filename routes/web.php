@@ -45,6 +45,10 @@ Route::get('/outcome-questionnaire', function () {
     return view('outcome-questionnaire');
 })->middleware(['auth'])->name('OutcomeQuestionnaire');
 
+Route::get('/outcome-history', function () {
+    return view('outcome-history');
+})->middleware(['auth'])->name('QuestionnaireHistory');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
@@ -81,6 +85,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/roye-outcome-questionnaire', [QuestionnaireController::class, 'setRoyeScoreQuestionnaire'])
         ->name('setRoyeScoreQuestionnaire');
+
+    Route::get('/outcome-results', [QuestionnaireController::class, 'getAllResults'])
+        ->name('getAllResults');
 
 });
 
