@@ -84,7 +84,7 @@ class HistorySplash extends React.Component {
             .then(r => {
                 this.setState({
                     data: {
-                        bootsWornFor: r.data.boots_worn_for,
+                        timeBootsWornFor: r.data.boots_worn_for,
                         totalAverageHours: Math.floor(r.data.total_average / 60),
                         totalAverageMinutes: Math.round(r.data.total_average % 60),
                     },
@@ -106,7 +106,7 @@ class HistorySplash extends React.Component {
             <div id="chart" className={"text-center mt-4"}>
                 <h1 className={"text-xl font-bold"}>Your Progress so far</h1>
                 <p>You've been using the Boots and Bars for </p>
-                <p className={"text-purple-400"}>{this.state.data.bootsWornFor} Weeks</p>
+                <p className={"text-purple-400"}>{this.state.data.timeBootsWornFor} Weeks</p>
                 <p>And your total daily average is </p>
                 <p className={"text-green-400"}>
                     {this.state.data.totalAverageHours}.{this.state.data.totalAverageMinutes} hours

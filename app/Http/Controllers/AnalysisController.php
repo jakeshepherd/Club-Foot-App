@@ -70,13 +70,12 @@ class AnalysisController extends Controller
         // get how long FAB worn for
         $oldestRecord = BootsAndBarsTime::where('user_id', Auth::id())
             ->oldest()->pluck('end_time')->first();
-
         $diffInWeeks = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
-        $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
 
         $allRecords = BootsAndBarsTime::where('user_id', Auth::id())
             ->pluck('duration')->toArray();
 
+        $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
         $data['total_average'] = array_sum($allRecords)/count($allRecords);
 
         return response()->json($data);
