@@ -47,15 +47,6 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Logout') }}
-                            </x-dropdown-link>
-                        </form>
                         <form method="GET" action="{{ route('Settings') }}">
                             <x-dropdown-link :href="route('Settings')"
                                              onclick="event.preventDefault();
@@ -75,6 +66,15 @@
                                              onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Website Credit') }}
+                            </x-dropdown-link>
+                        </form>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Logout') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -130,15 +130,6 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Logout') }}
-                    </x-responsive-nav-link>
-                </form>
                 <form method="GET" action="{{ route('Settings') }}">
                     <x-responsive-nav-link :href="route('Settings')"
                                      onclick="event.preventDefault();
@@ -159,6 +150,15 @@
                                                 this.closest('form').submit();">
                         {{ __('Website Credit') }}
                     </x-dropdown-link>
+                </form>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                                           onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Logout') }}
+                    </x-responsive-nav-link>
                 </form>
             </div>
         </div>
