@@ -20,7 +20,7 @@ class OutcomeHistory extends React.Component {
         return (
             <div className={"text-center mt-4"}>
                 <h1 className={"text-xl font-bold"}>Questionnaire results from the past</h1>
-                <div className={"grid grid-cols-2"}>
+                <div className={"grid grid-cols-1 sm:grid-cols-2"}>
                     {Object.entries(this.state.results).map(([key, value]) => {
                         let result = value.replace('[', '').replace(']', '').split(',')
                         return (
