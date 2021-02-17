@@ -103,8 +103,8 @@ class HistorySplash extends React.Component {
             })
 
         axios.post(`/timing-history`, {
-            start_time: '-2 weeks',
-            end_time: '-1 week',
+            start_date: '-2 weeks',
+            end_date: '-1 week',
         })
             .then(r => {
                 this.setState({
