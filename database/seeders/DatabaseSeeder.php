@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\BootsAndBarsTime;
+use App\Models\PhysioContactDetails;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -48,6 +49,12 @@ class DatabaseSeeder extends Seeder
             'end_time' => Carbon::now(),
             'duration' => 15 * 60,
             'tracking' => 0,
+        ]);
+        PhysioContactDetails::create([
+            'user_id' => $user->id,
+            'name' => 'Physio name',
+            'email' => 'physio@example.com',
+            'phone_number' => '0123456789',
         ]);
     }
 }
