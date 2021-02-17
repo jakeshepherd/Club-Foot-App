@@ -83,12 +83,13 @@ class MoreHistory extends React.Component {
     render() {
         return (
             <div>
-                <Chart
+                {this.props.data.hours !== undefined && <Chart
                     className={"inline-block md:w-1/3"}
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
-                />
+                />}
+                {this.props.data.hours === undefined && <p className={"text-red-500"}>No data available for previous weeks</p>}
             </div>
         );
     }
