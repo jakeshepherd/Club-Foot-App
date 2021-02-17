@@ -140,8 +140,8 @@ class HistoryForProgressTest extends TestCase
         $expected['days'][] = $startTime->format('l');
         $expected['hours'][] = 16;
 
-        $expected['start_date'] = Carbon::parse('-2 weeks');
-        $expected['end_date'] = Carbon::parse('-1 weeks');
+        $expected['start_date'] = Carbon::parse('-2 weeks')->format('d-m-Y');
+        $expected['end_date'] = Carbon::parse('-1 weeks')->format('d-m-Y');
 
         $response = $this->get('/timing-history');
 
@@ -151,12 +151,12 @@ class HistoryForProgressTest extends TestCase
         $this->assertSame($expected['hours'], json_decode($response->getContent(), true)['hours']);
         $this->assertEqualsWithDelta(
             $expected['start_date'],
-            Carbon::parse(json_decode($response->getContent(), true)['start_date']),
+            Carbon::parse(json_decode($response->getContent(), true)['start_date'])->format('d-m-Y'),
             5
         );
         $this->assertEqualsWithDelta(
             $expected['end_date'],
-            Carbon::parse(json_decode($response->getContent(), true)['end_date']),
+            Carbon::parse(json_decode($response->getContent(), true)['end_date'])->format('d-m-Y'),
             5
         );
     }
