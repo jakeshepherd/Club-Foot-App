@@ -25,6 +25,10 @@ Route::get('/history', function () {
     return view('history');
 })->middleware(['auth'])->name('History');
 
+Route::get('/more-history', function () {
+    return view('more-history');
+})->middleware(['auth'])->name('MoreHistory');
+
 Route::get('/FAQ', function () {
     return view('FAQ');
 })->middleware(['auth'])->name('FAQ');
@@ -69,11 +73,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/contact-details', [UserController::class, 'setPhysioDetailsForUser'])
         ->name('setContactDetails');
 
-    Route::get('/progress-so-far', [AnalysisController::class, 'getSevenDayAdherenceForGraph'])
+    Route::get('/progress-so-far', [AnalysisController::class, 'getProgressSoFar'])
         ->name('getProgressSoFar');
+
+    Route::post('/timing-history', [AnalysisController::class, 'getHistoryForTimeframe'])
+        ->name('getAllHistory');
 
     Route::post('/roye-outcome-questionnaire', [QuestionnaireController::class, 'setRoyeScoreQuestionnaire'])
         ->name('setRoyeScoreQuestionnaire');
+
 });
 
 require __DIR__.'/auth.php';

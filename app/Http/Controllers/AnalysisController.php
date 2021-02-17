@@ -6,14 +6,42 @@ use App\Models\BootsAndBarsTime;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AnalysisController extends Controller
 {
+    private $bootsAndBarsTime;
+
+    public function __construct()
+    {
+        $this->bootsAndBarsTime = new BootsAndBarsTime();
+    }
+
+    public function getHistoryForTimeframe(Request $request): JsonResponse
+    {
+        $startDate = Carbon::parse($request->input('start_date'));
+        $endDate = Carbon::parse($request->input('end_date'));
+
+        $allTimes = $this->bootsAndBarsTime->getTimeWithinTimeframe(
+            $startDate,
+            $endDate
+        );
+
+        $data = $this->formatForGraph($allTimes);
+        $data['start_date'] = $startDate->format('d-m-Y');
+        $data['end_date'] = $endDate->format('d-m-Y');
+
+        if (empty($data)) {
+            return response()->json($data, 204);
+        }
+        return response()->json($data);
+    }
+
     public function getSevenDayAverageInMinutes(): JsonResponse
     {
         $average = $this->calculateAverage(
-            (new BootsAndBarsTime)->getSevenDayTimes()
+            $this->bootsAndBarsTime->getSevenDayTimes()
         );
 
         return response()->json($average['average'], $average['status']);
@@ -22,22 +50,34 @@ class AnalysisController extends Controller
     public function getSevenDayAdherence(): JsonResponse
     {
         $data = $this->formatWeeklyAdherenceData(
-            (new BootsAndBarsTime)->getSevenDayTimes(),
+            $this->bootsAndBarsTime->getSevenDayTimes(),
             User::findOrFail(Auth::id())->time_goal
         );
 
         return response()->json($data['data'], $data['status']);
     }
 
-    public function getSevenDayAdherenceForGraph(): JsonResponse
+    public function getProgressSoFar(): JsonResponse
     {
         $data = $this->formatForGraph(
-            (new BootsAndBarsTime)->getSevenDayTimes(),
+            $this->bootsAndBarsTime->getSevenDayTimes(),
         );
 
         if (empty($data)) {
             return response()->json($data, 204);
         }
+
+        // get how long FAB worn for
+        $oldestRecord = BootsAndBarsTime::where('user_id', Auth::id())
+            ->oldest()->pluck('end_time')->first();
+        $diffInWeeks = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
+
+        $allRecords = BootsAndBarsTime::where('user_id', Auth::id())
+            ->pluck('duration')->toArray();
+
+        $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
+        $data['total_average'] = array_sum($allRecords)/count($allRecords);
+
         return response()->json($data);
     }
 

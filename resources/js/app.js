@@ -17,5 +17,6 @@ require('./components/Settings/Settings');
 require('./components/FAQ/FAQSplash');
 require('./components/ContactDetails/ContactSplash');
 require('./components/History/HistorySplash');
+require('./components/History/MoreHistory');
 require('./components/OutcomeQuestionnaire/QuestionnaireSplash');
 require('alpinejs');
