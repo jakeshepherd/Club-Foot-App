@@ -29,7 +29,7 @@ class QuestionnaireSplash extends React.Component {
         if (Object.keys(this.state.roye_score.questionnaire_data).length === 10) {
             axios.post(`/roye-outcome-questionnaire`, this.state.roye_score)
                 .then(() =>
-                    toast.success("✅ Questionnaire Submitted")
+                    toast.success("✅ Questionnaire Submitted. You can now return to the homepage")
                 ).catch(error => toast.error(error.response.data))
         } else {
             toast.error("✏️ Please fill in all the questions")
