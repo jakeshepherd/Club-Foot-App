@@ -29,5 +29,6 @@
             <br />
             <a target="_blank" href="https://icons8.com/icons/set/guest-male">Account icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
         </div>
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
