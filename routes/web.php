@@ -17,43 +17,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth'])->name('welcome');
-
-Route::get('/history', function () {
-    return view('history');
-})->middleware(['auth'])->name('History');
-
-Route::get('/more-history', function () {
-    return view('more-history');
-})->middleware(['auth'])->name('MoreHistory');
-
-Route::get('/FAQ', function () {
-    return view('FAQ');
-})->middleware(['auth'])->name('FAQ');
-
-Route::get('/settings', function () {
-    return view('settings');
-})->middleware(['auth'])->name('Settings');
-
-Route::get('/contact', function () {
-    return view('contact-details');
-})->middleware(['auth'])->name('ContactDetails');
-
-Route::get('/outcome-questionnaire', function () {
-    return view('outcome-questionnaire');
-})->middleware(['auth'])->name('OutcomeQuestionnaire');
-
-Route::get('/outcome-history', function () {
-    return view('outcome-history');
-})->middleware(['auth'])->name('QuestionnaireHistory');
-
-Route::get('/dashboard-credit', function () {
-    return view('icon-credit');
-})->middleware(['auth'])->name('IconCredit');
-
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('welcome');
+
+    Route::get('/history', function () {
+        return view('history');
+    })->name('History');
+
+    Route::get('/more-history', function () {
+        return view('more-history');
+    })->name('MoreHistory');
+
+    Route::get('/FAQ', function () {
+        return view('FAQ');
+    })->name('FAQ');
+
+    Route::get('/settings', function () {
+        return view('settings');
+    })->name('Settings');
+
+    Route::get('/contact', function () {
+        return view('contact-details');
+    })->name('ContactDetails');
+
+    Route::get('/outcome-questionnaire', function () {
+        return view('outcome-questionnaire');
+    })->name('OutcomeQuestionnaire');
+
+    Route::get('/outcome-history', function () {
+        return view('outcome-history');
+    })->name('QuestionnaireHistory');
+
+    Route::get('/dashboard-credit', function () {
+        return view('icon-credit');
+    })->name('IconCredit');
+
     Route::post('/boots-time-goal', [UserController::class, 'setTimeGoal'])
         ->name('setTimeGoal');
 
@@ -92,7 +92,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/outcome-results', [QuestionnaireController::class, 'getAllResults'])
         ->name('getAllResults');
-
 });
 
 require __DIR__.'/auth.php';
