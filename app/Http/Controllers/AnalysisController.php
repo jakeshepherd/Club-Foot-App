@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AnalysisController extends Controller
@@ -18,10 +19,10 @@ class AnalysisController extends Controller
         $this->bootsAndBarsTime = new BootsAndBarsTime();
     }
 
-    public function getHistoryForTimeframe(): JsonResponse
+    public function getHistoryForTimeframe(Request $request): JsonResponse
     {
-        $startDate = Carbon::parse('-2 weeks');
-        $endDate = Carbon::parse('-1 week');
+        $startDate = Carbon::parse($request->input('start_date'));
+        $endDate = Carbon::parse($request->input('end_date'));
 
         $allTimes = $this->bootsAndBarsTime->getTimeWithinTimeframe(
             $startDate,

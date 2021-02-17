@@ -143,7 +143,10 @@ class HistoryForProgressTest extends TestCase
         $expected['start_date'] = Carbon::parse('-2 weeks')->format('d-m-Y');
         $expected['end_date'] = Carbon::parse('-1 weeks')->format('d-m-Y');
 
-        $response = $this->get('/timing-history');
+        $response = $this->post('/timing-history', [
+            'start_date' => '-2 weeks',
+            'end_date' => '-1 week'
+        ]);
 
         $response->assertStatus(200);
 

@@ -72,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/progress-so-far', [AnalysisController::class, 'getProgressSoFar'])
         ->name('getProgressSoFar');
 
-    Route::get('/timing-history', [AnalysisController::class, 'getHistoryForTimeframe'])
+    Route::post('/timing-history', [AnalysisController::class, 'getHistoryForTimeframe'])
         ->name('getAllHistory');
 
     Route::post('/roye-outcome-questionnaire', [QuestionnaireController::class, 'setRoyeScoreQuestionnaire'])

@@ -102,7 +102,10 @@ class HistorySplash extends React.Component {
                 })
             })
 
-        axios.get(`/timing-history`)
+        axios.post(`/timing-history`, {
+            start_time: '-2 weeks',
+            end_time: '-1 week',
+        })
             .then(r => {
                 this.setState({
                     moreHistoryData: r.data
@@ -127,7 +130,8 @@ class HistorySplash extends React.Component {
                     series={this.state.series}
                     type="bar"
                 />
-                <p className={"text-sm cursor-pointer"} onClick={() => this.setState({showMoreHistory: !this.state.showMoreHistory})}>
+                <p className={"text-sm cursor-pointer"}
+                   onClick={() => this.setState({showMoreHistory: !this.state.showMoreHistory})}>
                     Tap to see more from previous weeks</p>
                 {this.state.showMoreHistory && <MoreHistory data={this.state.moreHistoryData}/>}
             </div>
