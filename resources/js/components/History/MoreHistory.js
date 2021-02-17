@@ -5,7 +5,6 @@ import Chart from "react-apexcharts";
 class MoreHistory extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             series: [{
                 name: 'Hours Boots Worn',
@@ -13,7 +12,8 @@ class MoreHistory extends React.Component {
             }],
             options: {
                 title: {
-                    text: this.props.data.start_date + ' to ' + this.props.data.end_date
+                    text: this.props.data.start_date + ' to ' + this.props.data.end_date,
+                    align: 'center',
                 },
                 chart: {
                     type: 'bar',
@@ -83,7 +83,7 @@ class MoreHistory extends React.Component {
     // note: this only shows two to one week ago currently
     render() {
         return (
-            <div>
+            <div className={"mt-8"}>
                 {this.props.data.hours !== undefined && <Chart
                     className={"inline-block md:w-1/3"}
                     options={this.state.options}
