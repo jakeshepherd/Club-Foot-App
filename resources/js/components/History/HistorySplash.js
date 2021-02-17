@@ -118,6 +118,7 @@ class HistorySplash extends React.Component {
                     series={this.state.series}
                     type="bar"
                 />
+                <br />
                 <a className={"text-sm cursor-pointer"}
                    aria-current="page" href="/more-history">
                     Tap to see more from previous weeks</a>
