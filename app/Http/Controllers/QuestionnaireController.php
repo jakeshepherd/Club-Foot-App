@@ -15,9 +15,14 @@ class QuestionnaireController extends Controller
     public function getAllResults(): JsonResponse
     {
         $results = OutcomeQuestionnaireResult::where('user_id', Auth::id())
-            ->get('questionnaire_data');
+            ->get(['created_at', 'questionnaire_data'])->toArray();
 
-        return response()->json($results);
+        $toReturn = [];
+        foreach ($results as $result) {
+            $toReturn[Carbon::parse($result['created_at'])->format('d-m-Y')] = $result['questionnaire_data'];
+        }
+
+        return response()->json($toReturn);
     }
 
     public function setRoyeScoreQuestionnaire(): JsonResponse

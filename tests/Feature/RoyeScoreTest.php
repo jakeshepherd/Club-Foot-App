@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\OutcomeQuestionnaireResult;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -139,6 +140,9 @@ class RoyeScoreTest extends TestCase
             'questionnaire_data' => json_encode($expected[0]),
         ]);
 
+        $startTime = Carbon::parse('+1 day');
+        Carbon::setTestNow($startTime);
+
         OutcomeQuestionnaireResult::create([
             'user_id' => Auth::id(),
             'questionnaire_id' => 0,
@@ -148,14 +152,14 @@ class RoyeScoreTest extends TestCase
         $response = $this->get('/outcome-results');
         $response->assertOk();
 
-        $actual = json_decode($response->getContent(), true)[0]['questionnaire_data'];
-        $actual = str_replace(["[", "]"], "", $actual);
-        $actual = explode(",", $actual);
-        $this->assertEquals($expected[0], $actual);
+        $results = json_decode($response->getContent(), true);
 
-        $actual = json_decode($response->getContent(), true)[1]['questionnaire_data'];
-        $actual = str_replace(["[", "]"], "", $actual);
-        $actual = explode(",", $actual);
-        $this->assertEquals($expected[1], $actual);
+        $count = 0;
+        foreach($results as $key => $value) {
+            $squareBracketsRemoved = str_replace(["[", "]"], "", $value);
+            $actual = explode(",", $squareBracketsRemoved);
+            $this->assertEquals($expected[$count], $actual);
+            $count++;
+        }
     }
 }
