@@ -1,6 +1,7 @@
 import React from "react";
 
 import Chart from "react-apexcharts";
+import ReactDOM from "react-dom";
 
 class MoreHistory extends React.Component {
     constructor(props) {
@@ -8,11 +9,11 @@ class MoreHistory extends React.Component {
         this.state = {
             series: [{
                 name: 'Hours Boots Worn',
-                data: this.props.data.hours,
+                data: []
             }],
             options: {
                 title: {
-                    text: this.props.data.start_date + ' to ' + this.props.data.end_date,
+                    text: '',
                     align: 'center',
                 },
                 chart: {
@@ -40,7 +41,7 @@ class MoreHistory extends React.Component {
                     title: {
                         text: 'Days'
                     },
-                    categories: this.props.data.days
+                    categories: []
                 },
                 yaxis: {
                     title: {
@@ -78,22 +79,49 @@ class MoreHistory extends React.Component {
                 }
             ]
         };
-
     }
+
+    async componentDidMount() {
+        await axios.post(`/timing-history`, {
+            start_date: '-2 weeks',
+            end_date: '-1 week',
+        })
+            .then(r => {
+                this.setState({
+                    series: [{
+                        name: 'Hours Boots Worn',
+                        data: r.data.hours
+                    }],
+                    options: {
+                        title: {
+                            text: r.data.start_date + ' to ' + r.data.end_date,
+                        },
+                        xaxis: {
+                            categories: r.data.days
+                        }
+                    }
+                })
+            })
+    }
+
     // note: this only shows two to one week ago currently
     render() {
         return (
-            <div className={"mt-8"}>
-                {this.props.data.hours !== undefined && <Chart
+            <div className={"text-center mt-4"}>
+                {this.state.series[0].data !== undefined && <Chart
                     className={"inline-block md:w-1/3"}
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
                 />}
-                {this.props.data.hours === undefined && <p className={"text-red-500"}>No data available for previous weeks</p>}
+                {this.state.series[0].data === undefined && <p className={"text-red-500"}>No data available for previous weeks</p>}
             </div>
         );
     }
 }
 
 export default MoreHistory;
+
+if (document.getElementById('more-history')) {
+    ReactDOM.render(<MoreHistory/>, document.getElementById('more-history'));
+}

@@ -25,6 +25,10 @@ Route::get('/history', function () {
     return view('history');
 })->middleware(['auth'])->name('History');
 
+Route::get('/more-history', function () {
+    return view('more-history');
+})->middleware(['auth'])->name('MoreHistory');
+
 Route::get('/FAQ', function () {
     return view('FAQ');
 })->middleware(['auth'])->name('FAQ');
