@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
-class StoreRoyeScoreTest extends TestCase
+class RoyeScoreTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -83,7 +83,8 @@ class StoreRoyeScoreTest extends TestCase
     }
 
     //test for weird data
-    public function test_it_fails_without_all_answers() {
+    public function test_it_fails_without_all_answers()
+    {
         $this->createUserAndLogin();
         $response = $this->post('/roye-outcome-questionnaire', [
             'questionnaire_data' => [
@@ -99,5 +100,62 @@ class StoreRoyeScoreTest extends TestCase
         ]);
         $response->assertStatus(400);
         $this->assertSame('"Please answer every question."', $response->getContent());
+    }
+
+    public function test_it_can_get_all_outcomes_for_user()
+    {
+        $this->withoutExceptionHandling();
+        $this->createUserAndLogin();
+
+        $expected = [
+            [
+                0 => 1,
+                1 => 1,
+                2 => 1,
+                3 => 1,
+                4 => 1,
+                5 => 1,
+                6 => 1,
+                7 => 1,
+                8 => 1,
+                9 => 1,
+            ], [
+                0 => 2,
+                1 => 2,
+                2 => 2,
+                3 => 2,
+                4 => 2,
+                5 => 2,
+                6 => 2,
+                7 => 2,
+                8 => 2,
+                9 => 2,
+            ]
+        ];
+
+        OutcomeQuestionnaireResult::create([
+            'user_id' => Auth::id(),
+            'questionnaire_id' => 0,
+            'questionnaire_data' => json_encode($expected[0]),
+        ]);
+
+        OutcomeQuestionnaireResult::create([
+            'user_id' => Auth::id(),
+            'questionnaire_id' => 0,
+            'questionnaire_data' => json_encode($expected[1]),
+        ]);
+
+        $response = $this->get('/outcome-results');
+        $response->assertOk();
+
+        $actual = json_decode($response->getContent(), true)[0]['questionnaire_data'];
+        $actual = str_replace(["[", "]"], "", $actual);
+        $actual = explode(",", $actual);
+        $this->assertEquals($expected[0], $actual);
+
+        $actual = json_decode($response->getContent(), true)[1]['questionnaire_data'];
+        $actual = str_replace(["[", "]"], "", $actual);
+        $actual = explode(",", $actual);
+        $this->assertEquals($expected[1], $actual);
     }
 }

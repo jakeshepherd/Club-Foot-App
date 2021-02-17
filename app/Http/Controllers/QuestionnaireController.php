@@ -12,6 +12,14 @@ use Illuminate\Validation\ValidationException;
 
 class QuestionnaireController extends Controller
 {
+    public function getAllResults(): JsonResponse
+    {
+        $results = OutcomeQuestionnaireResult::where('user_id', Auth::id())
+            ->get('questionnaire_data');
+
+        return response()->json($results);
+    }
+
     public function setRoyeScoreQuestionnaire(): JsonResponse
     {
         // check if there is a questionnaire submitted today already and exit early
@@ -45,7 +53,7 @@ class QuestionnaireController extends Controller
         OutcomeQuestionnaireResult::create([
             'user_id' => Auth::id(),
             'questionnaire_id' => 0,
-            'questionnaire_data' => json_encode(request('questionnaire_data')),
+            'questionnaire_data' => json_encode(request('questionnaire_data'), true),
         ]);
 
         return response()->json(true, 201);

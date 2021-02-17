@@ -14,4 +14,8 @@ class OutcomeQuestionnaireResult extends Model
         'questionnaire_id',
         'questionnaire_data',
     ];
+
+    protected $casts = [
+        'questionnaire_data' => 'array',
+    ];
 }

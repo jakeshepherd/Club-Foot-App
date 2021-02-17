@@ -86,6 +86,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/roye-outcome-questionnaire', [QuestionnaireController::class, 'setRoyeScoreQuestionnaire'])
         ->name('setRoyeScoreQuestionnaire');
 
+    Route::get('/outcome-results', [QuestionnaireController::class, 'getAllResults'])
+        ->name('getAllResults');
+
 });
 
 require __DIR__.'/auth.php';
