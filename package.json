@@ -14,20 +14,20 @@
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/postcss7-compat": "^2.0.2",
         "alpinejs": "^2.7.3",
-        "autoprefixer": "^10.1.0",
+        "autoprefixer": "^10.2.4",
         "axios": "^0.21",
         "bootstrap": "^4.0.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
-        "postcss": "^8.2.1",
+        "postcss": "^8.2.6",
         "postcss-import": "^12.0.1",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
-        "tailwindcss": "^2.0.2"
+        "tailwindcss": "^2.0.3"
     },
     "dependencies": {
         "apexcharts": "^3.24.0",

@@ -9,13 +9,12 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <link href="{{ secure_asset('/css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     </head>
 
     <body class="bg-blue-100">
         <img class="w-1/5 m-auto" src="../images/AppIcon.png" alt="App Icon"/>
         <div class="text-center p-4 w-1/2 m-auto bg-white rounded shadow-lg">
-            <h1>This is here</h1>
             <h1 class="text-2xl font-bold">Welcome to the Club Foot Dashboard</h1>
             <p class="m-auto mt-4 w-1/2">A website that aims to help you track your Boots and Bars wearing time and help you achieve your goals</p>
             <form action="/login">
