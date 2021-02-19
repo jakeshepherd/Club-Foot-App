@@ -14,16 +14,13 @@
 
     <body class="bg-blue-100">
         <img class="w-1/5 m-auto" src="../images/AppIcon.png" alt="App Icon"/>
-        <div class="text-center p-4 w-1/2 m-auto bg-white rounded shadow-lg">
+        <div class="text-center p-4 w-3/4 lg:w-1/2 m-auto bg-white rounded shadow-lg">
             <h1 class="text-2xl font-bold">Welcome to the Club Foot Dashboard</h1>
-            <p class="m-auto mt-4 w-1/2">A website that aims to help you track your Boots and Bars wearing time and help you achieve your goals</p>
+            <p class="m-auto mt-4 w-3/4 lg:w-1/2">A website that aims to help you track your Boots and Bars wearing time and help you achieve your goals</p>
             <form action="/login">
                 <input type="submit" class="button mt-3 p-4 bg-yellow-500 hover:bg-yellow-600" value="Sign in with email"/>
             </form>
-        </div>
-
-        <div class="text-center p-4 w-1/2 m-auto bg-white rounded shadow-lg">
-            <p>Developed by <a class="text-blue-600" href="http://jakeshepherd.me">Jake Shepherd</a></p>
+            <p class="mt-4">Developed by <a class="text-blue-600" href="http://jakeshepherd.me">Jake Shepherd</a></p>
         </div>
     </body>
 </html>
