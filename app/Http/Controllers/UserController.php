@@ -57,7 +57,7 @@ class UserController extends Controller
 
         $record = PhysioContactDetails::where('user_id', Auth::id())->first();
 
-        if ($record->count() !== 0) {
+        if (!is_null($record)) {
             $record->name = request('name');
             $record->email = request('email');
             $record->phone_number = request('phone_number');
