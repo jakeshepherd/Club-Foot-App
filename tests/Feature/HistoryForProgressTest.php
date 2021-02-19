@@ -108,7 +108,7 @@ class HistoryForProgressTest extends TestCase
         $startTime->subDay();
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime;
+        $newRow->start_time = $startTime;
         $newRow->end_time = $startTime->addMinutes(12*60);
         $newRow->duration = 12*60;
         $newRow->user_id = $user->id;
@@ -120,7 +120,7 @@ class HistoryForProgressTest extends TestCase
         $startTime->subHours(12);
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime->subDays(2);
+        $newRow->start_time = $startTime->subDay();
         $newRow->end_time = $startTime->addMinutes(10*60);
         $newRow->duration = 10*60;
         $newRow->user_id = $user->id;
@@ -140,7 +140,7 @@ class HistoryForProgressTest extends TestCase
         $expected['hours'][] = 16;
 
         $expected['start_date'] = Carbon::parse('-2 weeks')->format('d-m-Y');
-        $expected['end_date'] = Carbon::parse('-1 weeks')->format('d-m-Y');
+        $expected['end_date'] = Carbon::parse('-1 week')->format('d-m-Y');
 
         $response = $this->post('/timing-history', [
             'start_date' => '-2 weeks',
