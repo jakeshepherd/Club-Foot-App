@@ -36,7 +36,7 @@ class UserController extends Controller
 
     public function getPhysioDetailsForUser(): JsonResponse
     {
-        $results = PhysioContactDetails::findOrFail(Auth::id())->get(['name', 'email', 'phone_number'])
+        $results = PhysioContactDetails::where('user_id', Auth::id())->get(['name', 'email', 'phone_number'])
             ->toArray();
 
         return response()->json($results[0]);
@@ -55,14 +55,15 @@ class UserController extends Controller
             return response()->json('name, email or phone_number not specified in POST. Please try again.', 400);
         }
 
-        $record = PhysioContactDetails::find(Auth::id());
-        if ($record) {
+        $record = PhysioContactDetails::where('user_id', Auth::id())->first();
+
+        if (!is_null($record)) {
             $record->name = request('name');
             $record->email = request('email');
             $record->phone_number = request('phone_number');
             $record->save();
 
-            return response()->json(true, 200);
+            return response()->json(true);
         } else {
             PhysioContactDetails::create([
                 'user_id' => Auth::id(),

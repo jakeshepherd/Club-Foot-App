@@ -47,7 +47,7 @@ class PhysioDetailsTest extends TestCase
         $response = $this->post('/contact-details', $expected);
         $response->assertCreated();
 
-        $actual = PhysioContactDetails::findOrFail(Auth::id())->get(['name', 'email', 'phone_number'])
+        $actual = PhysioContactDetails::where('user_id', Auth::id())->get(['name', 'email', 'phone_number'])
             ->toArray();
 
         $this->assertSame([$expected], $actual);
