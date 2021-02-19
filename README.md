@@ -22,3 +22,14 @@ To perform a complete migration of the database
 `php artisan serve`
 
 To serve the application on `127.0.0.1`
+
+## Heroku
+Access files on live by running
+
+`heroku run bash`
+
+Now you can run anything you need like normal
+
+Currently available on:
+
+`https://salty-gorge-09035.herokuapp.com`
