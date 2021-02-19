@@ -87,7 +87,6 @@ class HistoryForProgressTest extends TestCase
 
     public function test_it_gets_all_history()
     {
-        $this->withoutExceptionHandling();
         $user = $this->createUserAndLogin();
 
         $expected = [];
