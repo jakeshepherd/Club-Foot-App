@@ -8,6 +8,7 @@ class HistorySplash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            dataAvailable: true,
             data: {},
             series: [{
                 name: '',
@@ -82,22 +83,27 @@ class HistorySplash extends React.Component {
     async componentDidMount() {
         await axios.get(`/progress-so-far`)
             .then(r => {
-                this.setState({
-                    data: {
-                        timeBootsWornFor: r.data.boots_worn_for,
-                        totalAverageHours: Math.floor(r.data.total_average / 60),
-                        totalAverageMinutes: Math.round(r.data.total_average % 60),
-                    },
-                    series: [{
-                        name: 'Hours Boots Worn',
-                        data: r.data.hours
-                    }],
-                    options: {
-                        xaxis: {
-                            categories: r.data.days
+                if (r.data !== "") {
+                    this.setState({
+                        dataAvailable: true,
+                        data: {
+                            timeBootsWornFor: r.data.boots_worn_for,
+                            totalAverageHours: Math.floor(r.data.total_average / 60),
+                            totalAverageMinutes: Math.round(r.data.total_average % 60),
+                        },
+                        series: [{
+                            name: 'Hours Boots Worn',
+                            data: r.data.hours
+                        }],
+                        options: {
+                            xaxis: {
+                                categories: r.data.days
+                            }
                         }
-                    }
-                })
+                    })
+                } else {
+                    this.setState({dataAvailable: false})
+                }
             })
     }
 
@@ -105,19 +111,21 @@ class HistorySplash extends React.Component {
         return (
             <div id="chart" className={"text-center mt-4"}>
                 <h1 className={"text-xl font-bold"}>Your Progress so far</h1>
-                <p>You've been using the Boots and Bars for </p>
-                <p className={"text-purple-400"}>{this.state.data.timeBootsWornFor} Weeks</p>
-                <p>And your total daily average is </p>
-                <p className={"text-green-400"}>
+                {this.state.dataAvailable && <p>You've been using the Boots and Bars for </p>}
+                {this.state.dataAvailable && <p className={"text-purple-400"}>{this.state.data.timeBootsWornFor} Weeks</p>}
+                {this.state.dataAvailable && <p>And your total daily average is </p>}
+                {this.state.dataAvailable && <p className={"text-green-400"}>
                     {this.state.data.totalAverageHours}.{this.state.data.totalAverageMinutes} hours
-                </p>
-                <p>So you're doing well!</p>
-                <Chart
+                </p>}
+                {this.state.dataAvailable && <p>So you're doing well!</p>}
+
+                {this.state.dataAvailable && <Chart
                     className={"inline-block md:w-1/3"}
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
-                />
+                />}
+                {!this.state.dataAvailable && <p className={"mt-4 text-xl text-blue-500"}>When there is some data available, it will show up here</p>}
                 <br />
                 <a className={"text-sm cursor-pointer"}
                    aria-current="page" href="/more-history">
