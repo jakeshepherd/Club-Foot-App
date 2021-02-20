@@ -118,6 +118,7 @@ class HistoryForProgressTest extends TestCase
         $expected['hours'][] = 12;
 
         $startTime->subHours(12);
+        $startTime->addDay();
 
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime->subDay();
@@ -148,17 +149,18 @@ class HistoryForProgressTest extends TestCase
         ]);
 
         $response->assertStatus(200);
+        $actual = json_decode($response->getContent(), true);
 
-        $this->assertSame($expected['days'], json_decode($response->getContent(), true)['days']);
-        $this->assertSame($expected['hours'], json_decode($response->getContent(), true)['hours']);
+        $this->assertSame($expected['days'], $actual['days']);
+        $this->assertSame($expected['hours'], $actual['hours']);
         $this->assertEqualsWithDelta(
             $expected['start_date'],
-            Carbon::parse(json_decode($response->getContent(), true)['start_date'])->format('d-m-Y'),
+            Carbon::parse($actual['start_date'])->format('d-m-Y'),
             5
         );
         $this->assertEqualsWithDelta(
             $expected['end_date'],
-            Carbon::parse(json_decode($response->getContent(), true)['end_date'])->format('d-m-Y'),
+            Carbon::parse($actual['end_date'])->format('d-m-Y'),
             5
         );
     }

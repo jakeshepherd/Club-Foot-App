@@ -49,9 +49,15 @@ class AnalysisController extends Controller
 
     public function getSevenDayAdherence(): JsonResponse
     {
+        $timeGoal = User::findOrFail(Auth::id())->time_goal;
+
+        if (is_null($timeGoal)) {
+            return response()->json('⏰ Please set a time goal', 404);
+        }
+
         $data = $this->formatWeeklyAdherenceData(
             $this->bootsAndBarsTime->getSevenDayTimes(),
-            User::findOrFail(Auth::id())->time_goal
+            $timeGoal
         );
 
         return response()->json($data['data'], $data['status']);
