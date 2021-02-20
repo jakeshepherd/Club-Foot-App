@@ -26,15 +26,16 @@ class Homepage extends React.Component {
         await axios.get(`/weekly-adherence`)
             .then(r => {
                 this.setState({
-                    weeklyAdherence: r.data
+                    weeklyAdherence: r.data,
+                    trackingDataAvailable: true
                 })
                 const totalSize = Object.keys(this.state.weeklyAdherence).length;
                 const numOfTrues = Object.values(this.state.weeklyAdherence).filter(Boolean).length;
                 this.setState({
                     weeklyAdherencePercent: Math.round((numOfTrues / totalSize) * 100)
                 })
-            }).catch(r => {
-                toast.info('No data has been recorded yet!')
+            }).catch(() => {
+                this.state.trackingDataAvailable = false
             })
     }
 
@@ -42,7 +43,8 @@ class Homepage extends React.Component {
         return (
             <div className="p-5 m-auto w-10/12 text-center">
                 <h2 className="font-seoulNamsan text-xl font-bold">Your Adherance for the last 7 days</h2>
-                <PieChart
+
+                {this.state.trackingDataAvailable && <PieChart
                     className="m-auto mt-4 mb-4 w-1/2 md:w-56"
                     data={[
                         {
@@ -62,7 +64,13 @@ class Homepage extends React.Component {
                     label={() => {
                         return this.state.weeklyAdherencePercent + '%'
                     }}
-                />
+                />}
+                {!this.state.trackingDataAvailable &&
+                <p className={"w-1/2 m-auto text-blue-600 text-lg"}>
+                    Please start tracking to start seeing analysis
+                </p>
+                }
+
                 <h2 className="text-xl font-bold">{this.state.averageDurationHours} Hours {this.state.averageDurationMinutes} Minutes
                     a day on Average</h2>
                 <DailyAdherenceView data={this.state.weeklyAdherence}/>
