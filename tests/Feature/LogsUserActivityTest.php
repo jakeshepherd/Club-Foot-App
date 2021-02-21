@@ -35,4 +35,24 @@ class LogsUserActivityTest extends TestCase
         $this->assertEqualsWithDelta($time, $actual->created_at, 5);
         $this->assertDatabaseCount('user_activity', 2);
     }
+
+    public function test_it_logs_on_login_with_different_users()
+    {
+        $time = Carbon::now();
+        Carbon::setTestNow($time);
+
+        $this->createUserAndLogin();
+        $this->post('/logout');
+
+        $time->addDay();
+        $user = $this->createUserAndLogin();
+
+        $actual = UserActivity::where([
+            'user_id' => $user->id,
+            'activity_type' => 0,
+        ])->latest()->get('user_id');
+
+        $this->assertCount(1, $actual);
+        $this->assertEquals($user->id, $actual[0]->user_id);
+    }
 }
