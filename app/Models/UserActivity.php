@@ -15,4 +15,8 @@ class UserActivity extends Model
         'user_id',
         'activity_type',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+    ];
 }
