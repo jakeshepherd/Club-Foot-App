@@ -34,4 +34,65 @@ class ReminderEmailControllerTest extends TestCase
         //assert
         Mail::assertQueued(UserInactivity::class);
     }
+
+    public function test_it_only_sends_email_once_for_multiple_logins()
+    {
+        //setup
+        $testTime = Carbon::parse('-3 weeks');
+        Carbon::setTestNow($testTime);
+        Mail::fake();
+
+        //act
+        $user = $this->createUserAndLogin();
+        $this->post('/logout');
+        $testTime->addWeek();
+
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $this->post('/logout');
+
+        (new ReminderEmailController())->queueEmails();
+
+        //assert
+        Mail::assertQueued(UserInactivity::class, 1);
+    }
+
+    public function test_it_only_sends_email_once_if_user_still_has_not_logged_in()
+    {
+        //setup
+        $testTime = Carbon::parse('-5 weeks');
+        Carbon::setTestNow($testTime);
+        Mail::fake();
+
+        //act
+        $user = $this->createUserAndLogin();
+        $this->post('/logout');
+        $testTime->addWeek();
+        (new ReminderEmailController())->queueEmails();
+
+        $testTime->addWeek();
+
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $this->post('/logout');
+        $testTime->addWeek();
+        (new ReminderEmailController())->queueEmails();
+
+        $testTime->addWeek();
+
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $this->post('/logout');
+        $testTime->addWeek();
+        (new ReminderEmailController())->queueEmails();
+
+        //assert
+        Mail::assertQueued(UserInactivity::class, 1);
+    }
 }

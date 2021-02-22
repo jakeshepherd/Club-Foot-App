@@ -14,9 +14,14 @@ class ReminderEmailController extends Controller
     {
         //todo -- change this to left join?
         $ids = UserActivity::where('created_at', '<=', Carbon::now()->subWeek()->toDateTimeString())->get('user_id');
-        $users = User::whereIn('id', $ids)->pluck('email');
+        $users = User::whereIn('id', $ids)->notReminded()->pluck('email');
         foreach ($users as $user) {
             Mail::to($user)->queue(new UserInactivity());
+
+            // set activity reminded so that we don't send loads of emails
+            $userCollection = User::firstWhere('email', $user);
+            $userCollection->activity_reminded = true;
+            $userCollection->save();
         }
     }
 }

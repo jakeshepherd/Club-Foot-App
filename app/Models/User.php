@@ -41,4 +41,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'time_goal' => 'integer',
     ];
+
+    public function scopeNotReminded($query)
+    {
+        return $query->where('activity_reminded', 0);
+    }
 }

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->integer('time_goal')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('activity_reminded')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
