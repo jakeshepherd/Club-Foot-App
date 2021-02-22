@@ -2,12 +2,11 @@
 
 namespace App\Console;
 
-use App\Models\User;
-use App\Models\UserActivity;
-use Carbon\Carbon;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\ReminderEmailController;
+use App\Jobs\SendEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Mail;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,17 +22,14 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->call(function () {
-                 $ids = UserActivity::where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->get('user_id');
-                 $users = User::whereIn('id', $ids)->pluck('email');
-                 Mail::to($users)->queue();
-                 dd($users);
-         })->everyMinute();
+        $schedule->call([ReminderEmailController::class, 'queueEmails'])->everyMinute();
+
+        $schedule->command('queue:work')->everyMinute();
     }
 
     /**
@@ -43,7 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
