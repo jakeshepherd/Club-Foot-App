@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\UserInactivity;
-use App\Models\User;
 use App\Models\UserActivity;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
