@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Mail\UserInactivity;
-use App\Models\User;
 use App\Models\UserActivity;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class ReminderEmailController extends Controller
 {
-    public function queueEmails()
+    public function queueEmails(): void
     {
         $ids = UserActivity::where('created_at', '<=', Carbon::now()->subWeek()->toDateTimeString())->get();
         foreach($ids as $id) {
