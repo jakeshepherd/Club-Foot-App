@@ -4,12 +4,8 @@ namespace Tests\Feature;
 
 use App\Http\Controllers\ReminderEmailController;
 use App\Mail\UserInactivity;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
@@ -53,6 +49,8 @@ class ReminderEmailControllerTest extends TestCase
         ]);
         $this->post('/logout');
 
+        $testTime->addWeeks(2);
+
         (new ReminderEmailController())->queueEmails();
 
         //assert
@@ -94,5 +92,35 @@ class ReminderEmailControllerTest extends TestCase
 
         //assert
         Mail::assertQueued(UserInactivity::class, 1);
+    }
+
+    public function test_does_not_send_after_login_recently_and_time_ago()
+    {
+        //setup
+        $testTime = Carbon::now();
+        Carbon::setTestNow($testTime);
+        Mail::fake();
+
+        $user = $this->createUserAndLogin();
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $this->post('/logout');
+
+        $testTime->subWeeks(2);
+
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $this->post('/logout');
+
+        $testTime->addWeeks(2);
+
+        (new ReminderEmailController())->queueEmails();
+
+        //assert
+        Mail::assertNothingQueued();
     }
 }

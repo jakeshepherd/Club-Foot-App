@@ -7,6 +7,7 @@ use App\Models\UserActivity;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class Kernel extends ConsoleKernel
@@ -30,10 +31,14 @@ class Kernel extends ConsoleKernel
     {
         // queue inactivity emails
         $schedule->call(function() {
-            $ids = UserActivity::where('created_at', '<=', Carbon::now()->subWeek()->toDateTimeString())->get();
-            foreach($ids as $id) {
-                $user = $id->user;
-                if ($user->activity_reminded == false) {
+            $latestLogins = UserActivity::where('activity_type',0)
+                ->select('user_id',DB::raw('max(created_at) AS created_at'))
+                ->orderBy('created_at','asc')
+                ->groupBy('user_id')
+                ->get('created_at', 'user_id');
+            foreach ($latestLogins as $latestLogin) {
+                $user = $latestLogin->user;
+                if ($latestLogin->created_at < Carbon::now()->subWeek() && !$user->activity_reminded) {
                     Mail::to($user->email)->queue(new UserInactivity());
 
                     // set activity reminded so that we don't send loads of emails
