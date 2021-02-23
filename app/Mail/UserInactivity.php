@@ -27,6 +27,6 @@ class UserInactivity extends Mailable
      */
     public function build()
     {
-        return $this->view('email.user-inactivity');
+        return $this->markdown('email.user-inactivity');
     }
 }

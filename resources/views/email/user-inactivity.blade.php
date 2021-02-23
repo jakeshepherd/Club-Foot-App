@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@component('mail::message')
+    Hi there,
 
-        <title>This is a title</title>
+    We noticed you haven't logged in for a while and we just wanted to send you a little reminder.
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    Compliance to your Boots and Bars directly affects the outcome of the treatment,
+    using your Club Foot dashboard will help you keep track of how the treatment is progression.
 
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    </head>
-    <body>
-        <h1>This is a test</h1>
-    </body>
-</html>
+@component('mail::button', ['url' => 'https://salty-gorge-09035.herokuapp.com/welcome'])
+    View your Dashboard
+@endcomponent
+
+    Thanks,
+    {{ config('app.name') }}
+@endcomponent
+
