@@ -2,9 +2,7 @@
 
 namespace App\Console;
 
-use App\Http\Controllers\JobController;
 use App\Http\Controllers\ReminderEmailController;
-use App\Jobs\SendEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -27,8 +25,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call([ReminderEmailController::class, 'queueEmails'])->daily();
-        $schedule->command('queue:work')->daily();
+        // queue inactivity emails
+        $schedule->call([ReminderEmailController::class, 'queueEmails'])->dailyAt('13:00:00');
+
+        // send emails
+        $schedule->command('queue:work')->dailyAt('13:01:00');
     }
 
     /**
