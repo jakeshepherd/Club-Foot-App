@@ -10,15 +10,12 @@ use Illuminate\Support\Facades\Mail;
 
 class ReminderEmailController extends Controller
 {
-    public function queueEmails(): int
+    public function queueEmails(): void
     {
-        Log::error('I AM HERE');
         $ids = UserActivity::where('created_at', '<=', Carbon::now()->subWeek()->toDateTimeString())->get();
         Log::error($ids);
         foreach($ids as $id) {
             $user = $id->user;
-            Log::error($user);
-            Log::error($user->activity_reminded);
             if ($user->activity_reminded == false) {
                 Mail::to($user->email)->queue(new UserInactivity());
 
@@ -27,6 +24,5 @@ class ReminderEmailController extends Controller
                 $user->save();
             }
         }
-        return 1;
     }
 }
