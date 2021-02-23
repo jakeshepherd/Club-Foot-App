@@ -14,9 +14,11 @@ class ReminderEmailController extends Controller
     public function queueEmails()
     {
         $ids = UserActivity::where('created_at', '<=', Carbon::now()->subWeek()->toDateTimeString())->get();
+        Log::error($ids);
         foreach($ids as $id) {
             $user = $id->user;
             Log::error($user);
+            Log::error($user->activity_reminded);
             if ($user->activity_reminded == false) {
                 Mail::to($user->email)->queue(new UserInactivity());
 
