@@ -2,13 +2,11 @@
 
 namespace App\Console;
 
-use App\Http\Controllers\ReminderEmailController;
 use App\Mail\UserInactivity;
 use App\Models\UserActivity;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class Kernel extends ConsoleKernel
