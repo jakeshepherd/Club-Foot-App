@@ -3,8 +3,13 @@
 namespace App\Console;
 
 use App\Http\Controllers\ReminderEmailController;
+use App\Mail\UserInactivity;
+use App\Models\UserActivity;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,7 +32,23 @@ class Kernel extends ConsoleKernel
     {
         $controller = new ReminderEmailController();
         // queue inactivity emails
-        $schedule->call($controller->queueEmails())->everyMinute();
+        $schedule->call(function() {
+            Log::error('I AM HERE');
+            $ids = UserActivity::where('created_at', '<=', Carbon::now()->subWeek()->toDateTimeString())->get();
+            Log::error($ids);
+            foreach($ids as $id) {
+                $user = $id->user;
+                Log::error($user);
+                Log::error($user->activity_reminded);
+                if ($user->activity_reminded == false) {
+                    Mail::to($user->email)->queue(new UserInactivity());
+
+                    // set activity reminded so that we don't send loads of emails
+                    $user->activity_reminded = true;
+                    $user->save();
+                }
+            }
+        })->everyMinute();
 
         // send emails
         $schedule->command('queue:work')->everyMinute();
