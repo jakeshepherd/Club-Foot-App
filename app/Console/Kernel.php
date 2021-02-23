@@ -27,9 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call([ReminderEmailController::class, 'queueEmails'])->everyMinute();
-
-        $schedule->command('queue:work')->everyMinute();
+        $schedule->call([ReminderEmailController::class, 'queueEmails'])->daily();
+        $schedule->command('queue:work')->daily();
     }
 
     /**
