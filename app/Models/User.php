@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -41,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'time_goal' => 'integer',
     ];
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(UserActivity::class);
+    }
+
+    public function scopeNotReminded($query)
+    {
+        return $query->where('activity_reminded', 0);
+    }
 }

@@ -90,12 +90,15 @@ class HistoryForProgressTest extends TestCase
         $user = $this->createUserAndLogin();
 
         $expected = [];
-        $startTime = Carbon::parse("15-02-2021 12:00:00");
-        Carbon::setTestNow();
+        $initialDate = Carbon::parse("25-02-2021 12:00:00");
+        $startTime = $initialDate;
+        Carbon::setTestNow($startTime);
+
+        $startTime->subWeek()->subDay();
 
         // Need to add a weeks worth of data
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time = $startTime->subWeek();
+        $newRow->start_time = $startTime;
         $newRow->end_time = $startTime->addMinutes(15*60);
         $newRow->duration = 15*60;
         $newRow->user_id = $user->id;
@@ -118,10 +121,10 @@ class HistoryForProgressTest extends TestCase
         $expected['hours'][] = 12;
 
         $startTime->subHours(12);
-        $startTime->addDay();
+        $startTime->subDay();
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time = $startTime->subDay();
+        $newRow->start_time = $startTime;
         $newRow->end_time = $startTime->addMinutes(10*60);
         $newRow->duration = 10*60;
         $newRow->user_id = $user->id;
@@ -139,6 +142,8 @@ class HistoryForProgressTest extends TestCase
         $newRow->save();
         $expected['days'][] = $startTime->format('l');
         $expected['hours'][] = 16;
+
+        Carbon::setTestNow(Carbon::parse("25-02-2021 12:00:00"));
 
         $expected['start_date'] = Carbon::parse('-2 weeks')->format('d-m-Y');
         $expected['end_date'] = Carbon::parse('-1 week')->format('d-m-Y');
