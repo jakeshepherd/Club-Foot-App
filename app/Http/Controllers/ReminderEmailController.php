@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Mail;
 
 class ReminderEmailController extends Controller
 {
-    public function queueEmails()
+    public function queueEmails(): int
     {
+        Log::error('I AM HERE');
         $ids = UserActivity::where('created_at', '<=', Carbon::now()->subWeek()->toDateTimeString())->get();
         Log::error($ids);
         foreach($ids as $id) {
@@ -26,5 +27,6 @@ class ReminderEmailController extends Controller
                 $user->save();
             }
         }
+        return 1;
     }
 }
