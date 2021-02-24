@@ -22,5 +22,5 @@ mix.js('resources/js/app.js', 'public/js').sourceMaps()
         fallback: {
             "path": require.resolve("path-browserify")
         }
-    },
+    }
 });
