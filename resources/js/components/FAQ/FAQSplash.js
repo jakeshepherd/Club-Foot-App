@@ -20,7 +20,7 @@ class FAQSplash extends React.Component {
                                            answer: 'Initially boots and bars are worn for 23 out of 24 hours for ' +
                                                'the first 3 months, after which, if your Physiotherapist is happy with ' +
                                                'the correction, you can drop down to night and nap time, aiming for 14 to 16 hours ' +
-                                               'per day until the age of 5. \n\n' +
+                                               'per day until the age of 5. ' +
                                                'It is important that a good bedtime regime is established early, ' +
                                                'as this will ensure your child goes happily into boots each night. ' +
                                                'A good way to remember is the 5 B’s:  Bath, Boots, Breast/Bottle, ' +
