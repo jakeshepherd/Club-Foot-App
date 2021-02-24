@@ -17,15 +17,37 @@ class FAQSplash extends React.Component {
                                    FAQs={[
                                        {
                                            question: 'How long should my child wear the boots and bars for?',
-                                           answer: 'For the first 3 months your child should wear the boots for 23 hours a day. ' +
-                                               'After this, your child only needs to wear them between 12 and 14 hours a day'
+                                           answer: 'Initially boots and bars are worn for 23 out of 24 hours for ' +
+                                               'the first 3 months, after which, if your Physiotherapist is happy with ' +
+                                               'the correction, you can drop down to night and nap time, aiming for 14 to 16 hours ' +
+                                               'per day until the age of 5. \n\n' +
+                                               'It is important that a good bedtime regime is established early, ' +
+                                               'as this will ensure your child goes happily into boots each night. ' +
+                                               'A good way to remember is the 5 B’s:  Bath, Boots, Breast/Bottle, ' +
+                                               'Book and Bed!\n'
+                                       },
+                                       {
+                                           question: 'My child is outgrowing their boots',
+                                           answer: 'When your child\'s toes reach the end of the boot, ' +
+                                               'contact your Physiotherapist to arrange an appointment to have ' +
+                                               'the next size boots fitted.'
+                                       },
+                                       {
+                                           question: 'Boots Padding',
+                                           answer: 'If you pad the bar you can help protect your child. ' +
+                                               'You can use any kind of fabric that will act as a bumper.'
                                        }
                                    ]}/>
                 <Question name={"Clothing"} image={clothing}
                           FAQs={[
                               {
-                                  question: 'Are there any good clothes to wear with the boots?',
-                                  answer: 'Try this website: www.example.com'
+                                  question: 'Can my baby wear clothes after the casting?',
+                                  answer: 'To enable the cast to dry thoroughly your baby shouldn\'t wear trousers or a sleepsuit' +
+                                      'for the first 24 hours, so don\'t forget to bring a vest and a blanket to keep your baby warm.'
+                              },
+                              {
+                                  question: 'Sock advice',
+                                  answer: 'It is best to wear socks that have grip on the bottom, to stop the boots from slipping.'
                               },
                           ]}
                 />
@@ -44,13 +66,29 @@ class FAQSplash extends React.Component {
                           FAQs={[
                               {
                                   question: 'My child has blisters',
-                                  answer: 'Blistering is often a sign that the Boots and Bars are not fitting properly! ' +
-                                      'Please call your local practice and we will try and help.'
+                                  answer: 'It is not normal to get blisters or rubbing on the back of the heel.' +
+                                      'Check that the boots are on correctly and contact your Physiotherapist. ' +
+                                      'Common errors include poor positioning of heel in boot and the middle strap ' +
+                                      'not being done up firmly enough.'
                               },
                               {
-                                  question: 'My child has a rash',
-                                  answer: 'A rash could mean that there is rubbing on your Boots and Bars, ' +
-                                      'please let us know by calling your local practice.'
+                                  question: 'My child\'s foot is swelling',
+                                  answer: 'It is also normal for the area between the middle and toe straps ' +
+                                      'to look swollen; this is not swelling but due to the soft tissue distribution ' +
+                                      'in your baby’s feet.'
+                              },
+                              {
+                                  question: 'There is redness on my child\'s foot',
+                                  answer: 'It is normal to get some redness underneath the middle strap; ' +
+                                      'this should fade when the boots are off. If you feel the redness is ' +
+                                      'getting worse or becoming sore, please let your Physiotherapist know and ' +
+                                      'they will be able to help with this.'
+                              },
+                              {
+                                  question: 'There are other marks on the foot',
+                                  answer: 'Occasionally you may get marks on other areas of the feet, ' +
+                                      'maybe from a crease or seam of a sock. They rarely cause a problem; ' +
+                                      'however always contact your Physiotherapist if you have concerns.'
                               }
                           ]}
                 />
