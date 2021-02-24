@@ -7,8 +7,6 @@ import {
     AccordionItemPanel,
 } from 'react-accessible-accordion';
 
-import video from "../../../images/FittingMitchellBootsandBarVideo.mp4";
-
 import 'react-accessible-accordion/dist/fancy-example.css';
 
 class QuestionWithVideo extends React.Component {
@@ -24,9 +22,10 @@ class QuestionWithVideo extends React.Component {
                     </AccordionItemHeading>
                         <AccordionItemPanel>
                             <h1 className={"text-2xl"}>How do I put on the boots and bars?</h1>
-                            <video width="100%" height="100%" controls playsInline preload="metadata">
-                                <source src={video} type="video/mp4" />
-                            </video>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/e74J0w8ijX0"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen/>
                         </AccordionItemPanel>
                     {this.props.FAQs.map((subQuestion, value) => (
                         <AccordionItemPanel key={value}>
