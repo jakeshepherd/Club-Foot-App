@@ -22,7 +22,7 @@ class QuestionWithVideo extends React.Component {
                     </AccordionItemHeading>
                         <AccordionItemPanel>
                             <h1 className={"text-2xl"}>How do I put on the boots and bars?</h1>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/e74J0w8ijX0"
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/e74J0w8ijX0"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen/>
