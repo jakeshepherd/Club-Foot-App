@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\BootsAndBarsTime;
 use App\Models\PhysioContactDetails;
+use App\Models\OutcomeQuestionnaireResults;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -126,6 +127,24 @@ class DatabaseSeeder extends Seeder
             'end_time' => Carbon::now(),
             'duration' => 15 * 60,
             'tracking' => 0,
+        ]);
+        OutcomeQuestionnaireResults::create([
+            'user_id' => $user->id,
+            'questionnaire_id' => 0,
+            'questionnaire_data' => ['1','1','1','1','1','1','1','1','1','1'],
+            'created_at'=> Carbon::parse('-1 day')
+        ]);
+        OutcomeQuestionnaireResults::create([
+            'user_id' => $user->id,
+            'questionnaire_id' => 0,
+            'questionnaire_data' => ['2','1','2','3','1','1','4','1','2','1'],
+            'created_at'=> Carbon::parse('-2 days')
+        ]);
+        OutcomeQuestionnaireResults::create([
+            'user_id' => $user->id,
+            'questionnaire_id' => 0,
+            'questionnaire_data' => ['2','1','2','3','1','1','4','1','2','1'],
+            'created_at'=> Carbon::parse('-3 days')
         ]);
         PhysioContactDetails::create([
             'user_id' => $user->id,
