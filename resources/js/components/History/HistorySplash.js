@@ -128,7 +128,7 @@ class HistorySplash extends React.Component {
                 {!this.state.dataAvailable && <p className={"mt-4 text-xl text-blue-500"}>When there is some data available, it will show up here</p>}
                 <br />
                 <a className={"text-sm cursor-pointer"}
-                   aria-current="page" href="/more-history">
+                   href="/more-history">
                     Tap to see more from previous weeks</a>
             </div>
         )

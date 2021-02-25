@@ -43,7 +43,7 @@ function ContactSplash() {
                 </div>
                 <div className={"m-7"}>
                     <img className="w-14 inline-block" src={emailIcon} alt={'Email icon'}/>
-                    <p className="card-text">{contactDetails.email}</p>
+                    <a href={"mailto:" + contactDetails.email} className="card-text">{contactDetails.email}</a>
                 </div>
                 <div className={"m-7"}>
                     <img className="w-14 inline-block" src={phoneIcon} alt={'Phone icon'}/>
