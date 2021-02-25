@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\BootsAndBarsTime;
 use App\Models\PhysioContactDetails;
-use App\Models\OutcomeQuestionnaireResults;
+use App\Models\OutcomeQuestionnaireResult;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -128,28 +128,28 @@ class DatabaseSeeder extends Seeder
             'duration' => 15 * 60,
             'tracking' => 0,
         ]);
-        OutcomeQuestionnaireResults::create([
+        OutcomeQuestionnaireResult::create([
             'user_id' => $user->id,
             'questionnaire_id' => 0,
-            'questionnaire_data' => ['1','1','1','1','1','1','1','1','1','1'],
-            'created_at'=> Carbon::parse('-1 day')
+            'questionnaire_data' => json_encode([2,1,2,3,1,1,4,1,2,1]),
+            'created_at'=> Carbon::parse('-3 days')
         ]);
-        OutcomeQuestionnaireResults::create([
+        OutcomeQuestionnaireResult::create([
             'user_id' => $user->id,
             'questionnaire_id' => 0,
-            'questionnaire_data' => ['2','1','2','3','1','1','4','1','2','1'],
+            'questionnaire_data' => json_encode([2,1,2,3,1,1,4,1,2,1]),
             'created_at'=> Carbon::parse('-2 days')
         ]);
-        OutcomeQuestionnaireResults::create([
+        OutcomeQuestionnaireResult::create([
             'user_id' => $user->id,
             'questionnaire_id' => 0,
-            'questionnaire_data' => ['2','1','2','3','1','1','4','1','2','1'],
-            'created_at'=> Carbon::parse('-3 days')
+            'questionnaire_data' => json_encode([1,1,1,1,1,1,1,1,1,1]),
+            'created_at'=> Carbon::parse('-1 day')
         ]);
         PhysioContactDetails::create([
             'user_id' => $user->id,
-            'name' => 'Physio name',
-            'email' => 'physio@example.com',
+            'name' => 'Example Name',
+            'email' => 'email@example.com',
             'phone_number' => '0123456789',
         ]);
     }
