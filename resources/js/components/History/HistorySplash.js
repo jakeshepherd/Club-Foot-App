@@ -52,7 +52,7 @@ class HistorySplash extends React.Component {
                     colors: [function ({value}) {
                         if (value < 12) {
                             return '#FF0000'
-                        } else if (value >= 12 && value < 14) {
+                        } else if (value >= 12 && value <= 14) {
                             return '#FFA500'
                         } else {
                             return '#008000'
