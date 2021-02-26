@@ -42,7 +42,7 @@ class FAQSplash extends React.Component {
                           FAQs={[
                               {
                                   question: 'Can my baby wear clothes after the casting?',
-                                  answer: 'To enable the cast to dry thoroughly your baby shouldn\'t wear trousers or a sleepsuit' +
+                                  answer: 'To enable the cast to dry thoroughly your baby shouldn\'t wear trousers or a sleepsuit ' +
                                       'for the first 24 hours, so don\'t forget to bring a vest and a blanket to keep your baby warm.'
                               },
                               {
@@ -66,7 +66,7 @@ class FAQSplash extends React.Component {
                           FAQs={[
                               {
                                   question: 'My child has blisters',
-                                  answer: 'It is not normal to get blisters or rubbing on the back of the heel.' +
+                                  answer: 'It is not normal to get blisters or rubbing on the back of the heel. ' +
                                       'Check that the boots are on correctly and contact your Physiotherapist. ' +
                                       'Common errors include poor positioning of heel in boot and the middle strap ' +
                                       'not being done up firmly enough.'
