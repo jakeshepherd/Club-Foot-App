@@ -51,8 +51,12 @@ class FAQSplash extends React.Component {
                               },
                           ]}
                 />
-                <Question name={"Signs of Regression"} image={foot}
+                <Question name={"Change in Foot Shape"} image={foot}
                           FAQs={[
+                              {
+                                  question: '',
+                                  answer: 'If you notice the following things, you should contact your physiotherapist for advice.'
+                              },
                               {
                                   question: '',
                                   answer: 'You may notice the arch of the foot is beginning to look more pronounced'
