@@ -110,13 +110,15 @@ class HistorySplash extends React.Component {
     render() {
         return (
             <div id="chart" className={"text-center mt-4"}>
-                <h1 className={"text-xl font-bold"}>Your Progress so far</h1>
+                <h1 className={"text-xl font-bold"}>Your Boots and Bars time so far</h1>
                 {this.state.dataAvailable && <p>You've been using the Boots and Bars for </p>}
                 {this.state.dataAvailable && <p className={"text-purple-400"}>{this.state.data.timeBootsWornFor} Weeks</p>}
                 {this.state.dataAvailable && <p>And your total daily average is </p>}
                 {this.state.dataAvailable && <p className={"text-green-400"}>
                     {this.state.data.totalAverageHours}.{this.state.data.totalAverageMinutes} hours
                 </p>}
+
+                {/*TODO -- make this dynamic*/}
                 {this.state.dataAvailable && <p>So you're doing well!</p>}
 
                 {this.state.dataAvailable && <Chart
