@@ -14,3 +14,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 public/mix-manifest.json
+.DS_Store
+.idea/
+app/.DS_Store
+app/Http/.DS_Store
+app/View/.DS_Store

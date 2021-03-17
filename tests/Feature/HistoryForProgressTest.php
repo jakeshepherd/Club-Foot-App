@@ -234,7 +234,7 @@ class HistoryForProgressTest extends TestCase
     public function test_it_gets_how_long_worn_for()
     {
         $user = $this->createUserAndLogin();
-        $startTime = Carbon::now();
+        $startTime = Carbon::parse('2021-01-28 02:28:10');
         Carbon::setTestNow($startTime);
 
         // set one for a few months ago

@@ -15,8 +15,10 @@
     <body class="bg-blue-100">
         <img class="w-1/5 m-auto" src="../images/AppIcon.png" alt="App Icon"/>
         <div class="text-center p-4 w-3/4 lg:w-1/2 m-auto bg-white rounded shadow-lg">
-            <h1 class="text-2xl font-bold">Welcome to the Club Foot Dashboard</h1>
-            <p class="m-auto mt-4 w-3/4 lg:w-1/2">A website that aims to help you track your Boots and Bars wearing time and help you achieve your goals</p>
+            <h1 class="text-2xl font-bold">Welcome</h1>
+            <p class="m-auto mt-4 w-3/4 lg:w-1/2">
+                This dashboard is a site that aims to support your family's use of the Boots and Bars.
+            </p>
             <form action="/login">
                 <input type="submit" class="button mt-3 p-4 bg-yellow-500 hover:bg-yellow-600" value="Sign in with email"/>
             </form>

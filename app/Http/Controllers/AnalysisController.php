@@ -81,6 +81,7 @@ class AnalysisController extends Controller
         $allRecords = BootsAndBarsTime::where('user_id', Auth::id())
             ->pluck('duration')->toArray();
 
+        // weeks the boots have been worn for
         $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
         $data['total_average'] = array_sum($allRecords)/count($allRecords);
 
