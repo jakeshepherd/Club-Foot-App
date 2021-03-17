@@ -33,7 +33,7 @@ class FAQSplash extends React.Component {
                                                'the next size boots fitted.'
                                        },
                                        {
-                                           question: 'Boots Padding',
+                                           question: 'Bar Padding',
                                            answer: 'If you pad the bar you can help protect your child. ' +
                                                'You can use any kind of fabric that will act as a bumper.'
                                        }
