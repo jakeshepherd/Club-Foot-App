@@ -32,7 +32,7 @@ class OutcomeQuestion extends React.Component {
         return (
             <div className={"w-11/12 lg:w-1/2 m-2 mt-14 m-auto rounded p-4 shadow-md text-center bg-blue-100"}>
                 <h1>{this.props.question}</h1>
-                <div className={"grid grid-cols-2"}>
+                <div className={"grid grid-cols-4 mt-4"}>
                     <p className={"shadow-md rounded p-2 m-2 w-24 justify-self-center cursor-pointer transition duration-500 bg-" + oneColour}
                        onClick={() => this.selectAnswer(1)}>{this.props.answers.one}</p>
                     <p className={"shadow-md rounded p-2 m-2 w-24 justify-self-center cursor-pointer transition duration-500 bg-" + twoColour}
