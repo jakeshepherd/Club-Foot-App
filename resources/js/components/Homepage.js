@@ -75,7 +75,7 @@ class Homepage extends React.Component {
                         eventTime: '4pm',
                     }}
                 />
-                <ToastContainer pauseOnFocusLoss draggable/>
+                <ToastContainer pauseOnFocusLoss draggable hideProgressBar/>
             </div>
         );
     }
