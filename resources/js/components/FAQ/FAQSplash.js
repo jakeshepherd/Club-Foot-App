@@ -72,8 +72,8 @@ class FAQSplash extends React.Component {
                                   question: 'My child has blisters',
                                   answer: 'It is not normal to get blisters or rubbing on the back of the heel. ' +
                                       'Check that the boots are on correctly and contact your Physiotherapist. ' +
-                                      'Common errors include poor positioning of heel in boot and the middle strap ' +
-                                      'not being done up firmly enough.'
+                                      'You should check to make sure that you are placing the heel to the back of the boot ' +
+                                      ' and that the middle strap is done up firmly enough.'
                               },
                               {
                                   question: 'My child\'s foot is swelling',
