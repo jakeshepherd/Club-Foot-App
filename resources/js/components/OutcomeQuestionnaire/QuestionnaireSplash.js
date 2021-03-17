@@ -134,6 +134,11 @@ class QuestionnaireSplash extends React.Component {
                     <h1 className={"text-2xl font-bold"}>Outcome Questionnaire</h1>
                     <p>Please answer all the questions</p>
                     <p>Note: Please do not submit an outcome questionnaire more than once per day</p>
+                        <button
+                            className={"button bg-blue-200 p-3 text-2xl md:text-base md:w-1/6 mt-5 hover:bg-blue-400"}>
+                            <a href="/outcome-history">See your history here</a>
+                        </button>
+
                     {Object.values(questionnaireData).map(function (key, value) {
                         return <OutcomeQuestion
                             key={value}
