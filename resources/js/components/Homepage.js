@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import TrackingButton from './TrackingButton';
 import DailyAdherenceView from './DailyAdherenceView';
 import NextCalendarEvent from './NextCalendarEvent';
+import information from "../../images/icons8-information-64.png";
 
 import {PieChart} from 'react-minimal-pie-chart';
 import {toast, ToastContainer} from 'react-toastify';
+import ReactTooltip from 'react-tooltip';
 
 class Homepage extends React.Component {
     constructor(props) {
@@ -63,8 +65,8 @@ class Homepage extends React.Component {
                         return this.state.weeklyAdherencePercent + '%'
                     }}
                 />
-                <h2 className="text-xl font-bold">{this.state.averageDurationHours} Hours {this.state.averageDurationMinutes} Minutes
-                    a day on Average</h2>
+                <h2 className="text-xl font-bold">{this.state.averageDurationHours} hours {this.state.averageDurationMinutes} minutes
+                    a day on average</h2>
                 <DailyAdherenceView data={this.state.weeklyAdherence}/>
                 <TrackingButton/>
                 <h2 className="mt-5 text-xl font-bold">What's Coming up...</h2>
@@ -76,6 +78,7 @@ class Homepage extends React.Component {
                     }}
                 />
                 <ToastContainer pauseOnFocusLoss draggable hideProgressBar/>
+                <ReactTooltip />
             </div>
         );
     }
