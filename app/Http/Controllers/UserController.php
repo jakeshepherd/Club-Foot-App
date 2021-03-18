@@ -31,7 +31,13 @@ class UserController extends Controller
 
     public function getTimeGoal(): JsonResponse
     {
-        return response()->json(User::findOrFail(Auth::id())->time_goal);
+        $timeGoal = User::findOrFail(Auth::id())->time_goal;
+
+        if (is_null($timeGoal)) {
+            Log::error('No time_goal found.');
+            return response()->json('Please set a time goal by going into your settings.', 404);
+        }
+        return response()->json($timeGoal);
     }
 
     public function getPhysioDetailsForUser(): JsonResponse

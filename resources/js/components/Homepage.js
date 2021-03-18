@@ -19,6 +19,14 @@ class Homepage extends React.Component {
     }
 
     async componentDidMount() {
+        await axios.get(`/boots-time-goal`)
+            .then(r => {
+                this.setState({
+                    time_goal: r.data/60
+                })
+            }).catch(() => {
+                toast.info('⏰ Please set a time goal by going into your settings in your account.')
+            })
         await axios.get(`/get-7-day-average`)
             .then(r => this.setState({
                 averageDurationHours: Math.floor(r.data / 60),
@@ -34,8 +42,6 @@ class Homepage extends React.Component {
                 this.setState({
                     weeklyAdherencePercent: Math.round((numOfTrues / totalSize) * 100)
                 })
-            }).catch(() => {
-                toast.info('Please start tracking to see analysis')
             })
     }
 
