@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import OutcomeQuestion from "./OutcomeQuestion";
 
 import {toast, ToastContainer} from 'react-toastify';
+import OutcomeQuestionTwoAnswers from "./OutcomeQuestionTwoAnswers";
 
 class QuestionnaireSplash extends React.Component {
     constructor(props) {
@@ -138,16 +139,66 @@ class QuestionnaireSplash extends React.Component {
                             className={"button bg-blue-200 p-3 text-2xl md:text-base md:w-1/6 mt-5 hover:bg-blue-400"}>
                             <a href="/outcome-history">See your history here</a>
                         </button>
-
-                    {Object.values(questionnaireData).map(function (key, value) {
-                        return <OutcomeQuestion
-                            key={value}
-                            questionNumber={value}
-                            question={key.question}
-                            answers={key.answers}
-                            handleQuestionSubmit={this.handleQuestionSubmit}
-                        />
-                    }.bind(this))}
+                    <OutcomeQuestion
+                        questionNumber={0}
+                        question={questionnaireData.q1.question}
+                        answers={questionnaireData.q1.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestion
+                        questionNumber={1}
+                        question={questionnaireData.q2.question}
+                        answers={questionnaireData.q2.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestion
+                        questionNumber={2}
+                        question={questionnaireData.q3.question}
+                        answers={questionnaireData.q3.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestion
+                        questionNumber={3}
+                        question={questionnaireData.q4.question}
+                        answers={questionnaireData.q4.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestion
+                        questionNumber={4}
+                        question={questionnaireData.q5.question}
+                        answers={questionnaireData.q5.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestionTwoAnswers
+                        questionNumber={5}
+                        question={questionnaireData.q6.question}
+                        answers={questionnaireData.q6.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestion
+                        questionNumber={6}
+                        question={questionnaireData.q7.question}
+                        answers={questionnaireData.q7.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestion
+                        questionNumber={7}
+                        question={questionnaireData.q8.question}
+                        answers={questionnaireData.q8.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestion
+                        questionNumber={8}
+                        question={questionnaireData.q9.question}
+                        answers={questionnaireData.q9.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
+                    <OutcomeQuestion
+                        questionNumber={9}
+                        question={questionnaireData.q10.question}
+                        answers={questionnaireData.q10.answers}
+                        handleQuestionSubmit={this.handleQuestionSubmit}
+                    />
                     <ToastContainer pauseOnFocusLoss draggable/>
                 </div>
                 <div className={"flex justify-center"}>
