@@ -115,7 +115,7 @@ class HistorySplash extends React.Component {
                 {this.state.dataAvailable && <p className={"text-purple-400"}>{this.state.data.timeBootsWornFor} Weeks</p>}
                 {this.state.dataAvailable && <p>And your total daily average is </p>}
                 {this.state.dataAvailable && <p className={"text-green-400"}>
-                    {this.state.data.totalAverageHours}.{this.state.data.totalAverageMinutes} hours
+                    {this.state.data.totalAverageHours} hours {this.state.data.totalAverageMinutes} mins
                 </p>}
 
                 {/*TODO -- make this dynamic*/}
