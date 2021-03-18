@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import Chart from "react-apexcharts";
-import MoreHistory from "./MoreHistory";
+import {toast} from "react-toastify";
 
 class HistorySplash extends React.Component {
     constructor(props) {
@@ -81,6 +81,14 @@ class HistorySplash extends React.Component {
     }
 
     async componentDidMount() {
+        await axios.get(`/boots-time-goal`)
+            .then(r => {
+                this.setState({
+                    time_goal: r.data/60
+                })
+            }).catch(() => {
+                toast.info('⏰ Please set a time goal by going into your settings in your account.')
+            })
         await axios.get(`/progress-so-far`)
             .then(r => {
                 if (r.data !== "") {
@@ -119,7 +127,10 @@ class HistorySplash extends React.Component {
                 </p>}
 
                 {/*TODO -- make this dynamic*/}
-                {this.state.dataAvailable && <p>So you're doing well!</p>}
+                {this.state.dataAvailable && this.state.data.totalAverageHours > this.state.time_goal && <p>So you're doing well!</p>}
+                {this.state.dataAvailable && this.state.data.totalAverageHours < this.state.time_goal &&
+                    <p>This is less than your time goal. <br /> Why don't you check out the FAQs to see if this can support you to reach your goal.</p>
+                }
 
                 {this.state.dataAvailable && <Chart
                     className={"inline-block md:w-1/3"}
