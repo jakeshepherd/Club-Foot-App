@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import TrackingButton from './TrackingButton';
 import DailyAdherenceView from './DailyAdherenceView';
 import NextCalendarEvent from './NextCalendarEvent';
-import information from "../../images/icons8-information-64.png";
 
 import {PieChart} from 'react-minimal-pie-chart';
 import {toast, ToastContainer} from 'react-toastify';
