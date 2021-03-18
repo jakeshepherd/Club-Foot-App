@@ -16,7 +16,7 @@ function DailyAdherenceView(props) {
                     </div>
                 )
             })}
-            <img data-tip={"Green circles indicate days the time goal was completed, red show when you didn\'t and grey shows no data available."}
+            <img data-tip={"Green circles indicate days the time goal was completed. Red circles indicate when the time goal was not achieved."}
                  className={"ml-4 w-8 inline-block rounded-full hover:shadow-md"} src={information}
                  alt={"information"}
             />
