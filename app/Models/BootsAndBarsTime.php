@@ -20,6 +20,14 @@ class BootsAndBarsTime extends Model
         'duration' => 'integer',
     ];
 
+    protected $fillable = [
+        'user_id',
+        'end_time',
+        'start_time',
+        'duration',
+        'tracking',
+    ];
+
     public function getTimeWithinTimeframe(Carbon $startDate, Carbon $endDate): array
     {
         return array_values(

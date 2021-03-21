@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//TODO -- add a set time end point and do backend`
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('welcome');
@@ -69,6 +68,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get-tracking', [TimingController::class, 'getTracking'])
         ->name('getTracking');
+
+    Route::post('/set-time', [TimingController::class, 'setTime'])
+        ->name('setTime');
 
     Route::get('/get-7-day-average', [AnalysisController::class, 'getSevenDayAverageInMinutes'])
         ->name('get7DayAverage');

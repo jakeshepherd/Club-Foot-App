@@ -7,6 +7,8 @@ use App\Models\BootsAndBarsTime;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class TimingController extends Controller
 {
@@ -60,7 +62,32 @@ class TimingController extends Controller
             return response()->json([
                 'id' => $time[0]->id,
                 'tracking' => (bool) $time[0]->tracking,
-            ], 200);
+            ]);
         }
+    }
+
+    public function setTime(): JsonResponse
+    {
+        try {
+            $this->validate(request(), [
+                'end_time' => 'required',
+                'duration' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            Log::error('end_time and duration must be specified in POST. Please try again.');
+            return response()->json('Please fill in all the details', 400);
+        }
+
+        $end_time = Carbon::parse(request('end_time'));
+
+        BootsAndBarsTime::create([
+            'user_id' => Auth::id(),
+            'start_time' => $end_time,
+            'end_time' => $end_time,
+            'duration' => request('duration'),
+            'tracking' => 0
+        ]);
+
+        return response()->json('Success', 201);
     }
 }

@@ -19,7 +19,10 @@ class AddTime extends React.Component {
     }
 
     handleHoursChange(event) {
-        this.setState({hours: event.target.value})
+        const regex = /^[0-9\b]+$/;
+        if (regex.test(event.target.value)) {
+            this.setState({hours: event.target.value})
+        }
     }
 
     handleSubmit(event) {
@@ -29,8 +32,8 @@ class AddTime extends React.Component {
             })
         } else {
             axios.post(`/set-time`, {
-                'date': this.state.date,
-                'hours': this.state.hours,
+                'end_time': this.state.date,
+                'duration': this.state.hours*60,
             }).then(() => {
                 toast.success('✅ Boots and Bars Hours Added')
                 window.location.reload(false);
