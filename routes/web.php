@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//TODO -- add a set time end point and do backend`
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('welcome');

@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import TrackingButton from './TrackingButton';
 import DailyAdherenceView from './DailyAdherenceView';
 import NextCalendarEvent from './NextCalendarEvent';
+import Overlay from "react-overlay-component";
+
+import addEvent from '../../images/icons8-add-property.svg';
 
 import {PieChart} from 'react-minimal-pie-chart';
 import {toast, ToastContainer} from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
+import EditDetailsForm from "./ContactDetails/EditDetailsForm";
+import AddTime from "./AddTime";
+
+const configs = {
+    animate: true,
+    clickDismiss: true,
+    escapeDismiss: false,
+    focusOutline: false,
+};
 
 class Homepage extends React.Component {
     constructor(props) {
@@ -15,7 +27,13 @@ class Homepage extends React.Component {
             averageDuration: '',
             weeklyAdherence: {},
             weeklyAdherencePercent: 0,
+            isOpen: false,
         }
+        this.closeOverlay = this.closeOverlay.bind(this)
+    }
+
+    closeOverlay () {
+        this.setState({isOpen: false});
     }
 
     async componentDidMount() {
@@ -73,7 +91,15 @@ class Homepage extends React.Component {
                 <h2 className="text-xl font-bold">{this.state.averageDurationHours} hours {this.state.averageDurationMinutes} minutes
                     a day on average</h2>
                 <DailyAdherenceView data={this.state.weeklyAdherence}/>
-                <TrackingButton/>
+                <div>
+                    <TrackingButton className={"inline"}/>
+                    <img data-tip={"Add boots and bars time retrospectively here"}
+                         src={addEvent}
+                         alt={"Add event"}
+                         className={"inline w-10 cursor-pointer align-middle ml-4"}
+                         onClick={() => this.setState({isOpen: true})}
+                    />
+                </div>
                 <h2 className="mt-5 text-xl font-bold">What's Coming up...</h2>
                 <NextCalendarEvent
                     eventDetails={{
@@ -82,6 +108,9 @@ class Homepage extends React.Component {
                         eventTime: '4pm',
                     }}
                 />
+                <Overlay configs={configs} isOpen={this.state.isOpen} closeOverlay={this.closeOverlay}>
+                    <AddTime />
+                </Overlay>
                 <ToastContainer pauseOnFocusLoss draggable hideProgressBar/>
                 <ReactTooltip />
             </div>
