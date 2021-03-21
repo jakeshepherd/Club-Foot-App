@@ -48,9 +48,9 @@ class Homepage extends React.Component {
                     weeklyAdherencePercent: Math.round((numOfTrues / totalSize) * 100)
                 })
             })
-        if (window.sessionStorage.getItem("elapsedTime") !== null) {
+        if (window.localStorage.getItem("elapsedTime") !== null) {
             this.setState({
-                elapsedTime: parseInt(window.sessionStorage.getItem("elapsedTime"))
+                elapsedTime: parseInt(window.localStorage.getItem("elapsedTime"))
             })
         }
     }
@@ -62,12 +62,12 @@ class Homepage extends React.Component {
 
     stopCounting() {
         clearInterval(this.state.intervalId);
-        window.sessionStorage.setItem("elapsedTime", this.state.elapsedTime)
+        window.localStorage.setItem("elapsedTime", this.state.elapsedTime)
     }
 
     countUp() {
         this.setState(({ elapsedTime }) => ({ elapsedTime: elapsedTime + 1 }));
-        window.sessionStorage.setItem("elapsedTime", this.state.elapsedTime)
+        window.localStorage.setItem("elapsedTime", this.state.elapsedTime)
     }
 
     render() {
