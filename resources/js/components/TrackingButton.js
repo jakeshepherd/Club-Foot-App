@@ -16,6 +16,7 @@ class TrackingButton extends React.Component {
         await axios.get(`/get-tracking`)
             .then(r => {
                 if (r.data.id > 0) {
+                    this.props.startCounting()
                     this.setState({
                         trackingId: r.data.id,
                         tracking: true
@@ -26,6 +27,7 @@ class TrackingButton extends React.Component {
 
     startTracking() {
         if (!this.state.tracking) {
+            this.props.startCounting()
             axios.post(`/start-tracking`)
                 .then(r => {
                     this.setState({
@@ -35,6 +37,7 @@ class TrackingButton extends React.Component {
                     toast.success('✅ Started tracking')
                 })
         } else {
+            this.props.stopCounting()
             axios.post(`/${this.state.trackingId}/stop-tracking`)
                 .then(r => {
                     this.setState({
