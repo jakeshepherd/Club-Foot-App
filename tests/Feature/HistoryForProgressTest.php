@@ -309,4 +309,45 @@ class HistoryForProgressTest extends TestCase
 
         $this->assertSame($expected, $actual['total_average']);
     }
+
+    public function test_it_works_with_zero_days()
+    {
+        $user = $this->createUserAndLogin();
+        $startTime = Carbon::now();
+        Carbon::setTestNow($startTime);
+
+        // add a few days in a row
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(1*60);
+        $newRow->duration = 0;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(10*60);
+        $newRow->duration = 10*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(19*60);
+        $newRow->duration = 19*60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $expected = ((10*60) + (19*60))/2;
+
+        $response = $this->get('/progress-so-far');
+        $response->assertStatus(200);
+
+        $actual = json_decode($response->getContent(), true);
+
+        $this->assertSame($expected, $actual['total_average']);
+    }
 }

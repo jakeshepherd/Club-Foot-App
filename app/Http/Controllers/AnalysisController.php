@@ -78,8 +78,10 @@ class AnalysisController extends Controller
             ->oldest()->pluck('end_time')->first();
         $diffInWeeks = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
 
-        $allRecords = BootsAndBarsTime::where('user_id', Auth::id())
-            ->pluck('duration')->toArray();
+        $allRecords = BootsAndBarsTime::where([
+            ['user_id', Auth::id()],
+            ['duration', '!=', 0]
+        ])->pluck('duration')->toArray();
 
         // weeks the boots have been worn for
         $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
@@ -96,7 +98,9 @@ class AnalysisController extends Controller
             if (count($duration) > 1) {
                 $dailyTotal = 0;
                 foreach ($duration as $subTime) {
-                    $dailyTotal += $subTime['duration'];
+                    if ($subTime['duration'] !== 0) {
+                        $dailyTotal += $subTime['duration'];
+                    }
                 }
                 $weeklyAdherence['days'][] = Carbon::parse($duration[0]['end_time'])->format('l');
                 $weeklyAdherence['hours'][] = round($dailyTotal/60, 1);
