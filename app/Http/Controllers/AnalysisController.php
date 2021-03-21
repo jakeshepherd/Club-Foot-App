@@ -63,6 +63,7 @@ class AnalysisController extends Controller
         return response()->json($data['data'], $data['status']);
     }
 
+//    TODO -- this gets average based on number of rows, it should be based on the number of days tracked for.
     public function getProgressSoFar(): JsonResponse
     {
         $data = $this->formatForGraph(
