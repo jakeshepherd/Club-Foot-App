@@ -99,13 +99,13 @@ class AnalysisController extends Controller
                     $dailyTotal += $subTime['duration'];
                 }
                 $weeklyAdherence['days'][] = Carbon::parse($duration[0]['end_time'])->format('l');
-                $weeklyAdherence['hours'][] = $dailyTotal/60;
+                $weeklyAdherence['hours'][] = round($dailyTotal/60, 1);
             }
             // if there's just one timing for the day then we can just get the duration nicely
             else {
                 $subDuration = $duration[0];
                 $weeklyAdherence['days'][] = Carbon::parse($subDuration['end_time'])->format('l');
-                $weeklyAdherence['hours'][] = $subDuration['duration']/60;
+                $weeklyAdherence['hours'][] = round($subDuration['duration']/60, 1);
             }
         }
 
