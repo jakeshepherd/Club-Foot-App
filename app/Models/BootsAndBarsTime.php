@@ -20,6 +20,14 @@ class BootsAndBarsTime extends Model
         'duration' => 'integer',
     ];
 
+    protected $fillable = [
+        'user_id',
+        'end_time',
+        'start_time',
+        'duration',
+        'tracking',
+    ];
+
     public function getTimeWithinTimeframe(Carbon $startDate, Carbon $endDate): array
     {
         return array_values(
@@ -40,6 +48,7 @@ class BootsAndBarsTime extends Model
             BootsAndBarsTime::where('user_id', Auth::id())
             ->whereBetween('end_time', [Carbon::parse('-7 days'), Carbon::now()])
             ->where('duration', '>=', '10')
+            ->orderBy('end_time', 'ASC')
             ->get(['end_time', 'duration'])
             ->groupBy(function ($element) {
                 return Carbon::parse($element->end_time)->format('d');

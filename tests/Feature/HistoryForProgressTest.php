@@ -21,9 +21,9 @@ class HistoryForProgressTest extends TestCase
 
         // Need to add a weeks worth of data
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime;
-        $newRow->end_time = $startTime->addMinutes(15*60);
-        $newRow->duration = 15*60;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(15 * 60);
+        $newRow->duration = 15 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -33,9 +33,9 @@ class HistoryForProgressTest extends TestCase
         $startTime->addDay();
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime;
-        $newRow->end_time = $startTime->addMinutes(12*60);
-        $newRow->duration = 12*60;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(12 * 60);
+        $newRow->duration = 12 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -45,9 +45,9 @@ class HistoryForProgressTest extends TestCase
         $startTime->addDay();
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime;
-        $newRow->end_time = $startTime->addMinutes(10*60);
-        $newRow->duration = 10*60;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(10 * 60);
+        $newRow->duration = 10 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -58,8 +58,8 @@ class HistoryForProgressTest extends TestCase
 
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;
-        $newRow->end_time = $startTime->addMinutes(16*60);
-        $newRow->duration = 16*60;
+        $newRow->end_time = $startTime->addMinutes(16 * 60);
+        $newRow->duration = 16 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -69,9 +69,9 @@ class HistoryForProgressTest extends TestCase
         $startTime->addDay();
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime;
-        $newRow->end_time = $startTime->addMinutes(18*60);
-        $newRow->duration = 18*60;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(18 * 60);
+        $newRow->duration = 18 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -99,8 +99,8 @@ class HistoryForProgressTest extends TestCase
         // Need to add a weeks worth of data
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;
-        $newRow->end_time = $startTime->addMinutes(15*60);
-        $newRow->duration = 15*60;
+        $newRow->end_time = $startTime->addMinutes(15 * 60);
+        $newRow->duration = 15 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -112,8 +112,8 @@ class HistoryForProgressTest extends TestCase
 
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;
-        $newRow->end_time = $startTime->addMinutes(12*60);
-        $newRow->duration = 12*60;
+        $newRow->end_time = $startTime->addMinutes(12 * 60);
+        $newRow->duration = 12 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -125,8 +125,8 @@ class HistoryForProgressTest extends TestCase
 
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;
-        $newRow->end_time = $startTime->addMinutes(10*60);
-        $newRow->duration = 10*60;
+        $newRow->end_time = $startTime->addMinutes(10 * 60);
+        $newRow->duration = 10 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -135,8 +135,8 @@ class HistoryForProgressTest extends TestCase
 
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;
-        $newRow->end_time = $startTime->addMinutes(6*60);
-        $newRow->duration = 6*60;
+        $newRow->end_time = $startTime->addMinutes(6 * 60);
+        $newRow->duration = 6 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -183,7 +183,8 @@ class HistoryForProgressTest extends TestCase
         $this->assertSame('', $response->getContent());
     }
 
-    public function test_it_gets_history_with_multiple_times_on_same_day() {
+    public function test_it_gets_history_with_multiple_times_on_same_day()
+    {
         $expected = [];
 
         $user = $this->createUserAndLogin();
@@ -193,17 +194,17 @@ class HistoryForProgressTest extends TestCase
 
         // Need to add a weeks worth of data
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime;
-        $newRow->end_time = $startTime->addMinutes(10*60);
-        $newRow->duration = 10*60;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(10 * 60);
+        $newRow->duration = 10 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime;
-        $newRow->end_time = $startTime->addMinutes(6*60);
-        $newRow->duration = 6*60;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(6 * 60);
+        $newRow->duration = 6 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -214,9 +215,9 @@ class HistoryForProgressTest extends TestCase
         $startTime->addDay();
 
         $newRow = new BootsAndBarsTime;
-        $newRow->start_time =$startTime;
-        $newRow->end_time = $startTime->addMinutes(10*60);
-        $newRow->duration = 10*60;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(10 * 60);
+        $newRow->duration = 10 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -240,20 +241,20 @@ class HistoryForProgressTest extends TestCase
         // set one for a few months ago
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime->subMonth();
-        $newRow->end_time = $startTime->addMinutes(15*60);
-        $newRow->duration = 15*60;
+        $newRow->end_time = $startTime->addMinutes(15 * 60);
+        $newRow->duration = 15 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
 
-        $startTime->subMinutes(15*60);
+        $startTime->subMinutes(15 * 60);
         $startTime->addMonth();
 
         // set one for a week ago to make sure it gets the right record
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime->subWeek();
-        $newRow->end_time = $startTime->addMinutes(1*60);
-        $newRow->duration = 1*60;
+        $newRow->end_time = $startTime->addMinutes(1 * 60);
+        $newRow->duration = 1 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
@@ -272,35 +273,37 @@ class HistoryForProgressTest extends TestCase
     public function test_it_gets_total_daily_average()
     {
         $user = $this->createUserAndLogin();
-        $startTime = Carbon::now();
+        $startTime = Carbon::parse('2021-01-28 02:28:10');
         Carbon::setTestNow($startTime);
 
         // add a few days in a row
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;
-        $newRow->end_time = $startTime->addMinutes(15*60);
-        $newRow->duration = 15*60;
+        $newRow->end_time = $startTime->addMinutes(15 * 60);
+        $newRow->duration = 15 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
 
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;
-        $newRow->end_time = $startTime->addMinutes(10*60);
-        $newRow->duration = 10*60;
+        $newRow->end_time = $startTime->addMinutes(10 * 60);
+        $newRow->duration = 10 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
+
+        $startTime->addDay();
 
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;
-        $newRow->end_time = $startTime->addMinutes(19*60);
-        $newRow->duration = 19*60;
+        $newRow->end_time = $startTime->addMinutes(19 * 60);
+        $newRow->duration = 19 * 60;
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
 
-        $expected = ((15*60) + (10*60) + (19*60))/3;
+        $expected = ((15 * 60) + (10 * 60) + (19 * 60)) / 3;
 
         $response = $this->get('/progress-so-far');
         $response->assertStatus(200);
@@ -308,5 +311,97 @@ class HistoryForProgressTest extends TestCase
         $actual = json_decode($response->getContent(), true);
 
         $this->assertSame($expected, $actual['total_average']);
+    }
+
+    public function test_it_works_with_zero_days()
+    {
+        $user = $this->createUserAndLogin();
+        $startTime = Carbon::parse('2021-01-28 02:28:10');
+        Carbon::setTestNow($startTime);
+
+        // add a few days in a row
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(1 * 60);
+        $newRow->duration = 0;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(10 * 60);
+        $newRow->duration = 10 * 60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(4 * 60);
+        $newRow->duration = 4 * 60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = $startTime;
+        $newRow->end_time = $startTime->addMinutes(19 * 60);
+        $newRow->duration = 19 * 60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+        $expected = ((14 * 60) + (19 * 60)) / 2;
+
+        $response = $this->get('/progress-so-far');
+        $response->assertStatus(200);
+
+        $actual = json_decode($response->getContent(), true);
+
+        $this->assertSame($expected, $actual['total_average']);
+    }
+
+    public function test_it_orders_dates_correctly()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->createUserAndLogin();
+        $startTime = Carbon::now();
+        Carbon::setTestNow($startTime);
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = '2021-03-22 09:53:08';
+        $newRow->end_time = '2021-03-22 09:53:08';
+        $newRow->duration = 840;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = '2021-03-23 09:53:17';
+        $newRow->end_time = '2021-03-23 09:53:17';
+        $newRow->duration = 60;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $newRow = new BootsAndBarsTime;
+        $newRow->start_time = '2021-03-20 09:53:30';
+        $newRow->end_time = '2021-03-20 09:53:30';
+        $newRow->duration = 300;
+        $newRow->user_id = $user->id;
+        $newRow->tracking = false;
+        $newRow->save();
+
+        $expected = [
+            'Saturday',
+            'Monday',
+        ];
+
+        $response = $this->get('/progress-so-far');
+        $response->assertStatus(200);
+
+        $actual = json_decode($response->getContent(), true);
+
+        $this->assertSame($expected, $actual['days']);
     }
 }

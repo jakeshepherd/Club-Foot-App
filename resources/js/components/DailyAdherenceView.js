@@ -8,6 +8,9 @@ function DailyAdherenceView(props) {
         <div className={"w-max m-auto"}>
             {Object.entries(props.data).map(([key, value]) => {
                 var circleColour = value ? 'green' : 'red'
+                if (value === null) {
+                    circleColour = 'gray'
+                }
                 var classStyle = 'daily-adherance border-' + circleColour + '-400 hover:bg-' + circleColour + '-400'
                 return (
                     <div data-tip={key} key={key} className={classStyle}>

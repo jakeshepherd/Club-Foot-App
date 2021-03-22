@@ -69,6 +69,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/get-tracking', [TimingController::class, 'getTracking'])
         ->name('getTracking');
 
+    Route::post('/set-time', [TimingController::class, 'setTime'])
+        ->name('setTime');
+
     Route::get('/get-7-day-average', [AnalysisController::class, 'getSevenDayAverageInMinutes'])
         ->name('get7DayAverage');
 

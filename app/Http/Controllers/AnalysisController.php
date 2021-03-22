@@ -78,12 +78,9 @@ class AnalysisController extends Controller
             ->oldest()->pluck('end_time')->first();
         $diffInWeeks = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
 
-        $allRecords = BootsAndBarsTime::where('user_id', Auth::id())
-            ->pluck('duration')->toArray();
-
         // weeks the boots have been worn for
         $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
-        $data['total_average'] = array_sum($allRecords)/count($allRecords);
+        $data['total_average'] = (array_sum($data['hours'])/count($data['days']))*60;
 
         return response()->json($data);
     }
@@ -96,16 +93,18 @@ class AnalysisController extends Controller
             if (count($duration) > 1) {
                 $dailyTotal = 0;
                 foreach ($duration as $subTime) {
-                    $dailyTotal += $subTime['duration'];
+                    if ($subTime['duration'] !== 0) {
+                        $dailyTotal += $subTime['duration'];
+                    }
                 }
                 $weeklyAdherence['days'][] = Carbon::parse($duration[0]['end_time'])->format('l');
-                $weeklyAdherence['hours'][] = $dailyTotal/60;
+                $weeklyAdherence['hours'][] = round($dailyTotal/60, 1);
             }
             // if there's just one timing for the day then we can just get the duration nicely
             else {
                 $subDuration = $duration[0];
                 $weeklyAdherence['days'][] = Carbon::parse($subDuration['end_time'])->format('l');
-                $weeklyAdherence['hours'][] = $subDuration['duration']/60;
+                $weeklyAdherence['hours'][] = round($subDuration['duration']/60, 1);
             }
         }
 
@@ -116,6 +115,12 @@ class AnalysisController extends Controller
     {
         $dailyTimings = [];
         $weeklyAdherence = [];
+
+        $start = Carbon::now()->subDays(7);
+        foreach (range(0, 6) as $day) {
+            $weeklyAdherence[$start->addDay()->format('l')] = null;
+        }
+
         // go through and get durations
         foreach ($durations as $duration) {
             // if there are multiple timings on one day, we handle it slightly differently
@@ -136,12 +141,6 @@ class AnalysisController extends Controller
             $weeklyAdherence[Carbon::parse($date)->format('l')] = $duration >= $timeGoal;
         }
 
-        if (empty($weeklyAdherence)) {
-            return [
-                'data' => 0,
-                'status' => 204,
-            ];
-        }
         return [
             'data' => $weeklyAdherence,
             'status' => 200,

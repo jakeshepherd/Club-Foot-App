@@ -3,14 +3,26 @@ import ReactDOM from 'react-dom';
 import TrackingButton from './TrackingButton';
 import DailyAdherenceView from './DailyAdherenceView';
 import NextCalendarEvent from './NextCalendarEvent';
+import Overlay from "react-overlay-component";
+import EditDetailsForm from "./ContactDetails/EditDetailsForm";
+import AddTime from "./AddTime";
+
+import addEvent from '../../images/icons8-add-property.svg';
 
 import {PieChart} from 'react-minimal-pie-chart';
 import {toast, ToastContainer} from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 import moment from 'moment';
-
 import {buildStyles, CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+
+
+const configs = {
+    animate: true,
+    clickDismiss: true,
+    escapeDismiss: false,
+    focusOutline: false,
+};
 
 class Homepage extends React.Component {
     constructor(props) {
@@ -24,10 +36,16 @@ class Homepage extends React.Component {
             elapsedTimeHours: 0,
             intervalIdSecs: 0,
             trackingState: 'tracking',
+            isOpen: false,
         }
         this.countUpSecs = this.countUpSecs.bind(this);
         this.startCounting = this.startCounting.bind(this);
         this.stopCounting = this.stopCounting.bind(this);
+        this.closeOverlay = this.closeOverlay.bind(this)
+    }
+
+    closeOverlay () {
+        this.setState({isOpen: false});
     }
 
     async componentDidMount() {
@@ -150,6 +168,15 @@ class Homepage extends React.Component {
                     a day on average</h2>
                 <DailyAdherenceView data={this.state.weeklyAdherence}/>
                 <TrackingButton startCounting={this.startCounting} stopCounting={this.stopCounting}/>
+                <div>
+                    <TrackingButton className={"inline"}/>
+                    <img data-tip={"Add boots and bars time retrospectively here"}
+                         src={addEvent}
+                         alt={"Add event"}
+                         className={"inline w-10 cursor-pointer align-middle ml-4"}
+                         onClick={() => this.setState({isOpen: true})}
+                    />
+                </div>
                 <h2 className="mt-5 text-xl font-bold">What's Coming up...</h2>
                 <NextCalendarEvent
                     eventDetails={{
@@ -158,6 +185,9 @@ class Homepage extends React.Component {
                         eventTime: '4pm',
                     }}
                 />
+                <Overlay configs={configs} isOpen={this.state.isOpen} closeOverlay={this.closeOverlay}>
+                    <AddTime />
+                </Overlay>
                 <ToastContainer pauseOnFocusLoss draggable hideProgressBar/>
                 <ReactTooltip/>
             </div>
