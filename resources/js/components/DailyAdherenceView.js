@@ -15,11 +15,12 @@ function DailyAdherenceView(props) {
                 return (
                     <div data-tip={key} key={key} className={classStyle}>
                         {key[0]}
-                        <ReactTooltip />
+                        <ReactTooltip multiline={true}/>
                     </div>
                 )
             })}
-            <img data-tip={"Green circles indicate days the time goal was completed. Red circles indicate when the time goal was not achieved."}
+            <img data-tip={"Green circles indicate days the time goal was completed. <br />" +
+                    "Red circles indicate when the time goal was not achieved. <br />Grey means there is no data."}
                  className={"ml-4 w-8 inline-block rounded-full hover:shadow-md"} src={information}
                  alt={"information"}
             />

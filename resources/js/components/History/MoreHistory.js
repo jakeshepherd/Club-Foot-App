@@ -52,11 +52,11 @@ class MoreHistory extends React.Component {
                     opacity: 1,
                     colors: [function ({value}) {
                         if (value < 12) {
-                            return '#FF0000'
+                            return '#fda0a0'
                         } else if (value >= 12 && value < 14) {
                             return '#FFA500'
                         } else {
-                            return '#008000'
+                            return '#a7f3d0'
                         }
                     }]
                 },

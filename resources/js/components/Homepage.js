@@ -4,12 +4,10 @@ import TrackingButton from './TrackingButton';
 import DailyAdherenceView from './DailyAdherenceView';
 import NextCalendarEvent from './NextCalendarEvent';
 import Overlay from "react-overlay-component";
-import EditDetailsForm from "./ContactDetails/EditDetailsForm";
 import AddTime from "./AddTime";
 
 import addEvent from '../../images/icons8-add-property.svg';
 
-import {PieChart} from 'react-minimal-pie-chart';
 import {toast, ToastContainer} from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 import moment from 'moment';
@@ -55,7 +53,7 @@ class Homepage extends React.Component {
                     time_goal: r.data / 60
                 })
             }).catch(() => {
-                toast.info('⏰ Please set a time goal by going into your settings in your account.')
+                toast.info('⏰ Please set a time goal by going into your settings in the top right.')
             })
         await axios.get(`/get-7-day-average`)
             .then(r => this.setState({
@@ -154,7 +152,7 @@ class Homepage extends React.Component {
                             // pathTransition: 'none',
 
                             // Colors
-                            pathColor: `a7f3d0`,
+                            pathColor: '#a7f3d0',
                             textColor: 'black',
                             trailColor: '#fda0a0',
                         })}
@@ -188,7 +186,7 @@ class Homepage extends React.Component {
                     <AddTime />
                 </Overlay>
                 <ToastContainer pauseOnFocusLoss draggable hideProgressBar/>
-                <ReactTooltip/>
+                <ReactTooltip multiline={true}/>
             </div>
         );
     }

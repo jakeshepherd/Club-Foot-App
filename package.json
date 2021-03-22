@@ -39,7 +39,6 @@
         "react-bootstrap": "^1.4.3",
         "react-circular-progressbar": "^2.0.3",
         "react-datepicker": "^3.6.0",
-        "react-minimal-pie-chart": "^8.1.0",
         "react-overlay-component": "^1.0.2",
         "react-toastify": "^7.0.1",
         "react-tooltip": "^4.2.13"
