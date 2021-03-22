@@ -11,10 +11,19 @@ class AdherencePercentAnalysisTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function test_it_can_get_percent_adherence_for_week()
+    private function populateExpectedArray(): array
     {
         $expected = [];
+        $start = Carbon::now()->subDays(7);
+        foreach (range(0, 6) as $day) {
+            $expected[$start->addDay()->format('l')] = null;
+        }
 
+        return $expected;
+    }
+
+    public function test_it_can_get_percent_adherence_for_week()
+    {
         $user = $this->createUserAndLogin();
         $this->post('/boots-time-goal', [
             'time_goal' => '15'
@@ -22,6 +31,8 @@ class AdherencePercentAnalysisTest extends TestCase
 
         $startTime = Carbon::parse('2021-01-28 02:28:10');
         Carbon::setTestNow($startTime);
+
+        $expected = $this->populateExpectedArray();
 
         // Need to add a weeks worth of data
         $newRow = new BootsAndBarsTime;
@@ -85,8 +96,6 @@ class AdherencePercentAnalysisTest extends TestCase
     }
     public function test_it_works_for_whole_week()
     {
-        $expected = [];
-
         $user = $this->createUserAndLogin();
         $this->post('/boots-time-goal', [
             'time_goal' => '15'
@@ -94,6 +103,8 @@ class AdherencePercentAnalysisTest extends TestCase
 
         $startTime = Carbon::parse('2021-02-02 01:00:00');
         Carbon::setTestNow($startTime);
+
+        $expected = $this->populateExpectedArray();
 
         // Need to add a weeks worth of data
         $newRow = new BootsAndBarsTime;
@@ -193,14 +204,13 @@ class AdherencePercentAnalysisTest extends TestCase
         ]);
 
         $response = $this->get('/weekly-adherence');
-        $response->assertStatus(204);
+        $response->assertStatus(200);
         $actual = (int) $response->content();
 
         $this->assertSame(0, $actual);
     }
     public function test_it_works_with_multiple_times_on_same_day() {
         $this->withoutExceptionHandling();
-        $expected = [];
 
         $user = $this->createUserAndLogin();
         $this->post('/boots-time-goal', [
@@ -209,6 +219,8 @@ class AdherencePercentAnalysisTest extends TestCase
 
         $startTime = Carbon::parse('2021-01-28 02:28:10');
         Carbon::setTestNow($startTime);
+
+        $expected = $this->populateExpectedArray();
 
         // Need to add a weeks worth of data
         $newRow = new BootsAndBarsTime;
@@ -244,6 +256,6 @@ class AdherencePercentAnalysisTest extends TestCase
         $response->assertOk();
         $actual = json_decode($response->content(), true);
 
-        $this->assertSame($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 }
