@@ -53,7 +53,7 @@ class Homepage extends React.Component {
                     time_goal: r.data / 60
                 })
             }).catch(() => {
-                toast.info('⏰ Please set a time goal by going into your settings in your account.')
+                toast.info('⏰ Please set a time goal by going into your settings in the top right.')
             })
         await axios.get(`/get-7-day-average`)
             .then(r => this.setState({
