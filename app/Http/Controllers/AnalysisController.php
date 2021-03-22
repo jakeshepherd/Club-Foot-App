@@ -115,6 +115,12 @@ class AnalysisController extends Controller
     {
         $dailyTimings = [];
         $weeklyAdherence = [];
+
+        $start = Carbon::now()->subDays(7);
+        foreach (range(0, 6) as $day) {
+            $weeklyAdherence[$start->addDay()->format('l')] = null;
+        }
+
         // go through and get durations
         foreach ($durations as $duration) {
             // if there are multiple timings on one day, we handle it slightly differently
