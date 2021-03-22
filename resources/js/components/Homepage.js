@@ -117,8 +117,8 @@ class Homepage extends React.Component {
     render() {
         return (
             <div className="p-5 m-auto w-10/12 text-center">
-                <h2 className="font-seoulNamsan text-xl font-bold">Your Boots and Bars use over the last 7 days</h2>
-                <div data-tip={"How the Boots and Bars have been on for this time"} className={"m-auto mt-4 mb-4 w-1/2 md:w-56"}>
+                <h2 className="font-seoulNamsan text-xl font-bold">Your Boots and Bars time for your current session</h2>
+                <div className={"m-auto mt-4 mb-4 w-1/2 md:w-56"}>
                     <CircularProgressbar
                         styles={buildStyles({
                             // Rotation of path and trail, in number of turns (0-1)
