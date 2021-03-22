@@ -86,7 +86,7 @@ class AnalysisController extends Controller
 
         // weeks the boots have been worn for
         $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
-        $data['total_average'] = array_sum($allRecords)/count($allRecords);
+        $data['total_average'] = (array_sum($data['hours'])/count($data['days']))*60;
 
         return response()->json($data);
     }
