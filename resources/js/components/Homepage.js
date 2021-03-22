@@ -167,9 +167,8 @@ class Homepage extends React.Component {
                 <h2 className="text-xl font-bold">{this.state.averageDurationHours} hours {this.state.averageDurationMinutes} minutes
                     a day on average</h2>
                 <DailyAdherenceView data={this.state.weeklyAdherence}/>
-                <TrackingButton startCounting={this.startCounting} stopCounting={this.stopCounting}/>
                 <div>
-                    <TrackingButton className={"inline"}/>
+                    <TrackingButton className={"inline"} startCounting={this.startCounting} stopCounting={this.stopCounting}/>
                     <img data-tip={"Add boots and bars time retrospectively here"}
                          src={addEvent}
                          alt={"Add event"}
