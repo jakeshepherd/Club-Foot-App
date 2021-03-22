@@ -141,12 +141,6 @@ class AnalysisController extends Controller
             $weeklyAdherence[Carbon::parse($date)->format('l')] = $duration >= $timeGoal;
         }
 
-        if (empty($weeklyAdherence)) {
-            return [
-                'data' => 0,
-                'status' => 204,
-            ];
-        }
         return [
             'data' => $weeklyAdherence,
             'status' => 200,
