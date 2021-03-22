@@ -57,11 +57,12 @@ class TimingController extends Controller
             return response()->json([
                 'id' => 0,
                 'tracking' => false,
-            ], 200);
+            ]);
         } else {
             return response()->json([
                 'id' => $time[0]->id,
                 'tracking' => (bool) $time[0]->tracking,
+                'start_time' => Carbon::parse($time[0]->start_time)->format('Y/m/d H:i:s'),
             ]);
         }
     }
