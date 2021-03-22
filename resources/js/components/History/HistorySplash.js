@@ -51,11 +51,11 @@ class HistorySplash extends React.Component {
                     opacity: 1,
                     colors: [function ({value}) {
                         if (value < 12) {
-                            return '#FF0000'
+                            return '#fda0a0'
                         } else if (value >= 12 && value <= 14) {
-                            return '#FFA500'
+                            return '#FFD877'
                         } else {
-                            return '#008000'
+                            return '#a7f3d0'
                         }
                     }]
                 },
@@ -126,7 +126,6 @@ class HistorySplash extends React.Component {
                     {this.state.data.totalAverageHours} hours {this.state.data.totalAverageMinutes} mins
                 </p>}
 
-                {/*TODO -- make this dynamic*/}
                 {this.state.dataAvailable && this.state.data.totalAverageHours > this.state.time_goal && <p>So you're doing well!</p>}
                 {this.state.dataAvailable && this.state.data.totalAverageHours < this.state.time_goal &&
                     <p>This is less than your time goal. <br /> Why don't you check out the FAQs to see if this can support you to reach your goal.</p>
