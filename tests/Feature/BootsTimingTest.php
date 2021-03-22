@@ -90,7 +90,7 @@ class BootsTimingTest extends TestCase
         $expected = [
             'id' => (int) $startTimeId,
             'tracking' => true,
-            'start_time' => Carbon::now()->format('Y-m-d H:m:s'),
+            'start_time' => Carbon::now()->format('Y/m/d H:m:s'),
         ];
 
         $this->assertSame(json_encode($expected), $actual);
@@ -140,7 +140,7 @@ class BootsTimingTest extends TestCase
         $expected = [
             'id' => (int) $startTimeId,
             'tracking' => true,
-            'start_time' => Carbon::now()->format('Y-m-d H:m:s'),
+            'start_time' => Carbon::now()->format('Y/m/d H:m:s'),
         ];
 
         $this->assertSame(json_encode($expected), $actual);
