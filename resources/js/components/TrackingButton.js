@@ -16,18 +16,20 @@ class TrackingButton extends React.Component {
         await axios.get(`/get-tracking`)
             .then(r => {
                 if (r.data.id > 0) {
-                    this.props.startCounting()
                     this.setState({
                         trackingId: r.data.id,
-                        tracking: true
+                        tracking: true,
+                        start_time: r.data.start_time
                     })
+                    this.props.startCounting('tracking', this.state.start_time)
+                } else {
+                    this.props.stopCounting('stopped')
                 }
             })
     }
 
     startTracking() {
         if (!this.state.tracking) {
-            this.props.startCounting()
             axios.post(`/start-tracking`)
                 .then(r => {
                     this.setState({
@@ -36,17 +38,19 @@ class TrackingButton extends React.Component {
                     })
                     toast.success('✅ Started tracking')
                 })
+            this.props.startCounting('tracking')
         } else {
-            this.props.stopCounting()
+            this.props.stopCounting('stopped')
             axios.post(`/${this.state.trackingId}/stop-tracking`)
                 .then(r => {
                     this.setState({
                         tracking: !this.state.tracking,
                         trackingDuration: r.data
                     })
-                    toast.error('🛑 Stopped tracking')
+                    toast.info('💾Tracking saved')
                 })
         }
+        // todo add pause
     }
 
     render() {
