@@ -272,7 +272,7 @@ class HistoryForProgressTest extends TestCase
     public function test_it_gets_total_daily_average()
     {
         $user = $this->createUserAndLogin();
-        $startTime = Carbon::now();
+        $startTime = Carbon::parse('2021-01-28 02:28:10');
         Carbon::setTestNow($startTime);
 
         // add a few days in a row
@@ -291,6 +291,8 @@ class HistoryForProgressTest extends TestCase
         $newRow->user_id = $user->id;
         $newRow->tracking = false;
         $newRow->save();
+
+        $startTime->addDay();
 
         $newRow = new BootsAndBarsTime;
         $newRow->start_time = $startTime;

@@ -79,11 +79,6 @@ class AnalysisController extends Controller
             ->oldest()->pluck('end_time')->first();
         $diffInWeeks = Carbon::parse($oldestRecord)->diffInWeeks(Carbon::now());
 
-        $allRecords = BootsAndBarsTime::where([
-            ['user_id', Auth::id()],
-            ['duration', '!=', 0]
-        ])->pluck('duration')->toArray();
-
         // weeks the boots have been worn for
         $data['boots_worn_for'] = $diffInWeeks == 0 ? 1 : $diffInWeeks;
         $data['total_average'] = (array_sum($data['hours'])/count($data['days']))*60;
