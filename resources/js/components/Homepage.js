@@ -174,14 +174,15 @@ class Homepage extends React.Component {
                          onClick={() => this.setState({isOpen: true})}
                     />
                 </div>
-                <h2 className="mt-5 text-xl font-bold">What's Coming up...</h2>
-                <NextCalendarEvent
-                    eventDetails={{
-                        eventName: 'Meet With Physio',
-                        eventDate: '24th Dec',
-                        eventTime: '4pm',
-                    }}
-                />
+                {/*todo -- add back when implemented*/}
+                {/*<h2 className="mt-5 text-xl font-bold">What's Coming up...</h2>*/}
+                {/*<NextCalendarEvent*/}
+                {/*    eventDetails={{*/}
+                {/*        eventName: 'Meet With Physio',*/}
+                {/*        eventDate: '24th Dec',*/}
+                {/*        eventTime: '4pm',*/}
+                {/*    }}*/}
+                {/*/>*/}
                 <Overlay configs={configs} isOpen={this.state.isOpen} closeOverlay={this.closeOverlay}>
                     <AddTime />
                 </Overlay>
