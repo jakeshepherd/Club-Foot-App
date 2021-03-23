@@ -23,6 +23,8 @@ class OutcomeHistory extends React.Component {
                 <div className={"grid grid-cols-1 sm:grid-cols-2"}>
                     {Object.entries(this.state.results).map(([key, value]) => {
                         let result = value.replace('[', '').replace(']', '').split(',')
+                        let outcome = parseInt(result[0]) + parseInt(result[1]) + parseInt(result[2]) + parseInt(result[3]) + parseInt(result[4])
+                            + parseInt(result[5]) + parseInt(result[6]) + parseInt(result[7]) + parseInt(result[8]) + parseInt(result[9])
                         return (
                             <div className={"mt-4 p-4 bg-white w-1/2 rounded shadow-md ml-auto mr-auto"} key={key}>
                                 <p className={"font-bold"}>On {key}: </p>
@@ -36,6 +38,7 @@ class OutcomeHistory extends React.Component {
                                 <p>Q8: {result[7]}</p>
                                 <p>Q9: {result[8]}</p>
                                 <p>Q10: {result[9]}</p>
+                                <p className={"font-bold"}>Result: {outcome}</p>
                             </div>
                         )
                     })}
