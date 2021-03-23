@@ -365,7 +365,7 @@ class HistoryForProgressTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $user = $this->createUserAndLogin();
-        $startTime = Carbon::now();
+        $startTime = Carbon::parse('2021-03-23 01:00:00');
         Carbon::setTestNow($startTime);
 
         $newRow = new BootsAndBarsTime;
