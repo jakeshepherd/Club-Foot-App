@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @layer components {
-    .daily-adherance {
+    .daily-adherence {
         @apply rounded-full h-10 w-10 inline-block border-4 items-center p-1 m-2 transition duration-500 cursor-pointer;
     }
     .button {
