@@ -167,7 +167,7 @@ class Homepage extends React.Component {
                 <DailyAdherenceView data={this.state.weeklyAdherence}/>
                 <div>
                     <TrackingButton className={"inline"} startCounting={this.startCounting} stopCounting={this.stopCounting}/>
-                    <img data-tip={"Add boots and bars time retrospectively here"}
+                    <img data-tip={"Add boots and bars time from the past here"}
                          src={addEvent}
                          alt={"Add event"}
                          className={"inline w-10 cursor-pointer align-middle ml-4"}
