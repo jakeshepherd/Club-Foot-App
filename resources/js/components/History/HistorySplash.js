@@ -124,7 +124,7 @@ class HistorySplash extends React.Component {
                 {this.state.dataAvailable &&
                 <p className={"text-purple-400"}>{this.state.data.timeBootsWornFor} Weeks</p>}
                 {this.state.dataAvailable && <p>And your total daily average is </p>}
-                {this.state.dataAvailable && this.state.data.totalAverageHours > this.state.time_goal &&
+                {this.state.dataAvailable && this.state.data.totalAverageHours >= this.state.time_goal &&
                 <p className={"text-green-400"}>
                     {this.state.data.totalAverageHours} hours {this.state.data.totalAverageMinutes} mins
                 </p>}
@@ -134,7 +134,7 @@ class HistorySplash extends React.Component {
                     {this.state.data.totalAverageHours} hours {this.state.data.totalAverageMinutes} mins
                 </p>}
 
-                {this.state.dataAvailable && this.state.data.totalAverageHours > this.state.time_goal &&
+                {this.state.dataAvailable && this.state.data.totalAverageHours >= this.state.time_goal &&
                 <p className={"mt-4"}>So you're doing well!</p>}
                 {this.state.dataAvailable && this.state.data.totalAverageHours < this.state.time_goal &&
                 <p className={"mt-4"}>
