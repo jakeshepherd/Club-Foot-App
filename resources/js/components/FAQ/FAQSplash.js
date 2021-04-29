@@ -13,6 +13,11 @@ class FAQSplash extends React.Component {
     render() {
         return (
             <div>
+                <h1 className="w-4/5 md:w-1/2 text-center m-2 ml-auto mr-auto">For more information, please visit the 
+                    <a className="text-blue-600" href="https://www.nhs.uk/conditions/club-foot/"> NHS website </a>
+                    and <a className="text-blue-600" href="https://www.stepsworldwide.org/conditions/talipes-clubfoot/">
+                        Steps Worldwide</a>
+                </h1>
                 <QuestionWithVideo name={"Brace Advice"} image={boot}
                                    FAQs={[
                                        {
