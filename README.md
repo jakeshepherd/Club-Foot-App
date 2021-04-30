@@ -20,12 +20,13 @@
 
 To perform a complete migration of the database
 
-`php artisna migrate:fresh --seed`
+`php artisan migrate:fresh --seed`
+
 To perform a complete migration of the database with added seed data
 
 `php artisan serve`
 
-To serve the application on `127.0.0.1`
+To serve the application on `127.0.0.1`. Make sure you are running a MySQL database.
 
 ## Heroku
 Access files on live by running
