@@ -14,10 +14,14 @@
 
 5. Generate php artisan key
    `php artisan key:generate`
+
 ## Artisan commands
 `php artisan migrate:fresh`
 
 To perform a complete migration of the database
+
+`php artisna migrate:fresh --seed`
+To perform a complete migration of the database with added seed data
 
 `php artisan serve`
 
